@@ -1,3 +1,5 @@
+> 历史记录：本文仅记录当时版本，不能作为当前完成状态或验收结论。当前入口见 [文档导航](../README.md)。
+
 # POY/DTY 上游工业情报与原料预测 Agent：100 分修正总纲
 
 版本：v1.28
@@ -17,7 +19,7 @@
 - 下一阶段：在 2026-09-07 首个工作日窗口核验以 08:20 为 cutoff、在 09:30 前释放的非 `blocked` 日报，然后启动独立 20 业务日价值实验。预测轨继续自然积累真实 OOS，并只在逐格证据通过时走治理晋级。
 - 明确非目标：不实现“下一结果何时成熟、为何未结算、预计何时可评估”；不重开同一历史快照上的盲目调参；不恢复 CCF/DCE 当前采集；不降低预测门槛或把模拟结果计为 formal；不发送工业情报即时业务提醒；不让情报输出成为采购、销售、套保或交易执行指令。
 
-工业情报轨的产品范围、实施合同和架构决策分别以 [`POY_DTY_上游原料智能Agent项目文档.md`](../POY_DTY_上游原料智能Agent项目文档.md)、[`docs/industrial-intelligence-center.md`](industrial-intelligence-center.md) 和 [ADR-0005](adr/0005-industrial-intelligence-center.md) 为准；本文件继续冻结预测轨评分与全项目完成关系。
+工业情报轨的产品范围、实施合同和架构决策分别以 [`POY_DTY_上游原料智能Agent项目文档.md`](../../POY_DTY_上游原料智能Agent项目文档.md)、[`docs/industrial-intelligence-center.md`](../industrial-intelligence-center.md) 和 [ADR-0005](../adr/0005-industrial-intelligence-center.md) 为准；本文件继续冻结预测轨评分与全项目完成关系。
 
 ## 1. 文档权威与修正原则
 

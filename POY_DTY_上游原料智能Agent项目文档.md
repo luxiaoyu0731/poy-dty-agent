@@ -9,7 +9,7 @@
 
 架构决策：[`docs/adr/0005-industrial-intelligence-center.md`](docs/adr/0005-industrial-intelligence-center.md)
 
-双轨完成定义：[`docs/project-correction-100.md`](docs/project-correction-100.md)
+双轨完成定义：[`docs/history/project-correction-100.md`](docs/history/project-correction-100.md)
 
 ## 1. 项目定位
 

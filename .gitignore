@@ -63,3 +63,15 @@ server/data/backfill_reports/*timeout*.json
 # Also ignore dependency symlinks used by local worktrees.
 /node_modules
 /server/.venv
+
+# Local credentials, caches and temporary artifacts
+*.pem
+*.key
+*.p12
+*.pfx
+Thumbs.db
+*.tmp
+*.bak
+.venv/
+.cache/
+!.env*.example

@@ -1,6 +1,6 @@
 # 全链路预测与 Agent 治理实施状态
 
-- **2026-08-31 当前合同更正**：`docs/project-correction-100.md` 与 ADR-0001
+- **2026-08-31 当前合同更正**：`docs/history/project-correction-100.md` 与 ADR-0001
   取代下文所有“单一 POY/DTY 成本压力正式目标”“14 节点/42 格为当前合同”
   或“旧 19 序列为当前完成线”的描述。当前合同严格为原油、石脑油、PX、
   PTA、MEG、POY、DTY × D1/D7/D30（21 格）。旧 Phase A、scalar ledger 与
