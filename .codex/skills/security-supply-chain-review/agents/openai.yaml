@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security & Supply Chain Review"
+  short_description: "Review security and software supply-chain risks"
+  default_prompt: "Use $security-supply-chain-review to assess security and supply-chain risks without changing code."

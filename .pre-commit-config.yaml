@@ -1,0 +1,44 @@
+default_install_hook_types: [pre-commit, pre-push]
+exclude: '^(dist|\.visual-regression|\.review-screenshots|artifacts|\.codex-run)/'
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: [--maxkb=1024]
+        # Reviewed visual assets have a separate 2 MiB limit; source stays at 1 MiB.
+        exclude: '^(docs/media/[^/]+\.png|public/visual-reference/[^/]+\.png|public/chain-assets/materials-atlas\.png)$'
+      - id: check-added-large-files
+        name: check-reviewed-visual-assets
+        args: [--maxkb=2048]
+        files: '^(docs/media/[^/]+\.png|public/visual-reference/[^/]+\.png|public/chain-assets/materials-atlas\.png)$'
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        exclude: '^(dist|\.visual-regression|\.review-screenshots|artifacts|\.codex-run)/'
+
+  - repo: local
+    hooks:
+      - id: semgrep-project-security
+        name: Semgrep project security rules
+        entry: semgrep scan --config .semgrep/semgrep.yml --error --severity ERROR
+        language: system
+        types_or: [python, ts, tsx]
+        exclude: '^(dist|\.visual-regression|\.review-screenshots|artifacts|\.codex-run)/'
+
+      - id: gitleaks-staged
+        name: Gitleaks staged secret scan
+        entry: gitleaks git --pre-commit --redact --staged --verbose --config .gitleaks.toml
+        language: system
+        pass_filenames: false
+
+      - id: trivy-production-gate
+        name: Trivy High/Critical production gate
+        entry: trivy fs --config trivy.yaml .
+        language: system
+        pass_filenames: false
+        stages: [pre-push]

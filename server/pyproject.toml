@@ -1,0 +1,55 @@
+[project]
+name = "poy-dty-upstream-agent-server"
+version = "1.0.0"
+description = "Final-version backend skeleton for the POY/DTY upstream material intelligence agent."
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26,<3",
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.32.0",
+  "httpx>=0.27.2",
+  "pydantic>=2.9.2",
+  "python-dotenv>=1.0.1",
+  "starlette>=1.3.1",
+  "msgpack>=1.2.1",
+  "akshare>=1.17.0",
+  "fastembed==0.7.4",
+  "pillow>=12.3.0",
+  "pypdf>=6.19.0,<7",
+]
+
+[dependency-groups]
+dev = [
+  {include-group = "test"},
+  {include-group = "lint"},
+  {include-group = "audit"}
+]
+test = [
+  "httpx2>=2.12.0,<3",
+  "pytest>=8.3.0",
+  "pytest-cov>=6.0.0",
+]
+lint = [
+  "ruff>=0.8.0"
+]
+audit = [
+  "pip>=26.2",
+  "pip-audit>=2.7.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.uvicorn]
+factory = false
+
+[tool.uv]
+override-dependencies = ["pillow>=12.3.0"]

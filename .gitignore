@@ -1,0 +1,65 @@
+node_modules/
+dist/
+.visual-regression/
+.review-screenshots/
+.playwright-cli/
+output/
+server/.venv/
+server/.coverage
+server/.ruff_cache/
+server/app/__pycache__/
+server/*.egg-info/
+server/data/
+server/server/data/
+*.pyc
+.env
+.env.local
+.env.*
+!.env*.example
+.DS_Store
+playwright-report/
+test-results/
+.workspace-archive/
+.external/
+.codex-run/
+
+# Local AI task packs (working context, not source)
+agent-context/
+
+# Generated vite config outputs (source of truth: vite.config.ts)
+vite.config.js
+vite.config.d.ts
+
+# Workspace cleanup guardrails
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.uv-cache/
+.cache/fastembed/
+.fastembed_cache/
+server/.cache/
+*.py[cod]
+*.log
+docs/.Rhistory
+~$*.docx
+
+# Browser and visual-test artifacts
+browser-screenshots/
+screenshots/
+*.webm
+
+# Local databases and backups
+data/*.db
+server/data/**/*.db
+server/data/backups/*.db
+server/data/backfill_reports/archive/
+server/data/backfill_reports/*sample*.json
+server/data/backfill_reports/*dry-run*.json
+server/data/backfill_reports/*timeout*.json
+
+# WorkBuddy local session state (not source)
+.workbuddy/
+
+# Also ignore dependency symlinks used by local worktrees.
+/node_modules
+/server/.venv

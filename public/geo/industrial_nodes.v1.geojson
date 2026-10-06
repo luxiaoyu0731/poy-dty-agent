@@ -1,0 +1,296 @@
+{
+ "type": "FeatureCollection",
+ "name": "industrial_nodes.v1",
+ "features": [
+  {
+   "type": "Feature",
+   "id": "port.jubail.natural-earth-v5.1.2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     49.670907,
+     27.028611
+    ]
+   },
+   "properties": {
+    "node_id": "port.jubail.natural-earth-v5.1.2",
+    "node_type": "port",
+    "name": "朱拜勒港",
+    "name_en": "Jubail",
+    "aliases": [
+     "Jubail Port",
+     "朱拜勒港"
+    ],
+    "country": "SA",
+    "source_id": "natural_earth_ports",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+    "source_version": "natural-earth-v5.1.2",
+    "source_file_sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+    "verified_date": "2026-09-05",
+    "rights": "Public domain (Natural Earth terms of use); not suitable for navigation.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "port.ulsan.natural-earth-v5.1.2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     129.38563,
+     35.487778
+    ]
+   },
+   "properties": {
+    "node_id": "port.ulsan.natural-earth-v5.1.2",
+    "node_type": "port",
+    "name": "蔚山港",
+    "name_en": "Ulsan",
+    "aliases": [
+     "Ulsan Port",
+     "蔚山港"
+    ],
+    "country": "KR",
+    "source_id": "natural_earth_ports",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+    "source_version": "natural-earth-v5.1.2",
+    "source_file_sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+    "verified_date": "2026-09-05",
+    "rights": "Public domain (Natural Earth terms of use); not suitable for navigation.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "port.ningbo.natural-earth-v5.1.2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     121.553357,
+     29.866667
+    ]
+   },
+   "properties": {
+    "node_id": "port.ningbo.natural-earth-v5.1.2",
+    "node_type": "port",
+    "name": "宁波舟山港",
+    "name_en": "Ningbo",
+    "aliases": [
+     "Ningbo-Zhoushan",
+     "宁波舟山港"
+    ],
+    "country": "CN",
+    "source_id": "natural_earth_ports",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+    "source_version": "natural-earth-v5.1.2",
+    "source_file_sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+    "verified_date": "2026-09-05",
+    "rights": "Public domain (Natural Earth terms of use); not suitable for navigation.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "port.rotterdam.natural-earth-v5.1.2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     4.292874,
+     51.927222
+    ]
+   },
+   "properties": {
+    "node_id": "port.rotterdam.natural-earth-v5.1.2",
+    "node_type": "port",
+    "name": "鹿特丹港",
+    "name_en": "Rotterdam",
+    "aliases": [
+     "Port of Rotterdam",
+     "鹿特丹港"
+    ],
+    "country": "NL",
+    "source_id": "natural_earth_ports",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+    "source_version": "natural-earth-v5.1.2",
+    "source_file_sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+    "verified_date": "2026-09-05",
+    "rights": "Public domain (Natural Earth terms of use); not suitable for navigation.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "port.kaohsiung.natural-earth-v5.1.2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     120.307067,
+     22.565278
+    ]
+   },
+   "properties": {
+    "node_id": "port.kaohsiung.natural-earth-v5.1.2",
+    "node_type": "port",
+    "name": "高雄港",
+    "name_en": "Kaohsiung",
+    "aliases": [
+     "Kaohsiung Port",
+     "高雄港"
+    ],
+    "country": "TW",
+    "source_id": "natural_earth_ports",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+    "source_version": "natural-earth-v5.1.2",
+    "source_file_sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+    "verified_date": "2026-09-05",
+    "rights": "Public domain (Natural Earth terms of use); not suitable for navigation.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "port.houston.natural-earth-v5.1.2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -95.20212,
+     29.739167
+    ]
+   },
+   "properties": {
+    "node_id": "port.houston.natural-earth-v5.1.2",
+    "node_type": "port",
+    "name": "休斯敦港",
+    "name_en": "Houston",
+    "aliases": [
+     "Port of Houston",
+     "休斯敦港"
+    ],
+    "country": "US",
+    "source_id": "natural_earth_ports",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+    "source_version": "natural-earth-v5.1.2",
+    "source_file_sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+    "verified_date": "2026-09-05",
+    "rights": "Public domain (Natural Earth terms of use); not suitable for navigation.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "port.shanghai.natural-earth-v5.1.2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     121.48722,
+     31.221944
+    ]
+   },
+   "properties": {
+    "node_id": "port.shanghai.natural-earth-v5.1.2",
+    "node_type": "port",
+    "name": "上海港",
+    "name_en": "Shanghai",
+    "aliases": [
+     "Shanghai Port",
+     "上海港"
+    ],
+    "country": "CN",
+    "source_id": "natural_earth_ports",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+    "source_version": "natural-earth-v5.1.2",
+    "source_file_sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+    "verified_date": "2026-09-05",
+    "rights": "Public domain (Natural Earth terms of use); not suitable for navigation.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "port.singapore.natural-earth-v5.1.2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     103.722144,
+     1.292778
+    ]
+   },
+   "properties": {
+    "node_id": "port.singapore.natural-earth-v5.1.2",
+    "node_type": "port",
+    "name": "新加坡港",
+    "name_en": "Singapore",
+    "aliases": [
+     "Port of Singapore",
+     "新加坡港"
+    ],
+    "country": "SG",
+    "source_id": "natural_earth_ports",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+    "source_version": "natural-earth-v5.1.2",
+    "source_file_sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+    "verified_date": "2026-09-05",
+    "rights": "Public domain (Natural Earth terms of use); not suitable for navigation.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "canal.suez.south_entrance",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.548,
+     29.966
+    ]
+   },
+   "properties": {
+    "node_id": "canal.suez.south_entrance",
+    "node_type": "canal",
+    "name": "Suez Canal Southern Entrance",
+    "name_en": "Suez Canal Southern Entrance",
+    "aliases": [
+     "Suez Canal",
+     "苏伊士运河"
+    ],
+    "country": "EG",
+    "source_id": "canal.suez.south_entrance",
+    "source_url": "https://www.suezcanal.gov.eg/",
+    "source_version": "authority-published",
+    "source_note": "Suez Canal Authority published canal overview",
+    "verified_date": "2026-09-05",
+    "rights": "Factual location data cited from authority publication.",
+    "location_precision": "source_point"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "canal.panama.atlantic_entrance",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -79.521,
+     9.36
+    ]
+   },
+   "properties": {
+    "node_id": "canal.panama.atlantic_entrance",
+    "node_type": "canal",
+    "name": "Panama Canal Atlantic Entrance",
+    "name_en": "Panama Canal Atlantic Entrance",
+    "aliases": [
+     "Panama Canal",
+     "巴拿马运河"
+    ],
+    "country": "PA",
+    "source_id": "canal.panama.atlantic_entrance",
+    "source_url": "https://www.pancanal.com/",
+    "source_version": "authority-published",
+    "source_note": "Panama Canal Authority published canal overview",
+    "verified_date": "2026-09-05",
+    "rights": "Factual location data cited from authority publication.",
+    "location_precision": "source_point"
+   }
+  }
+ ]
+}

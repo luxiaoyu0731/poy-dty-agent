@@ -1,0 +1,12 @@
+runner:
+  semgrep:
+    cmd: semgrep scan --config .semgrep/semgrep.yml --severity ERROR --sarif --quiet .
+    format: sarif
+    name: Semgrep
+    level: error
+
+  trivy:
+    cmd: trivy fs --config trivy.yaml --format sarif --exit-code 0 .
+    format: sarif
+    name: Trivy
+    level: error

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "created_on": "2026-07-26",
+  "base_commit": "69d78a4",
+  "target": "working-tree",
+  "scanner": {
+    "name": "trivy",
+    "version": "0.72.0",
+    "severities": [
+      "UNKNOWN",
+      "LOW",
+      "MEDIUM"
+    ]
+  },
+  "findings": {
+    "vulnerabilities": [],
+    "misconfigurations": [],
+    "secrets": []
+  },
+  "license_inventory_count": 208,
+  "policy": "Fail when a future reviewed scan introduces a vulnerability, misconfiguration, or secret fingerprint not present here."
+}

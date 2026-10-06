@@ -1,0 +1,141 @@
+{
+  "id": "RCA-20261006-RADAR-RECOVERY",
+  "owner": "Codex",
+  "status": "open",
+  "incident": {
+    "symptom": "Radar items remain headline-only; body recovery may never consider known historical imports or eligible rows behind a terminal prefix.",
+    "context": "2026-10-06; prior page fixes committed40cbea3; operator authorized seven-day production read-only candidate inspection as UID10001. No recovery writes/acquisition/models.",
+    "reproduction": "Use fixtures for each historical discovery identity, changed public permission, and510 newer terminal rows ahead of an eligible two-day-old article."
+  },
+  "root_cause": {
+    "earliest_layer": "Body recovery candidate selection",
+    "explanation": "Selector used current NEWS_SOURCES while worker resolver supports historical QUERY_GROUPS; source_not_enabled marked permanent terminal even after a valid permission change; LIMIT500 repeatedly hides eligible older rows in the same seven-day window. This does not establish that every headline-only radar item has these causes.",
+    "evidence": [
+      "server/scripts/backfill_news_article_bodies.py candidates/source_for",
+      "server/tests/test_body_recovery_selection.py",
+      "agent-context/radar-recovery-tests.log:117passed in11.63s",
+      "Public news inventory GET /news/articles?limit=200 returned403; inventory incomplete.",
+      "/data/reports/body-acquisition-latest.json generated2026-10-06T09:00:05Z:5pending,2title_only,3navigation_contaminated_body",
+      "agent-context/radar-publisher-diagnostics.json:five linked pages captured read-only; three Texnet pages have complete short quotation sentences below40-character summary gate, rejected by existing boundary helper; two100ppi pages are quote tables (one mismatched commodity), not validated narrative events.",
+      "Production read-only inventory 2026-10-06T09:33:54.143213+00:00:228 scanned;120 full_text;108 below full_text;106 stopped and5 in cooldown (overlap);old/new eligible0; state hash unchanged. Private manifest SHA256 258dc7e6022f53f0d7d355e31e5b083f62584422b2011b3dbc8457adc800023c.",
+      "Stopped reasons:70 source_not_enabled;35 three-attempt non-terminal failures;1 access_restricted. None of70 blocked resolved URLs passes current guard. Queue defects have zero newly eligible matches in this snapshot."
+    ]
+  },
+  "impact": {
+    "query": "Read-only seven-day news_articles snapshot at 2026-10-06T09:33:54.143213+00:00; same content revision/state, source resolver, quality, terminal/cap/cooldown, old and repaired selector eligibility; affected means newly eligible due to three selector fixes, not all radar defects.",
+    "declared_scope": "Seven-day body-recovery queue, maximum20 selected candidates; all12 historical source identities in fixtures, current source terminal-prefix fixture.",
+    "coverage": "complete",
+    "counts": {
+      "scanned": 228,
+      "affected": 0
+    },
+    "exclusions": [
+      "RemovedCCF identities",
+      "Subscription/login/CAPTCHA barriers",
+      "Forecast/issued ledgers",
+      "Production backfill not authorized"
+    ],
+    "unassessed": [
+      "Successful acquisitions and downstream validated summaries after release",
+      "Other parser and relevance defects",
+      "Complete publisher extraction coverage beyond the five URLs from the latest recovery batch",
+      "Permission-dependent source selection changes are not deployed and have no production-after success evidence"
+    ]
+  },
+  "mechanism_fix": {
+    "change": "Reuse source_for during selection; recheck only source_not_enabled with existing public/host permission guard; stream recent rows with stable ordering instead of discarding all rows beyond500.",
+    "temporary_action": "无",
+    "evidence": [
+      "Affected recovery/publisher/body quality/historical recovery suite117passed"
+    ]
+  },
+  "legacy_handling": {
+    "decision": "Approved read-only candidate inventory completed; no database/state changes, acquisition or models. Production recovery writes/source-policy changes remain unapproved.",
+    "issued_boundary": "Issued ledger and historical inputs remain unchanged; recovered material retains actual new visibility time via existing guarded ingest.",
+    "rollback": "Restore previous recovery script. No schema migration; existing state/retry counters unchanged."
+  },
+  "generalization": {
+    "positive_cases": [
+      "All12 historical import source identities reach selector",
+      "Allowed public permission reopens previously configuration-blocked entry without resetting attempts",
+      "Eligible row behind510 terminal entries can be selected"
+    ],
+    "negative_cases": [
+      "Removed and unknown sources remain excluded",
+      "Still-disabled sources remain stopped",
+      "Access-restricted and unsupported documents never reopen",
+      "Three-attempt cap and one-hour cooldown stay enforced",
+      "Eight-day-old record excluded; limit20 preserved; source state unchanged"
+    ],
+    "commands": [
+      "DG01-controlled uv run --project server python -m pytest affected suites -q",
+      "DG01-controlled uv run --project server python -m pytest server/tests -q",
+      "Main workspace root-cause:check with explicit owned records directory"
+    ],
+    "results": [
+      "Fresh DG01 root:3485passed in232.54s (0:03:52), exit0",
+      "npm run check passed; built in1.11s (existing chunk-size warning).",
+      "Read-only production dry-run candidates0; complete declared seven-day snapshot228; repaired selector newly eligible0; state SHA256 unchanged."
+    ],
+    "limitations": [
+      "No production recovery invoked",
+      "Source-policy changes and new acquisitions remain separate approval scope"
+    ]
+  },
+  "recurrence": {
+    "command": "Run test_body_recovery_selection.py before worker changes; review body-acquisition-latest reasons and progress against permitted inventory after publication.",
+    "signals": [
+      "Excluded source identity",
+      "Stuck terminal prefix",
+      "Permission restored with no recovery",
+      "Missing validated body"
+    ],
+    "owner": "Codex/operator",
+    "review_on": "Before publication and next existing hourly run",
+    "deployment": "not_deployed"
+  },
+  "acceptance": {
+    "display": {
+      "state": "unknown",
+      "evidence": [
+        "No production-after radar review"
+      ]
+    },
+    "mechanism": {
+      "state": "passed",
+      "evidence": [
+        "117 affected tests; all12 historical identities and exclusion cases covered",
+        "Fresh full backend3485passed; final source diff reviewed; no production writes."
+      ]
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "No forecast effect evaluation; queue changes do not authorize factual promotion."
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "inventory",
+      "owner": "Operator/Codex",
+      "due": "Before scope-wide recovery",
+      "status": "done",
+      "check": "Authorized UID10001 existing-container dry-run and read-only snapshot completed.228 scanned; affected-by-selector0. State unchanged. Diagnosis of remaining70 permission-blocked and36 other stopped entries remains separate; record not closed."
+    },
+    {
+      "id": "full-validation",
+      "owner": "Codex",
+      "due": "Before handoff",
+      "status": "done",
+      "check": "Fresh-root backend3485passed; affected117passed; buildpassed; diffcheckpassed."
+    },
+    {
+      "id": "publication-observation",
+      "owner": "Codex",
+      "due": "After publication authorization",
+      "status": "open",
+      "check": "Observe existing hourly job and downstream body quality; no forced run or backfill."
+    }
+  ]
+}

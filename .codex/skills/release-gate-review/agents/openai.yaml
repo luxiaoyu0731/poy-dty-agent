@@ -1,0 +1,4 @@
+interface:
+  display_name: "Release Gate Review"
+  short_description: "Produce an evidence-based ship or no-ship decision"
+  default_prompt: "Use $release-gate-review to produce a traceable release decision from current evidence."

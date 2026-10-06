@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily prospective shadow predictions at 08:00 Shanghai
+
+[Timer]
+OnCalendar=*-*-* 08:00:00 Asia/Shanghai
+Persistent=false
+AccuracySec=1s
+Unit=poydty-prediction-shadow.service
+
+[Install]
+WantedBy=timers.target

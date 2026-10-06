@@ -1,0 +1,4 @@
+interface:
+  display_name: "API Contract Review"
+  short_description: "Check API implementation and contract consistency"
+  default_prompt: "Use $api-contract-review to detect API contract drift and compatibility risks."

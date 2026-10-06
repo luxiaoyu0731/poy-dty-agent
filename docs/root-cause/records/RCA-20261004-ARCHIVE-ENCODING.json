@@ -1,0 +1,166 @@
+{
+  "id": "RCA-20261004-ARCHIVE-ENCODING",
+  "owner": "Codex / 操作员",
+  "status": "mechanism_verified",
+  "incident": {
+    "symptom": "已取得的2015年Eni转载原文在离线原文核对时触发UTF-8解码失败，不能据此判定原文不存在。",
+    "context": "原始网页71747字节，hash40bcbe83816db9c93203504be758f986daafd80bab22ca75cd02070beb7745dc；声明ISO-8859-1。",
+    "reproduction": "原核对路径raw.decode(utf-8, strict)在offset301拒绝真实原字节；新路径显式记录编码并核对实际META声明。"
+  },
+  "root_cause": {
+    "earliest_layer": "离线原始HTML编码解释",
+    "explanation": "核对器硬编码UTF-8；实际源声明ISO-8859-1。没有自动猜测、忽略坏字节或时间证据豁免。",
+    "evidence": [
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/cached-source-encoding-scope-audit.json",
+        "sha256": "2428769f04bfc124e45da2a3a171b77c36413b9d31742493d03896a5409fc1f7",
+        "bytes": 9644,
+        "summary": "23唯一已缓存HTML；22合法UTF-8、1明确ISO-8859-1。"
+      },
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/cached-source-decoding-validation.json",
+        "sha256": "199b2b0bbf018c4f89fb94c710889bc129e483887408c74ab37f17d7012252b4",
+        "bytes": 12227,
+        "summary": "23均严格解码；22既有解释及全部原始字节保持；三篇仅获得正文可得证明。"
+      }
+    ]
+  },
+  "impact": {
+    "query": "去重扫描原冻结队列已取正文、v1重建正文和扩展HTTP200 HTML；逐份核原始hash、无符号链接、声明与严格UTF-8。",
+    "declared_scope": "本场上述23份唯一缓存HTML的解码解释。",
+    "coverage": "complete_for_declared_scope",
+    "counts": {
+      "scanned": 23,
+      "affected": 1
+    },
+    "exclusions": [
+      "失败或尚未取得的网页",
+      "PDF及官方XML",
+      "全部其他生产/历史原文"
+    ],
+    "unassessed": []
+  },
+  "mechanism_fix": {
+    "change": "默认UTF-8严格解释保持；仅支持收据显式ISO-8859-1且原页面前16384字节真实META声明唯一一致；无声明、冲突、注释/脚本伪声明和其他codec拒绝。",
+    "temporary_action": "无；未转码或改写原字节",
+    "evidence": [
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/cached-source-decoding-validation.json",
+        "sha256": "199b2b0bbf018c4f89fb94c710889bc129e483887408c74ab37f17d7012252b4",
+        "bytes": 12227,
+        "summary": "23均严格解码；22既有解释及全部原始字节保持；三篇仅获得正文可得证明。"
+      },
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/source-encoding-focused-tests.log",
+        "sha256": "aa3adc15021f03c782be23d899ab30d48fc2944c976d69af1bc2578b2eee3c95",
+        "bytes": 99,
+        "summary": "27 passed in 0.66s；正反例及既有重建路径。"
+      }
+    ]
+  },
+  "legacy_handling": {
+    "decision": "旧已封存v1不重算；新正文保存独立可得性收据，不作为已验收案例或互证票。",
+    "issued_boundary": "仅离线实验工具，不改生产输入或发行账本。",
+    "rollback": "撤回离线decoder及其测试；保留所有原始字节与旧收据。"
+  },
+  "generalization": {
+    "positive_cases": [
+      "META charset与http-equiv两类ISO声明",
+      "原始重音字及引句、23真实缓存正文"
+    ],
+    "negative_cases": [
+      "缺声明/错误UTF-8声明/冲突声明",
+      "注释和script内伪META",
+      "未记录编码及未支持codec",
+      "改写或翻译引句"
+    ],
+    "commands": [
+      "DG01_TEST_DB_ROOT=<0700-root> TMPDIR=<root>/tmp SQLITE_PATH=<root>/source-encoding.db PYTHONPATH=server:. uv run --project server python -m pytest server/tests/test_archive_source_audit.py server/tests/test_reconstructed_corpus.py -q",
+      "PYTHONPATH=server:. uv run --project server python <private>/check-source-decoding-scope.py"
+    ],
+    "results": [
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/source-encoding-focused-tests.log",
+        "sha256": "aa3adc15021f03c782be23d899ab30d48fc2944c976d69af1bc2578b2eee3c95",
+        "bytes": 99,
+        "summary": "27 passed in 0.66s；正反例及既有重建路径。"
+      },
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/cached-source-decoding-validation.json",
+        "sha256": "199b2b0bbf018c4f89fb94c710889bc129e483887408c74ab37f17d7012252b4",
+        "bytes": 12227,
+        "summary": "23均严格解码；22既有解释及全部原始字节保持；三篇仅获得正文可得证明。"
+      },
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/backend-full-source-encoding.log",
+        "sha256": "bdf51669ed4ab388a8055eeb42dc20d189ef2af2f176df053639bb7a6fa488a3",
+        "bytes": 3793,
+        "summary": "3369 passed in 221.26s; full backend after codec change"
+      }
+    ],
+    "limitations": [
+      "前16384字节之后的声明不在此绑定范围",
+      "正文可得性不认证来源真实性、机制、后验或预测效果",
+      "当前离线变更未发布，持续检测未部署"
+    ]
+  },
+  "recurrence": {
+    "command": "新增源入库前运行validate_document并在每场预检检查全量原始hash及显式编码；持续任务未部署。",
+    "signals": [
+      "UnicodeDecodeError",
+      "source_encoding_not_bound_to_markup",
+      "unsupported_source_encoding",
+      "原始及提取hash不一致"
+    ],
+    "owner": "Codex",
+    "review_on": "新语料版本冻结前",
+    "deployment": "not_deployed"
+  },
+  "acceptance": {
+    "display": {
+      "state": "not_applicable",
+      "evidence": [
+        "本补丁仅离线工具；没有页面结构或业务展示变化"
+      ]
+    },
+    "mechanism": {
+      "state": "verified",
+      "evidence": [
+        {
+          "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/cached-source-decoding-validation.json",
+          "sha256": "199b2b0bbf018c4f89fb94c710889bc129e483887408c74ab37f17d7012252b4",
+          "bytes": 12227,
+          "summary": "23均严格解码；22既有解释及全部原始字节保持；三篇仅获得正文可得证明。"
+        },
+        {
+          "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/source-encoding-focused-tests.log",
+          "sha256": "aa3adc15021f03c782be23d899ab30d48fc2944c976d69af1bc2578b2eee3c95",
+          "bytes": 99,
+          "summary": "27 passed in 0.66s；正反例及既有重建路径。"
+        }
+      ]
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "三篇资料后验、互证及RAG干预仍未验证；不能转正计票"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "corpus-admission",
+      "owner": "Codex",
+      "due": "新语料配对前",
+      "status": "open",
+      "check": "独立冻结案例时钟与同口径后验，不按价格结果选择案例"
+    },
+    {
+      "id": "repeatable-admission",
+      "owner": "Codex",
+      "due": "新语料版本冻结前",
+      "status": "open",
+      "check": "实际运行完整入库预检及持续检查，不用测试通过冒充检测已部署"
+    }
+  ]
+}

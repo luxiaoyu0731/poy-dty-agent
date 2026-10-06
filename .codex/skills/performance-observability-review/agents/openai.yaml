@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance & Observability Review"
+  short_description: "Review performance budgets and operational signals"
+  default_prompt: "Use $performance-observability-review to assess performance and observability readiness."

@@ -1,0 +1,141 @@
+{
+  "id": "RCA-20261006-FUSION-ATOMIC",
+  "owner": "Codex/操作员",
+  "status": "mechanism_verified",
+  "incident": {
+    "symptom": "10/6定案方向修改后异常，21格已入账而定案审计未完整保存",
+    "context": "/path/to/project-context/desktop-review-20261006/daily-20261006-artifacts.json sha256=058907d1bfea1366204509625972985423626e9b0976b914f9352def6733a0a3 bytes=780494; 内部只读API issued-20261006-internal.json sha256=74bb63ae1f23bda5389a9f3eb1fc35257a70f5da9cc2944cbceac616a23f8108",
+    "reproduction": "对真实SevenProductForecastBatch运行非空R2改写分支，旧代码先object.__setattr__(cells)再读取批次不存在的configuration_sha256。"
+  },
+  "root_cause": {
+    "earliest_layer": "预测定案到发行之间的可变批次处理及分离审计写入",
+    "explanation": "批次与账本模型字段混淆；原地改写后报错未回滚；逐行审计独立提交，不与发行原子提交；原测试没有实际改写分支。今天石脑油D7价格变幅-0.01842152在中性带0.03870988内，发行方向down，确认一个方向改写。",
+    "evidence": [
+      "/path/to/project-context/desktop-review-20261006/daily-20261006-artifacts.json",
+      "/path/to/project-context/desktop-review-20261006/issued-20261006-internal.json",
+      "/path/to/project-context/desktop-review-20261006/fusion-history-readonly.json"
+    ]
+  },
+  "impact": {
+    "query": "枚举生产seven-product-lifecycle目录全部JSON，按SHA去重；rg批次object.__setattr__与configuration_sha256改写路径；内部只读API对照21格价格变化与中性带",
+    "declared_scope": "当前保留的生产生命周期报告和当前源码发行改写路径；10/6已发行21格",
+    "coverage": "complete",
+    "counts": {
+      "scanned": 24,
+      "affected": 1
+    },
+    "exclusions": [
+      "旧账本和原始输入不重写",
+      "10/1另一LedgerCell.target类型错误单列历史，非此次configuration字段路径"
+    ],
+    "unassessed": [
+      "已被生产清理的历史报告",
+      "旧报告缺少审计的存量补注尚未授权",
+      "上线后真实运行恢复尚未验证"
+    ]
+  },
+  "mechanism_fix": {
+    "change": "独立候选完整校验；保留完整基准；定案配置生成合法SHA与新批次身份；21格审计与发行同事务；失败回滚后完整基准回退；独立定案告警",
+    "temporary_action": "不以重发或补写掩盖历史异常",
+    "evidence": [
+      "/path/to/project-context/desktop-review-20261006/fusion-focused.log",
+      "/path/to/project-context/desktop-review-20261006/fusion-backend-final.log",
+      "/path/to/project-context/desktop-review-20261006/fusion-e2e-final.log",
+      "/path/to/project-context/desktop-review-20261006/fusion-frontend-check.log",
+      "/path/to/project-context/daily-fix-public-20261006/post-runtime.json"
+    ]
+  },
+  "legacy_handling": {
+    "decision": "10/6石脑油D7异常留证；禁止静默改写或同日重发",
+    "issued_boundary": "冻结发行账本；历史审计缺失通过异常记录保留，不自动补造",
+    "rollback": "恢复保存制品/源码，无迁移；不回滚已发行账本"
+  },
+  "generalization": {
+    "positive_cases": [
+      "七品种D7/D30共14格改写",
+      "真实R2规则单格改写",
+      "无改写全21审计",
+      "发行与审计同事务"
+    ],
+    "negative_cases": [
+      "非法方向/缺行/重复/未知品种/错误日期/基准不匹配/D1改写拒绝",
+      "第三行SQL写入后失败全部回滚",
+      "回读失败全部回滚",
+      "既有账本缺审计不自动补造",
+      "总状态成功但定案失败仍严重告警"
+    ],
+    "commands": [
+      "uv run --project server python -m pytest server/tests -q",
+      "npm run check",
+      "npm run test:e2e -- --reporter=line",
+      "npm run root-cause:check -- --directory <本批记录>"
+    ],
+    "results": [
+      "针对性50 passed in 6.67s",
+      "最终全量3453 passed in 271.29s (0:04:31)",
+      "npm run check exit=0（既有600kB分包警告）",
+      "变更文件ruff check和git diff --check通过",
+      "214 passed (5.2m), 1 skipped",
+      "生产uid10001只读验证：8640运行指纹匹配，保存的九输入9/9，定案降级告警可识别；真实新日链尚未发生"
+    ],
+    "limitations": [
+      "功能正确不证明预测效果提升",
+      "未发布，生产复发检查未启用"
+    ]
+  },
+  "recurrence": {
+    "command": "python server/scripts/check_local_production_alerts.py --status-path /data/local-production/latest-status.json --output-dir /data/local-production/alerts",
+    "signals": [
+      "EVENT_FINALIZATION_DEGRADED严重",
+      "EVENT_FINALIZATION_UNKNOWN未知",
+      "生命周期event_fusion.audit_status/回退/改写格数"
+    ],
+    "owner": "Codex/操作员",
+    "review_on": "2026-10-07 08:00真实日链；下次相关改动前",
+    "deployment": "deployed"
+  },
+  "acceptance": {
+    "display": {
+      "state": "not_applicable",
+      "evidence": [
+        "本轮未改业务页面；验证运行告警"
+      ]
+    },
+    "mechanism": {
+      "state": "verified",
+      "evidence": [
+        "/path/to/project-context/desktop-review-20261006/fusion-backend-final.log",
+        "/path/to/project-context/desktop-review-20261006/fusion-focused.log"
+      ]
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "本轮未重跑付费回测，未宣称预测命中提升"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "regressions",
+      "owner": "Codex",
+      "due": "交付前",
+      "status": "done",
+      "check": "最新全量验证与根因检查绿"
+    },
+    {
+      "id": "release-observe",
+      "owner": "操作员/Codex",
+      "due": "发布后下一业务日",
+      "status": "open",
+      "check": "审核发布后，核对真实日链、定案审计、日历门及告警"
+    },
+    {
+      "id": "deployed-readonly-check",
+      "owner": "Codex",
+      "due": "2026-10-06发布后",
+      "status": "done",
+      "check": "版本/接口/源码/告警只读验证通过；新日链观察仍开放"
+    }
+  ]
+}

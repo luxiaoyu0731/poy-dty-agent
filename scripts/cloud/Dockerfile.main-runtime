@@ -1,0 +1,23 @@
+# The artifact builder supplies an exact reviewed local image, never a moving tag.
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS assemble
+USER root
+COPY server/app/ /app/server/app/
+COPY server/scripts/ /app/server/scripts/
+COPY server/release.json /app/server/release.json
+COPY scripts/cloud/assemble_python_runtime.py /assemble_python_runtime.py
+RUN python /assemble_python_runtime.py
+
+FROM scratch AS runtime
+COPY --from=assemble /runtime/ /
+ENV PATH="/app/server/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+ENV LD_LIBRARY_PATH=/usr/local/lib
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt SSL_CERT_DIR=/etc/ssl/certs
+ENV OPENSSL_CONF=/etc/ssl/openssl.cnf
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 SQLITE_PATH=/data/agent.db
+WORKDIR /app
+USER 10001:10001
+EXPOSE 8000
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/live', timeout=3).read()"]
+CMD ["/bin/sh", "-c", "set -eu; if [ \"${APP_ENV:-}\" != production ] && [ \"${APP_ENV:-}\" != staging ]; then exit 1; fi; test \"${ENFORCE_INTERNAL_TOKEN:-}\" = 1; test -n \"${INTERNAL_API_TOKEN:-}\"; exec uvicorn app.main:app --app-dir server --host 0.0.0.0 --port 8000"]

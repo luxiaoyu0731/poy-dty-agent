@@ -1,0 +1,54 @@
+{
+  "contract_id": "phase-a",
+  "contract_version": "phase-a.v3",
+  "base_contract_version": "phase-a.v2",
+  "base_contract_path": "phase_a_contracts.v2.json",
+  "governance_version": "2026-08-05",
+  "continuous_contract_policy": {
+    "policy_id": "china-futures-main-continuous.v1",
+    "eligible_contracts": "exchange_listed_active_contracts",
+    "ranking": ["open_interest_desc", "volume_desc", "nearer_expiry_asc"],
+    "roll_confirmation_trading_days": 2,
+    "roll_effective": "next_trading_day",
+    "forced_roll_trigger": "current_contract_final_trading_month",
+    "forced_roll_effective": "next_trading_day",
+    "forced_roll_selection": "ranked_non_final_trading_month",
+    "price_field": "official_daily_settlement",
+    "back_adjustment": "prohibited",
+    "synthetic_fill": "prohibited"
+  },
+  "continuous_contract_series_ids": [
+    "crude.sc.ine.main.settlement.cny_bbl",
+    "px.czce.main.settlement.cny_mt",
+    "methanol.czce.main.settlement.cny_mt",
+    "pta.czce.main.settlement.cny_mt",
+    "meg.dce.main.settlement.cny_mt"
+  ],
+  "series_overrides": {
+    "crude.sc.ine.main.settlement.cny_bbl": {
+      "continuous_contract_policy_id": "china-futures-main-continuous.v1",
+      "eligibility_status": "blocked_license_or_spec_unverified",
+      "blocked_reason": "official daily source remains a candidate until source authorization and reuse evidence are frozen"
+    },
+    "px.czce.main.settlement.cny_mt": {
+      "continuous_contract_policy_id": "china-futures-main-continuous.v1",
+      "eligibility_status": "blocked_license_or_spec_unverified",
+      "blocked_reason": "official daily source remains a candidate until source authorization and reuse evidence are frozen"
+    },
+    "methanol.czce.main.settlement.cny_mt": {
+      "continuous_contract_policy_id": "china-futures-main-continuous.v1",
+      "eligibility_status": "blocked_license_or_spec_unverified",
+      "blocked_reason": "official daily source remains a candidate until source authorization and reuse evidence are frozen"
+    },
+    "pta.czce.main.settlement.cny_mt": {
+      "continuous_contract_policy_id": "china-futures-main-continuous.v1",
+      "eligibility_status": "blocked_license_or_spec_unverified",
+      "blocked_reason": "official daily source remains a candidate until source authorization and reuse evidence are frozen"
+    },
+    "meg.dce.main.settlement.cny_mt": {
+      "continuous_contract_policy_id": "china-futures-main-continuous.v1",
+      "eligibility_status": "blocked_license_or_spec_unverified",
+      "blocked_reason": "official daily source remains a candidate until source authorization and reuse evidence are frozen"
+    }
+  }
+}

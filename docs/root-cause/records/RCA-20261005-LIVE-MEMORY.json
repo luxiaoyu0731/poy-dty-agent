@@ -1,0 +1,103 @@
+{
+  "id": "RCA-20261005-LIVE-MEMORY",
+  "owner": "Codex / 操作员",
+  "status": "open",
+  "incident": {
+    "symptom": "召回只记观察、旧教训机械约束风险；操作员要求两模块同时影响未来发牌",
+    "context": "2026-10-05 操作员在讨论风险后明确“都接上”；效果回测取消",
+    "reproduction": "比较 AgentChain.run_historical_analog、fuse_batch 与周蒸馏的输入/输出；接口能力位独立读取"
+  },
+  "root_cause": {
+    "earliest_layer": "历史经验输入与复盘蒸馏策略",
+    "explanation": "旧召回未进案例候选；旧蒸馏按发行近7天选全格、使用统一旧结算标签并提出硬规则。新接入属于功能变更，不代表证明历史业务效果。",
+    "evidence": [
+      "server/app/agent_chain.py",
+      "server/scripts/run_agent_distillation.py"
+    ]
+  },
+  "impact": {
+    "query": "所有历史经验事件共用候选入口；所有21格通过fuse_batch；新蒸馏查询按结算时刻选改写格",
+    "declared_scope": "未来7品种×3期限发行及周蒸馏；现有模拟教训原记录保留；取消回放不恢复",
+    "coverage": "partial",
+    "counts": {
+      "scanned": null,
+      "affected": null
+    },
+    "exclusions": [
+      "冻结发行账本",
+      "旧历史资料重新计分",
+      "客户正式报告重启"
+    ],
+    "unassessed": [
+      "新版业务效果",
+      "线上各品种合格召回率"
+    ]
+  },
+  "mechanism_fix": {
+    "change": "独立召回/计票/反思背景开关；凭据复核与品种期限绑定；冻结分期限分析带；已结算改写样本与精确教训可见时刻；原子有效期轮换",
+    "temporary_action": "无",
+    "evidence": []
+  },
+  "legacy_handling": {
+    "decision": "旧发行及原教训内容不重写；新标签仅供蒸馏；未来新教训按有效期轮换30条",
+    "issued_boundary": "只影响接入后发行",
+    "rollback": "关闭三个试运行开关并恢复保存源与镜像；已发行批次不回滚"
+  },
+  "generalization": {
+    "positive_cases": [
+      "同品种同期限三源凭据驱动R2",
+      "真实已结算改写格可进入分析",
+      "教训轮换保持历史可见性"
+    ],
+    "negative_cases": [
+      "跨品种、跨期限、未来原文、降级与伪造召回均不计票",
+      "未来结算、缺冻结带、未改写格拒绝",
+      "重复发布事务回滚不丢旧教训"
+    ],
+    "commands": [
+      "DG01 安全环境下 pytest server/tests/test_live_memory_policy.py -q"
+    ],
+    "results": [
+      "4 passed in 0.53s"
+    ],
+    "limitations": [
+      "全量与生产发布观察待完成；不宣称预测效果验收"
+    ]
+  },
+  "recurrence": {
+    "command": "npm run root-cause:monitor -- --base-url https://app.kaipingrc.com --output <私有路径>",
+    "signals": [
+      "链报告召回凭据/范围/策略",
+      "教训来源与发布时间",
+      "有引用和合格组仍未作用需复核"
+    ],
+    "owner": "维护者",
+    "review_on": "下一次相关改动前",
+    "deployment": "not_deployed"
+  },
+  "acceptance": {
+    "display": {
+      "state": "unknown",
+      "evidence": []
+    },
+    "mechanism": {
+      "state": "unknown",
+      "evidence": []
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "操作员取消回放并批准未验收线上试运行"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "investigate",
+      "owner": "维护者",
+      "due": "下一次相关改动前",
+      "status": "open",
+      "check": "同类影响和反例验证完成"
+    }
+  ]
+}

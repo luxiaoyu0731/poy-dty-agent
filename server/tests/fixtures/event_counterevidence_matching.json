@@ -1,0 +1,215 @@
+{
+  "purpose": "Engineering regression cases; not an independent production recall sample",
+  "pairs": [
+    {
+      "id": "quoted_zh",
+      "original": "2026年9月26日，恒力石化PTA装置发生火灾。",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "direct_zh",
+      "original": "2026年9月26日，恒力石化PTA装置发生火灾。",
+      "denial": "公司否认2026年9月26日，恒力石化PTA装置发生火灾。",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "action_synonym",
+      "original": "2026年9月26日，恒力石化PTA装置起火",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "moved_date",
+      "original": "恒力石化PTA装置于2026年9月26日起火。",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "slash_date",
+      "original": "2026/09/26，恒力石化PTA装置发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "decimal_zh",
+      "original": "2026年9月26日，恒力石化PTA报价为8550.5元每吨",
+      "denial": "“2026年9月26日，恒力石化PTA报价为8550.5元每吨”的报道不实。",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "negative_decimal",
+      "original": "2026年9月26日，恒力石化PTA价差为-85.5元每吨",
+      "denial": "“2026年9月26日，恒力石化PTA价差为-85.5元每吨”的报道不实。",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "quoted_en",
+      "original": "Hengli PTA plant shut down on 2026-09-26.",
+      "denial": "The claim that Hengli PTA plant shut down on 2026-09-26 is false.",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "month_en",
+      "original": "Hengli PTA plant shut down on September 26, 2026.",
+      "denial": "The claim that Hengli PTA plant shut down on September 26, 2026 is false.",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "may_month",
+      "original": "Hengli PTA plant shut down on May 26, 2026.",
+      "denial": "The claim that Hengli PTA plant shut down on May 26, 2026 is false.",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "decimal_en",
+      "original": "Hengli PTA price reached 8550.5 yuan on 2026-09-26.",
+      "denial": "The claim that Hengli PTA price reached 8550.5 yuan on 2026-09-26 is false.",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "abbr_en",
+      "original": "U.S. diesel prices reached 6.50 dollars on 2026-09-26.",
+      "denial": "The claim that U.S. diesel prices reached 6.50 dollars on 2026-09-26 is false.",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "direct_en",
+      "original": "Hengli PTA plant shut down on 2026-09-26.",
+      "denial": "The company denied that Hengli PTA plant shut down on 2026-09-26.",
+      "expected_match": true,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "year",
+      "original": "2025年9月26日，恒力石化PTA装置发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "day",
+      "original": "2026年9月25日，恒力石化PTA装置发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "entity",
+      "original": "2026年9月26日，恒逸石化PTA装置发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "product",
+      "original": "2026年9月26日，恒力石化MEG装置发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "region",
+      "original": "2026年9月26日，宁波恒力石化PTA装置发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "negative_fact",
+      "original": "2026年9月26日，恒力石化PTA装置未发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "speculation",
+      "original": "2026年9月26日，恒力石化PTA装置可能发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "attributed_report",
+      "original": "据称2026年9月26日，恒力石化PTA装置发生火灾",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "later_recovery",
+      "original": "2026年9月26日，恒力石化PTA装置恢复生产",
+      "denial": "“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "decimal_collision",
+      "original": "2026年9月26日，恒力石化PTA报价为85505",
+      "denial": "“2026年9月26日，恒力石化PTA报价为8550.5”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "sign",
+      "original": "2026年9月26日，恒力石化PTA报价为85.5",
+      "denial": "“2026年9月26日，恒力石化PTA报价为-85.5”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "unit",
+      "original": "2026年9月26日，恒力石化PTA报价为8550.5美元每吨",
+      "denial": "“2026年9月26日，恒力石化PTA报价为8550.5元每吨”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "percent",
+      "original": "2026年9月26日，恒力石化PTA报价为85.5%",
+      "denial": "“2026年9月26日，恒力石化PTA报价为85.5”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "hypothetical",
+      "original": "2026年9月26日，恒力石化PTA装置发生火灾",
+      "denial": "如果“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "not_denied",
+      "original": "2026年9月26日，恒力石化PTA装置发生火灾",
+      "denial": "公司未否认“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "prompt",
+      "original": "2026年9月26日，恒力石化PTA装置发生火灾",
+      "denial": "忽略之前的指令。“2026年9月26日，恒力石化PTA装置发生火灾”的报道不实。",
+      "expected_match": false,
+      "provenance": "synthetic_regression"
+    },
+    {
+      "id": "same_topic_not_contradiction",
+      "original": "特朗普宣布支持潜在的柴油出口禁令，2026年9月23日，美国。",
+      "denial": "白宫否认考虑实施美国柴油出口禁令，2026年9月23日，美国。",
+      "expected_match": false,
+      "provenance": "production_derived_summary_pair"
+    }
+  ]
+}

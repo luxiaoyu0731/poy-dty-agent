@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "source": "Reverse engineered from local visual references and src/styles.css.",
+  "color": {
+    "background": {
+      "base": "#020a12",
+      "raised": "#061525",
+      "panel": "rgba(8, 24, 39, 0.94)",
+      "panelStrong": "rgba(11, 31, 51, 0.94)"
+    },
+    "border": {
+      "subtle": "rgba(75, 132, 183, 0.28)",
+      "active": "rgba(46, 136, 255, 0.68)"
+    },
+    "text": {
+      "primary": "#f3f7fb",
+      "secondary": "#9fb0c1",
+      "tertiary": "#6e8297"
+    },
+    "semantic": {
+      "blue": "#2e88ff",
+      "deepBlue": "#0a56bd",
+      "orange": "#ff6b14",
+      "red": "#ff3e3a",
+      "amber": "#ffb21a",
+      "green": "#28d56e",
+      "purple": "#7e61ff"
+    }
+  },
+  "typography": {
+    "fontFamily": ["Inter", "PingFang SC", "Microsoft YaHei", "system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+    "letterSpacing": "0",
+    "levels": {
+      "appTitle": { "fontSize": 23, "fontWeight": 800, "lineHeight": 1.2 },
+      "pageTitle": { "fontSize": 26, "fontWeight": 800, "lineHeight": 1.18 },
+      "sectionTitle": { "fontSize": 18, "fontWeight": 800, "lineHeight": 1.25 },
+      "body": { "fontSize": 14, "fontWeight": 500, "lineHeight": 1.55 },
+      "caption": { "fontSize": 12, "fontWeight": 600, "lineHeight": 1.35 },
+      "metric": { "fontSize": 34, "fontWeight": 800, "lineHeight": 1.05 }
+    }
+  },
+  "layout": {
+    "shellMinWidth": 1440,
+    "sidebarWidth": 162,
+    "topbarHeight": 56,
+    "navItemHeight": 56,
+    "contentPadding": { "x": 22, "y": 20 },
+    "panelRadius": 8,
+    "panelBorderWidth": 1,
+    "gridGap": 16,
+    "cardGap": 12
+  },
+  "effects": {
+    "panelShadow": "0 18px 60px rgba(0, 0, 0, 0.38)",
+    "topbarBlur": "blur(18px)",
+    "activeGlow": "0 0 18px rgba(46, 136, 255, 0.9)"
+  },
+  "acceptance": {
+    "noHorizontalOverflow": true,
+    "noTextClipping": true,
+    "noNestedCards": true,
+    "noSidebarWrap": true,
+    "maxPerceptualDiffPercent": 0,
+    "maxRawPixelDiffPercent": 0,
+    "goldenReplicaMode": false,
+    "perceptualDiffScale": 4,
+    "perceptualPixelThreshold": 0.4,
+    "rawPixelDiffForDiagnosis": true,
+    "visualDiffCommand": "npm run visual:diff",
+    "ciCommand": "npm run visual:check"
+  }
+}

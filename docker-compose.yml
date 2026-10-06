@@ -1,0 +1,122 @@
+services:
+  backend:
+    build: .
+    env_file:
+      - .env
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      ENFORCE_INTERNAL_TOKEN: ${ENFORCE_INTERNAL_TOKEN:-1}
+      SQLITE_PATH: ${SQLITE_PATH:-/data/agent.db}
+    ports:
+      - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
+    volumes:
+      - agent-data:/data
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  scheduler:
+    build: .
+    env_file:
+      - .env
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      ENFORCE_INTERNAL_TOKEN: ${ENFORCE_INTERNAL_TOKEN:-1}
+      SQLITE_PATH: ${SQLITE_PATH:-/data/agent.db}
+      CODEX_RUN_DIR: ${CODEX_RUN_DIR:-/data/codex-run}
+      LOCAL_PRODUCTION_OUTPUT_DIR: ${LOCAL_PRODUCTION_OUTPUT_DIR:-/data/local-production}
+      LOCAL_PRODUCTION_STATUS_PATH: ${LOCAL_PRODUCTION_STATUS_PATH:-/data/local-production/latest-status.json}
+      LOCAL_PRODUCTION_ALERT_OUTPUT_DIR: ${LOCAL_PRODUCTION_ALERT_OUTPUT_DIR:-/data/local-production/alerts}
+      PRODUCTION_HEALTH_BASE_URL: ${PRODUCTION_HEALTH_BASE_URL:-http://backend:8000}
+      PRODUCTION_SCHEDULER_INTERVAL_SECONDS: ${PRODUCTION_SCHEDULER_INTERVAL_SECONDS:-86400}
+      ALERT_PUSH_PROVIDER: ${ALERT_PUSH_PROVIDER:-}
+      SERVERCHAN_SENDKEY: ${SERVERCHAN_SENDKEY:-}
+      PUSHPLUS_TOKEN: ${PUSHPLUS_TOKEN:-}
+      PUSHPLUS_TOPIC: ${PUSHPLUS_TOPIC:-}
+      WECHAT_WEBHOOK_URL: ${WECHAT_WEBHOOK_URL:-}
+      # 告警检查读取的新鲜度/公网探针产物路径（服务器侧 health-probe 定时产出）。
+      OUTPUT_FRESHNESS_PATH: ${OUTPUT_FRESHNESS_PATH:-/data/local-production/output-freshness/latest.json}
+      PUBLIC_HEALTH_PROBE_PATH: ${PUBLIC_HEALTH_PROBE_PATH:-/data/local-production/public-health/latest.json}
+      PIPELINE_GRAPH_STATE_ROOT: ${PIPELINE_GRAPH_STATE_ROOT:-/data}
+    command:
+      - python
+      - server/scripts/run_production_scheduler.py
+    depends_on:
+      - backend
+    volumes:
+      - agent-data:/data
+    restart: unless-stopped
+    # 镜像自带 HEALTHCHECK 探测 8000 端口 API；后台脚本服务没有 API，禁用以免永久 unhealthy。
+    healthcheck:
+      disable: true
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  news-scheduler:
+    build: .
+    env_file:
+      - .env
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      SQLITE_PATH: ${SQLITE_PATH:-/data/agent.db}
+      CODEX_RUN_DIR: ${CODEX_RUN_DIR:-/data/codex-run}
+      NEWS_AUTOMATION_OUTPUT_DIR: ${NEWS_AUTOMATION_OUTPUT_DIR:-/data/news-automation}
+      NEWS_SCHEDULER_INTERVAL_SECONDS: ${NEWS_SCHEDULER_INTERVAL_SECONDS:-1800}
+      ALERT_PUSH_PROVIDER: ${ALERT_PUSH_PROVIDER:-}
+      SERVERCHAN_SENDKEY: ${SERVERCHAN_SENDKEY:-}
+      PUSHPLUS_TOKEN: ${PUSHPLUS_TOKEN:-}
+      PUSHPLUS_TOPIC: ${PUSHPLUS_TOPIC:-}
+      WECHAT_WEBHOOK_URL: ${WECHAT_WEBHOOK_URL:-}
+    command:
+      - python
+      - server/scripts/run_news_scheduler.py
+    depends_on:
+      - backend
+    volumes:
+      - agent-data:/data
+    restart: unless-stopped
+    healthcheck:
+      disable: true
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  event-summary-worker:
+    build: .
+    env_file:
+      - .env
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      SQLITE_PATH: ${SQLITE_PATH:-/data/agent.db}
+      EVENT_SUMMARY_WORKER_OUTPUT_DIR: ${EVENT_SUMMARY_WORKER_OUTPUT_DIR:-/data/event-summary-worker}
+      EVENT_SUMMARY_WORKER_CONCURRENCY: ${EVENT_SUMMARY_WORKER_CONCURRENCY:-3}
+      EVENT_SUMMARY_WORKER_BATCH_SIZE: ${EVENT_SUMMARY_WORKER_BATCH_SIZE:-5}
+      EVENT_SUMMARY_DAILY_REQUEST_LIMIT: ${EVENT_SUMMARY_DAILY_REQUEST_LIMIT:-50}
+      EVENT_SUMMARY_DAILY_BUDGET_RMB: ${EVENT_SUMMARY_DAILY_BUDGET_RMB:-10}
+      EVENT_SUMMARY_MAX_COST_PER_REQUEST_RMB: ${EVENT_SUMMARY_MAX_COST_PER_REQUEST_RMB:-0.20}
+    command:
+      - python
+      - server/scripts/run_event_summary_worker.py
+    depends_on:
+      - backend
+    volumes:
+      - agent-data:/data
+    restart: unless-stopped
+    healthcheck:
+      disable: true
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+volumes:
+  agent-data:

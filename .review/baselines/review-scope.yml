@@ -1,0 +1,37 @@
+version: 1
+name: current-worktree-production-review
+created_on: "2026-07-26"
+
+comparison:
+  base_commit: "69d78a4"
+  target: working-tree
+  include:
+    - tracked-modifications
+    - tracked-deletions
+    - untracked-source-and-configuration
+  exclude:
+    - dist/**
+    - .visual-regression/**
+    - .review-screenshots/**
+    - artifacts/**
+    - .codex-run/**
+    - .external/**
+    - .env
+    - "**/node_modules/**"
+    - "**/.venv/**"
+    - "**/__pycache__/**"
+
+policy:
+  secrets: block-all
+  semgrep-error: block-all
+  vulnerability-high-critical: block-all
+  ruff: zero-findings
+  low-medium-security:
+    mode: no-new-findings
+    baseline_status: active
+    baseline_file: .review/baselines/security-low-medium.json
+
+notes:
+  - The working tree is intentionally reviewed as one delivery unit.
+  - Missing or skipped evidence is not considered a pass.
+  - The first reviewed low/medium scan contained no vulnerability, misconfiguration, or secret findings.

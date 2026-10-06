@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Review"
+  short_description: "Review architecture boundaries and maintainability"
+  default_prompt: "Use $architecture-review to assess architecture risks with file-and-line evidence."

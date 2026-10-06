@@ -1,0 +1,6 @@
+{
+  "schema_version": "codeql_waivers.v2",
+  "accepted_by": "operator",
+  "accepted_on": "2026-08-30",
+  "waivers": []
+}

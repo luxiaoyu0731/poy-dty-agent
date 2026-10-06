@@ -1,0 +1,154 @@
+{
+  "id": "RCA-20261006-RADAR-PUBLISHER",
+  "owner": "Codex",
+  "status": "mechanism_verified",
+  "incident": {
+    "symptom": "Radar event panels lack grounded content; several public originals contain full bodies while extraction yields navigation or snippets.",
+    "context": "Seven-day snapshot228; operator approved pypdf/public3 publishers and fixed14 capture restore. Published b139d2f then percentage guard d670d2c;14 full bodies/14 grounded fact summaries/13 unique current events verified.",
+    "reproduction": "CNBC ArticleBody-articleBody, OilPrice article_content, CNPC sj-main; MPA news page links current public PDF."
+  },
+  "root_cause": {
+    "earliest_layer": "Publisher body extraction and source permission",
+    "explanation": "Generic DOM selectors omit three observed publisher containers; MPA bodies reside in PDF attachments unsupported by old collector. OPEC canonical-domain alias failed same-source permission. Three public publishers were absent from the two-layer admission lists. Full-body recovery is distinct from factual/causal verification.",
+    "evidence": [
+      "agent-context/radar-extraction-comparison.json:12allowed non-quote failures checked;8full bodies locally extractable after repair",
+      "agent-context/radar-mpa-pdf-results.json:2and4pages,3749and4317characters,document numbers match parent",
+      "agent-context/radar-approved-public-diagnostics.json:4full bodies;ArabNews403 preserved",
+      "server/tests/test_radar_publisher_containers.py",
+      "server/tests/test_official_news_pdf.py",
+      "server/tests/test_verified_news_captures.py",
+      "agent-context/radar-quote-scope-summary.json:all23quote-source failures inspected;14price-table/referencequotes,6shortreferencequotes,3completebriefs belowexisting80-character boundary gate. Gates not lowered."
+    ]
+  },
+  "impact": {
+    "query": "Frozen seven-day inventory228;all35retry-exhausted originals inspected(12non-quote+23quote),all5newly approved originals checked.14means locally full-body-recoverable records, not verified causal events.70permission blockers inventoried byhost; remaining unapproved sources excluded.",
+    "declared_scope": "Parser families CNBC/OilPrice/CNPC; MPA text PDFs; existing OPEC canonical alias; approved AlJazeera/Guardian/ArabNews public originals; fixed mutable-recovery manifest<=20.",
+    "coverage": "complete",
+    "counts": {
+      "scanned": 228,
+      "affected": 14
+    },
+    "exclusions": [
+      "Issued ledgers and historical frozen inputs",
+      "RemovedCCF",
+      "Paywall/login/CAPTCHA",
+      "Unknown/unapproved publisher originals",
+      "Text-free or encrypted PDF; no OCR/unlock",
+      "Unrelated experiment edits"
+    ],
+    "unassessed": [
+      "Future changes to publisher HTML and PDF layouts",
+      "Successful acquisition of excluded unapproved or access-restricted sources not claimed"
+    ]
+  },
+  "mechanism_fix": {
+    "change": "Host/path-bound DOM selectors, bounded official PDF text reader in isolated process, existing-source OPEC alias, two-layer permission for three approved publishers. Legacy fixed-capture apply validates hashes/access/full-body before journaled CAS ingest; never resets retry state or invokes a model. Exact percentage-unit equivalence supports80percent/80% with originalquote binding, no numeric rounding/bare-unit acceptance.",
+    "temporary_action": "无",
+    "evidence": [
+      "128affected tests passed before PDF addition;143PDF/related tests passed before final additions;25capture/PDFtests passed",
+      "Final fresh full backend:3524passed in247.28s; earlier connection-lifecycle test failure corrected and rerun.",
+      "pip-audit:No known vulnerabilities found",
+      "Final percentage regression:3534passed238.35s;67affectedpassed;whole-serverRuff/SemgrepERROR0"
+    ]
+  },
+  "legacy_handling": {
+    "decision": "Fixed14 manifest applied2026-10-06T10:20:04Z underUID10001/body-acquisitionlock after fullhash/access/bodypreflight and operatorapproval;owner-only oldarticle/summary journals preserved;retry state untouched.",
+    "issued_boundary": "No issued ledger write; repaired source bodies are newly available mutable inputs and require separate fact-summary verification.",
+    "rollback": "Restore previous backend image/script/config; saved pre-change mutable article and summary journal. No schema migration. Source admission can be rolled back independently."
+  },
+  "generalization": {
+    "positive_cases": [
+      "Threepublisher containers preserve final paragraph",
+      "CNBC in-article quotes/recommendations/account prompts excluded",
+      "MPA2and4page actualPDF text extracted with number binding",
+      "PDFparent URL/hash persisted while parent article identity/time remains",
+      "Manifestapply journals olddata,preserves identity/time/retry state"
+    ],
+    "negative_cases": [
+      "Sameclasses onunknowndomains/listing/video remainuntrusted",
+      "Unapproved redirects,HTMLmasquerading asPDF,encrypted/oversized/blank/too-many-pages/mismatch failclosed",
+      "PDFparse timeout kills and reaps child",
+      "Stalehash,alteredsnapshot,duplicateidentity,accessbarrier fail beforeapply",
+      "Repeatedmanifest application rejected, no duplicate records",
+      "ArabNews403 preserved, no bypass"
+    ],
+    "commands": [
+      "DG01-controlled uv run --project server python -m pytest affected suites -q",
+      "DG01-controlled uv run --project server python -m pytest server/tests -q",
+      "Main workspace root-cause:check with explicit owned records directory"
+    ],
+    "results": [
+      "Latest complete fresh suite:3524passed in247.28s(0:04:07),exit0",
+      "Ruff changedfiles passed after one formatting-only correction",
+      "npm run check passed; offlineAI21/21,providercalls0;pip-audit knownvulnerabilities0;TrivylockfilesHIGH/CRITICAL0;Semgrepchanged/newfiles0",
+      "FrontendfullE2E:226passed(5.2m),1skipped;exit0",
+      "Fixed14capture manifest SHA256ca67d5c9f3382f81409511142b0f8b9f837ab70bb147e214f882a5d17507ba02; approved journaled apply14 completed",
+      "Productionfixed14dryrun14validated/apply14applied;latestfact summaries14completed,1impactrejected remainsrestricted",
+      "CandidateLinuxPDF2and4pages;actualruntime67distributionsaudit0;actualimageHIGH/CRITICAL/secrets0;runtimeunexpectedfiles0;publicfrontend/live/readyidentitymatches",
+      "Additionalformatdefect:80percent and80% not equivalent in oldnumbercheck;exactunit/numericnormalization patch underfreshfullregression. Currentread-only7days132summaryrow audit found1percentage-rejectedrecordwithotherunsupportedquotes/date;notpromoted. Historical14-scope single rejection passedexistingretry, originalnumberquote no longerstored;onlyhelper defectisproven.",
+      "Current-source-linked public14materialqueries:14HTTP200,13uniqueevents allwithfactualclaims. Two materialsclusterintooneevent;do notdoublecount. Oldanchor metadataentry remainshistorical,notcurrentlinkedsourcehead.",
+      "Final d670d2c public release/live/ready HTTP200 with exact identity;14 current-linked material queries HTTP200/facts,13 unique events;runtime image b82475b6 and percentage equivalence smoke passed."
+    ],
+    "limitations": [
+      "PDFaddress-space cap enforced Linux; macOS local checks enforce CPU/wallclock only",
+      "No business-direction correctness claimed from bodyextraction"
+    ]
+  },
+  "recurrence": {
+    "command": "Run publisher/PDF/capture selection regressions beforecollector changes; compare existing hourly body-acquisition and summary coverage reports with declared seven-day inventory after publication.",
+    "signals": [
+      "Public source permission staysblocked afterapproval",
+      "Parser produces navigation despiteknownbody",
+      "Originalattachment unread",
+      "Queueempty while retryexhausted body-defects remain"
+    ],
+    "owner": "Codex/operator",
+    "review_on": "Beforepublication and next existing hourlyrun",
+    "deployment": "Published b139d2f then d670d2c 20261006T104446Z-fd52dac85a64e30a; existing news-scheduler and summary worker running on verified image; existing cycle completed10:26Z and consumed restored14. No new timer. Regression checks and existing coverage reports retained."
+  },
+  "acceptance": {
+    "display": {
+      "state": "passed",
+      "evidence": [
+        "public-current-linked14.json:14materials/13uniquecurrentlinkedevents allwithfacts;browserlist30ready9.6s singleprobe;pairedidentitymatches"
+      ]
+    },
+    "mechanism": {
+      "state": "passed",
+      "evidence": [
+        "Final fresh full backend3534 passed;PDF guards/manifests/public permissions/containers/percentage unit generalization covered.",
+        "14 approved captures applied after full preflight and journal;actual bodies and summaries verified separately.",
+        "Production14bodyfull_text/14fact_summary_completed/14currentitemrevisionslaterthanrestore;14publicfactsboundtosourceevidencelinks."
+      ]
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "Bodyavailability is not factverification or prediction accuracy"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "scope",
+      "owner": "Codex",
+      "due": "Beforeapply",
+      "status": "done",
+      "check": "All35retry-exhausted originals and5newlyapproved originals inspected;fixed14full-bodycapture manifests hashbound;23quote cases retain gates. No productionwrites."
+    },
+    {
+      "id": "validation",
+      "owner": "Codex",
+      "due": "Beforecommit",
+      "status": "done",
+      "check": "Fresh backend3524passed;frontend226passed/1skipped;build/Ruff/diff/root structural checks passed. Release image/runtime evidence remains separate."
+    },
+    {
+      "id": "release",
+      "owner": "Operator/Codex",
+      "due": "Afterreadinessreview",
+      "status": "done",
+      "check": "Both reviewed releases published;fixed14 journaled restore/grounded summaries/13 current-linked radar events verified;final public identity matches;no extra legacy rewrite."
+    }
+  ]
+}

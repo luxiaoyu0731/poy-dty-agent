@@ -1,0 +1,133 @@
+{
+  "id": "RCA-20261006-PIPELINE-READ-LATENCY",
+  "owner": "Codex / 操作员",
+  "status": "mechanism_verified",
+  "incident": {
+    "symptom": "Agent画布请求超时后全部状态未知，提示条挤压画布",
+    "context": "2026-10-06 15:33公网截图；运行8c29ed9；公网graph实测HTTP200/36.662s，日志34.575s/68.701s，RAG66.529s",
+    "reproduction": "并发加载慢RAG与graph，后者共享_WORKBENCH_HEAVY_BUILD_LOCK；前端12s中止读取。"
+  },
+  "root_cause": {
+    "earliest_layer": "只读API并发隔离与连接选择",
+    "explanation": "graph/detail/event-factors排在重检索共享锁后；semantic_index_status虽只查询仍使用connect写初始化，包括journal_mode设置；前端失败清掉已有graph。数据库锁报错同期存在，但引发写锁的具体后台事务未定位，不能称整个数据库争用问题关闭。",
+    "evidence": [
+      "server/app/main.py:_serialize_heavy_workbench_build及五处装饰器",
+      "server/app/semantic_index.py:semantic_index_status",
+      "src/services/api.ts:getJson默认12000ms",
+      "src/pages/AgentWorkbenchPage.tsx:loadGraph失败原setGraph(undefined)",
+      "/path/to/project/agent-context/pipeline-read-production-evidence.log SHA256 fd86e9ad746041a1ec409a6a2fb325c382e21ab396540d7532db48b31a4c4461"
+    ]
+  },
+  "impact": {
+    "query": "检查全部五个重工作台装饰器及semantic_index_status消费者；检查loadGraph全部错误路径",
+    "declared_scope": "管道graph/detail与文件event-factors，语义索引状态及其正文校验查询，Agent刷新展示",
+    "coverage": "complete",
+    "counts": {
+      "scanned": 5,
+      "affected": 3
+    },
+    "exclusions": [
+      "预测发行/预算/迁移/后台写入事务策略"
+    ],
+    "unassessed": [
+      "后台行情任务database is locked的具体长事务来源，另需调查"
+    ]
+  },
+  "mechanism_fix": {
+    "change": "三个观测路由移出重检索锁；索引状态和其grounded摘要检查使用connect_readonly；失败保留当前已成功读取graph并标生成时间，首次失败仍未知",
+    "temporary_action": "不延长默认超时、不伪造成功、不修改生产DB",
+    "evidence": [
+      "server/tests/test_pipeline_read_isolation.py",
+      "tests/app.spec.ts:workflow failed refresh/first read"
+    ]
+  },
+  "legacy_handling": {
+    "decision": "只读展示调整，不回填旧报告",
+    "issued_boundary": "已发行21格及预算冻结",
+    "rollback": "恢复源代码或已保存制品，无迁移"
+  },
+  "generalization": {
+    "positive_cases": [
+      "慢RAG持锁时三个观测路由正常返回",
+      "SQLite写事务保留期间只读索引状态正常返回",
+      "刷新失败保留原状态及生成时间"
+    ],
+    "negative_cases": [
+      "首次失败19卡状态未知",
+      "仅RAG/market链重构建保持序列化",
+      "索引时点/正文变化仍由原规则判断"
+    ],
+    "commands": [
+      "DG01隔离pytest server/tests",
+      "npm run check",
+      "PLAYWRIGHT_RETRIES=0 npm run test:e2e"
+    ],
+    "results": [
+      "47 passed in 11.16s",
+      "3461 passed in 247.49s (0:04:07)",
+      "216 passed (5.1m), 1 skipped, retries=0",
+      "故障刷新专项1 passed (5.3s)",
+      "npm run check exit0，既有分包提醒",
+      "变更文件Ruff与git diff --check通过",
+      "公网新版本并发：graph5.444s/RAG28.082s；此前graph36.662s；仅本次样本，不宣称p95。浏览器19卡/未知0/管道告警0。"
+    ],
+    "limitations": [
+      "后台写入长事务来源未定位，后续仍需调查",
+      "单次并发验收不能证明全部压力下都低于12秒；原生CUA工具超时，浏览器验收由Playwright完成"
+    ]
+  },
+  "recurrence": {
+    "command": "管道与慢RAG并发回归；生产HTTP日志duration_ms与前端超时；日度健康巡检",
+    "signals": [
+      "pipeline/graph延迟超过前端12秒等待",
+      "database is locked",
+      "刷新错误/生成时间"
+    ],
+    "owner": "Codex / 操作员",
+    "review_on": "发布后并发验收及后续日度巡检",
+    "deployment": "deployed; public concurrent and browser check passed, next daily writer contention review pending"
+  },
+  "acceptance": {
+    "display": {
+      "state": "passed",
+      "evidence": [
+        "首次失败未知骨架、刷新失败保留旧数据及时间、成功恢复告警消失，浏览器回归通过"
+      ]
+    },
+    "mechanism": {
+      "state": "passed",
+      "evidence": [
+        "47项针对性通过"
+      ]
+    },
+    "business_effect": {
+      "state": "not_applicable",
+      "evidence": [
+        "只读性能修复，不主张预测命中改善"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "local-validation",
+      "owner": "Codex",
+      "due": "本批完成前",
+      "status": "done",
+      "check": "全量回归与diff审查"
+    },
+    {
+      "id": "publication",
+      "owner": "操作员 / Codex",
+      "due": "发布时",
+      "status": "done",
+      "check": "操作员确认后发布f44322d；实际新容器并发RAG28.082s/graph5.444s HTTP200/18节点，公网浏览器19卡、未知0、管道警告0；原生CUA工具两次超时，改用Playwright验证并记录限制"
+    },
+    {
+      "id": "writer-contention",
+      "owner": "Codex",
+      "due": "后续调查",
+      "status": "open",
+      "check": "定位后台writer长事务，不扩大本批为生产DB操作"
+    }
+  ]
+}

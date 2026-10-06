@@ -1,0 +1,10 @@
+[Unit]
+Description=POY DTY isolated prospective prediction shadow
+After=docker.service time-sync.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/agent/bin/prediction-shadow.sh run
+TimeoutStartSec=180
+Nice=10

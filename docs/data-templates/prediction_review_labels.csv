@@ -1,0 +1,1 @@
+prediction_id,created_at,target,horizon,direction,index_low,index_high,confidence,data_snapshot_id,actual_review_at,actual_direction,actual_index,verdict,miss_reason,weight_adjustment,reviewer,notes

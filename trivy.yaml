@@ -1,0 +1,26 @@
+exit-code: 1
+format: table
+severity:
+  - HIGH
+  - CRITICAL
+
+scan:
+  scanners:
+    - vuln
+    - misconfig
+    - secret
+    - license
+  skip-dirs:
+    - dist
+    - .visual-regression
+    - .review-screenshots
+    - artifacts
+    - .codex-run
+    - .external
+    - "**/node_modules"
+    - "**/.venv"
+    - "**/__pycache__"
+  skip-files: []
+
+vulnerability:
+  ignore-unfixed: false

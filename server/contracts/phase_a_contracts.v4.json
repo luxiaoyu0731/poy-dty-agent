@@ -1,0 +1,190 @@
+{
+  "contract_id": "phase-a",
+  "contract_version": "phase-a.v4",
+  "base_contract_version": "phase-a.v3",
+  "base_contract_path": "phase_a_contracts.v3.json",
+  "governance_version": "2026-08-05",
+  "public_source_personal_reuse_policy": {
+    "policy_id": "public-source-personal-reuse.v1",
+    "permitted_use": "personal_internal_analysis_and_non_reversible_public_derived_conclusions",
+    "source_attribution_required": true,
+    "immutable_capture_evidence_required": true,
+    "raw_data_redistribution": "prohibited"
+  },
+  "international_front_month_policy": {
+    "policy_id": "international-front-month.v1",
+    "selection": "nearest_listed_contract_not_in_final_trading_month",
+    "roll_effective": "next_trading_day",
+    "price_field": "official_daily_settlement",
+    "back_adjustment": "prohibited",
+    "synthetic_fill": "prohibited"
+  },
+  "derived_cost_pressure_formula": {
+    "formula_id": "poy-dty-upstream-cost-pressure.v1",
+    "components": [
+      {"series_id": "pta.ccf.domestic.daily_assessment.cny_mt", "weight": 0.855},
+      {"series_id": "meg.ccf.domestic.daily_assessment.cny_mt", "weight": 0.335}
+    ],
+    "baseline": "trailing_20_common_business_days_arithmetic_mean",
+    "pressure_index": "100_times_current_material_basket_divided_by_baseline_mean",
+    "missing_input_behavior": "unscorable",
+    "shared_by_targets": ["poy.upstream_cost_pressure.index", "dty.upstream_cost_pressure.index"]
+  },
+  "series_overrides": {
+    "crude.brent.ice.front_month.settlement.usd_bbl": {
+      "candidate_source_ids": ["ice_brent_settlement_public"],
+      "continuous_contract_policy_id": "international-front-month.v1",
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "public source is registered but current capture, visibility and calendar evidence are pending"
+    },
+    "crude.wti.cme.front_month.settlement.usd_bbl": {
+      "candidate_source_ids": ["cme_wti_settlement_public"],
+      "continuous_contract_policy_id": "international-front-month.v1",
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "public source is registered but current capture, visibility and calendar evidence are pending"
+    },
+    "crude.sc.ine.main.settlement.cny_bbl": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "official candidate source and frozen continuous rule require current capture, visibility and calendar evidence"
+    },
+    "naphtha.ccf.domestic.daily_assessment.cny_mt": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "authorized CCF specification is frozen but current capture, visibility, freshness and calendar evidence are pending"
+    },
+    "coal.benchmark.unresolved.assessment.cny_mt": {
+      "market": "Qinhuangdao_port",
+      "instrument_or_grade": "composite_trade_5500",
+      "quote_type": "public_spot_assessment",
+      "candidate_source_ids": [],
+      "context_source_ids": ["cctd_qinhuangdao_thermal_coal"],
+      "raw_unit": "CNY/mt",
+      "standard_unit": "CNY/mt",
+      "conversion_formula": "identity",
+      "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai",
+      "calendar_id": "China_business_day",
+      "price_time_semantics": "daily_formal_source_unresolved; CCTD weekly contextual assessment only",
+      "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_daily_source_unresolved",
+      "blocked_reason": "CCTD Qinhuangdao 5500 is weekly contextual evidence, not a daily formal price; a separately approved daily formal source is required"
+    },
+    "mx.domestic.spot_assessment.cny_mt": {
+      "market": "East_China",
+      "instrument_or_grade": "mixed_xylene",
+      "quote_type": "public_spot_assessment",
+      "candidate_source_ids": ["sunsirs_public_commodity_assessment"],
+      "raw_unit": "CNY/mt",
+      "standard_unit": "CNY/mt",
+      "conversion_formula": "identity",
+      "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai",
+      "calendar_id": "China_business_day",
+      "price_time_semantics": "published_daily_assessment",
+      "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "public assessment definition is frozen but current capture, visibility and calendar evidence are pending"
+    },
+    "px.czce.main.settlement.cny_mt": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "official candidate source and frozen continuous rule require current capture, visibility and calendar evidence"
+    },
+    "px.ccf.domestic.daily_assessment.cny_mt": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "authorized CCF specification is frozen but current capture, visibility, freshness and calendar evidence are pending"
+    },
+    "ethylene.domestic.spot_assessment.cny_mt": {
+      "market": "East_China",
+      "instrument_or_grade": "polymer_grade_ethylene",
+      "quote_type": "public_spot_assessment",
+      "candidate_source_ids": ["sunsirs_public_commodity_assessment"],
+      "raw_unit": "CNY/mt",
+      "standard_unit": "CNY/mt",
+      "conversion_formula": "identity",
+      "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai",
+      "calendar_id": "China_business_day",
+      "price_time_semantics": "published_daily_assessment",
+      "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "public assessment definition is frozen but current capture, visibility and calendar evidence are pending"
+    },
+    "eo.domestic.spot_assessment.cny_mt": {
+      "market": "East_China",
+      "instrument_or_grade": "industrial_grade_ethylene_oxide",
+      "quote_type": "public_spot_assessment",
+      "candidate_source_ids": ["sunsirs_public_commodity_assessment"],
+      "raw_unit": "CNY/mt",
+      "standard_unit": "CNY/mt",
+      "conversion_formula": "identity",
+      "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai",
+      "calendar_id": "China_business_day",
+      "price_time_semantics": "published_daily_assessment",
+      "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "public assessment definition is frozen but current capture, visibility and calendar evidence are pending"
+    },
+    "methanol.czce.main.settlement.cny_mt": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "official candidate source and frozen continuous rule require current capture, visibility and calendar evidence"
+    },
+    "pta.czce.main.settlement.cny_mt": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "official candidate source and frozen continuous rule require current capture, visibility and calendar evidence"
+    },
+    "pta.ccf.domestic.daily_assessment.cny_mt": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "authorized CCF specification is frozen but current capture, visibility, freshness and calendar evidence are pending"
+    },
+    "meg.dce.main.settlement.cny_mt": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "official candidate source and frozen continuous rule require current capture, visibility and calendar evidence"
+    },
+    "meg.ccf.domestic.daily_assessment.cny_mt": {
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "authorized CCF specification is frozen but current capture, visibility, freshness and calendar evidence are pending"
+    },
+    "polyester_melt.domestic.assessment.cny_mt": {
+      "market": "East_China",
+      "instrument_or_grade": "fibre_grade_polyester_melt",
+      "quote_type": "public_spot_assessment",
+      "candidate_source_ids": ["sunsirs_public_commodity_assessment"],
+      "raw_unit": "CNY/mt",
+      "standard_unit": "CNY/mt",
+      "conversion_formula": "identity",
+      "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai",
+      "calendar_id": "China_business_day",
+      "price_time_semantics": "published_daily_assessment",
+      "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "public assessment definition is frozen but current capture, visibility and calendar evidence are pending"
+    },
+    "polyester_chip.domestic.assessment.cny_mt": {
+      "market": "East_China",
+      "instrument_or_grade": "fibre_grade_PET_chips",
+      "quote_type": "public_spot_assessment",
+      "candidate_source_ids": ["sunsirs_public_commodity_assessment"],
+      "raw_unit": "CNY/mt",
+      "standard_unit": "CNY/mt",
+      "conversion_formula": "identity",
+      "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai",
+      "calendar_id": "China_business_day",
+      "price_time_semantics": "published_daily_assessment",
+      "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "public assessment definition is frozen but current capture, visibility and calendar evidence are pending"
+    },
+    "poy.upstream_cost_pressure.index": {
+      "derived_formula_id": "poy-dty-upstream-cost-pressure.v1",
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "deterministic formula is implemented but approved PTA/MEG input evidence, visibility and calendar evidence are pending"
+    },
+    "dty.upstream_cost_pressure.index": {
+      "derived_formula_id": "poy-dty-upstream-cost-pressure.v1",
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "deterministic formula is implemented but approved PTA/MEG input evidence, visibility and calendar evidence are pending"
+    }
+  }
+}

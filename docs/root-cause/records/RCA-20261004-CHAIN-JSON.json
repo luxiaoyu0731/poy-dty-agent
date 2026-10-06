@@ -1,0 +1,162 @@
+{
+  "id": "RCA-20261004-CHAIN-JSON",
+  "owner": "Codex / 操作员",
+  "status": "mechanism_verified",
+  "incident": {
+    "symptom": "2022-03-03封存配对回放因模型返回非法JSON值1-3而走模板；原生产解析器可能截取损坏外层的合法内层对象。",
+    "context": "旧实验保留；格式修复运行版本b3b06d0已发布。仅审查本场密封回执，不外推全部生产历史。",
+    "reproduction": "以封存原回执运行链完整对象解析器；保持请求与原响应不变，旧错误得到invalid_json。"
+  },
+  "root_cause": {
+    "earliest_layer": "模型输出解码与已有修复循环的衔接",
+    "explanation": "非法JSON未进入已有字段修复；生产抽取子对象会隐藏外层损坏。语义真实性、嵌套字段全校验和锁库故障不在此根因范围。",
+    "evidence": [
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/chain-output-all-sealed-scope-audit.json",
+        "sha256": "2e05fec9004f2d26d92a83de33d8947dd16541b60a53b417b3ddbf0a2c9774ae",
+        "bytes": 659,
+        "summary": "712份真实response状态回执；711完整对象、1非法JSON；所有签名核对。"
+      }
+    ]
+  },
+  "impact": {
+    "query": "对reconstructed-paid-cache-v1全部712密封文件验证request/receipt哈希并严格解析response；不依赖单个举报ID。",
+    "declared_scope": "v1预跑及60日配对场全部缓存回执的完整JSON对象解析。",
+    "coverage": "complete_for_declared_scope",
+    "counts": {
+      "scanned": 712,
+      "affected": 1
+    },
+    "exclusions": [
+      "完整嵌套schema及事实真实性",
+      "全部生产历史、其他模型模块",
+      "今日SQLite锁库"
+    ],
+    "unassessed": []
+  },
+  "mechanism_fix": {
+    "change": "链只接受完整对象或完整JSON代码块；拒绝损坏外层、重复键、非有限数及非对象；格式与类型错误共用一次既有修复，仍受HTTP硬顶。伪造案例先剔除再收集信封引用。",
+    "temporary_action": "无强制引用、无改旧结果",
+    "evidence": [
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/chain-output-repair-tests.log",
+        "sha256": "8d7687f755bcaa12f187d21613ec9070f185ff375ba563c7bc736799932cb50a",
+        "bytes": 99,
+        "summary": "29项正反例通过"
+      },
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/chain-format-repair-pilot-results.json",
+        "sha256": "7127b87b0d7985c3859474bb1fb5268e39339c7c513f06cbc86e221e6847d669",
+        "bytes": 5869,
+        "summary": "真实新增1次HTTP格式修复；旧原响应与场结果未修改。"
+      }
+    ]
+  },
+  "legacy_handling": {
+    "decision": "保留712原回执和旧场负结果；仅单独执行有版本身份的修复预跑，不覆盖旧结果。",
+    "issued_boundary": "未修改已发行输入、账本或方向规则。",
+    "rollback": "/opt/agent/releases/chain-output-repair-20261004-b3b06d0/activate.sh rollback；保留尝试预算账本。"
+  },
+  "generalization": {
+    "positive_cases": [
+      "完整对象、完整JSON代码块",
+      "真实坏响应的一次计费修复"
+    ],
+    "negative_cases": [
+      "损坏外层含合法子对象",
+      "重复键/非有限数/浮点溢出/数组/多对象/附加散文",
+      "运输失败不得触发格式修复",
+      "虚构案例不得遗留信封引用"
+    ],
+    "commands": [
+      "PYTHONPATH=server:. uv run --project server python -m pytest server/tests/test_chain_output_repair.py server/tests/test_cached_replay_port.py -q"
+    ],
+    "results": [
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/chain-scoped-record-regression.log",
+        "sha256": "fee33d760717989ea8d921994e5318208fae670f195f536cd0f479f6d522a62c",
+        "bytes": 99,
+        "summary": "16 passed in 0.49s"
+      },
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/chain-output-all-sealed-scope-audit.json",
+        "sha256": "2e05fec9004f2d26d92a83de33d8947dd16541b60a53b417b3ddbf0a2c9774ae",
+        "bytes": 659,
+        "summary": "712份真实response状态回执；711完整对象、1非法JSON；所有签名核对。"
+      },
+      {
+        "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/chain-format-repair-pilot-results.json",
+        "sha256": "7127b87b0d7985c3859474bb1fb5268e39339c7c513f06cbc86e221e6847d669",
+        "bytes": 5869,
+        "summary": "真实新增1次HTTP格式修复；旧原响应与场结果未修改。"
+      }
+    ],
+    "limitations": [
+      "不证明嵌套schema全部覆盖或模型事实真实",
+      "RAG/反思效果未验收；生产复发监测未上线"
+    ]
+  },
+  "recurrence": {
+    "command": "每场完成后对密封response回执复跑完整对象解析与签名核对；生产告警尚待接入。",
+    "signals": [
+      "invalid_json数量",
+      "修复实际HTTP尝试与40硬顶计数",
+      "模板回退与失败原因分开"
+    ],
+    "owner": "Codex / 操作员",
+    "review_on": "下一场付费配对前及下一次链输出改动前",
+    "deployment": "not_deployed"
+  },
+  "acceptance": {
+    "display": {
+      "state": "verified",
+      "evidence": [
+        {
+          "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/public-chain-repair-verification.json",
+          "sha256": "7f52bb4ee393132d1cd1a9f76a50ab6303d907226dea4ca1ac341b06ae9eb448",
+          "bytes": 1412,
+          "summary": "公开身份、18节点与预算未知展示核对；不替代原生视觉审查"
+        }
+      ]
+    },
+    "mechanism": {
+      "state": "verified",
+      "evidence": [
+        {
+          "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/chain-output-all-sealed-scope-audit.json",
+          "sha256": "2e05fec9004f2d26d92a83de33d8947dd16541b60a53b417b3ddbf0a2c9774ae",
+          "bytes": 659,
+          "summary": "712份真实response状态回执；711完整对象、1非法JSON；所有签名核对。"
+        },
+        {
+          "path": "/path/to/project-context/evidence-experiment-acceptance-20261004/chain-format-repair-pilot-results.json",
+          "sha256": "7127b87b0d7985c3859474bb1fb5268e39339c7c513f06cbc86e221e6847d669",
+          "bytes": 5869,
+          "summary": "真实新增1次HTTP格式修复；旧原响应与场结果未修改。"
+        }
+      ]
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "没有RAG/反思干预效应验收；格式成功不代表预测增益"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "runtime-recurrence",
+      "owner": "Codex",
+      "due": "下一次链输出发布前",
+      "status": "open",
+      "check": "实际运行的错误/修复计数观察与公开告警核验"
+    },
+    {
+      "id": "business-exposure",
+      "owner": "Codex / 操作员",
+      "due": "RAG及反思最终验收",
+      "status": "open",
+      "check": "真实干预、完整配对与分期限效果，保留未验收判定"
+    }
+  ]
+}

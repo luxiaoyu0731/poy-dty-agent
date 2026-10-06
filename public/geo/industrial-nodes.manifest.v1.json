@@ -1,0 +1,47 @@
+{
+ "manifest_version": "industrial_nodes.v1-manifest",
+ "converter_version": "industrial-nodes-converter.v1",
+ "nodes_file": "industrial_nodes.v1.geojson",
+ "nodes_content_sha256": "8fae0abe7bcc6b6e9d169b2026a3e2fee1b610c4a9622de00c925356e69a952a",
+ "natural_earth_ports": {
+  "asset": "ne_10m_ports.v5.1.2.geojson",
+  "version": "natural-earth-v5.1.2",
+  "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_ports.geojson",
+  "sha256": "c5a5028f5187a5e1b9fe7f0fab99804a8be7482099a2365d404fb7e9dd6b5457",
+  "license": "Public domain per Natural Earth terms of use; coordinate quality degraded, not for navigation."
+ },
+ "natural_earth_countries": {
+  "asset": "ne_110m_admin_0_countries.v5.1.2.geojson",
+  "version": "natural-earth-v5.1.2",
+  "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_110m_admin_0_countries.geojson",
+  "sha256": "6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f",
+  "license": "Public domain per Natural Earth terms of use."
+ },
+ "coverage_gaps": [
+  {
+   "node_type": "port",
+   "code": "port_missing_from_pinned_source",
+   "detail": "Daesan (KR) is not present in the pinned Natural Earth Ports file; left unresolved instead of guessing coordinates."
+  },
+  {
+   "node_type": "refinery",
+   "code": "no_verified_ab_coordinates",
+   "detail": "No refinery nodes yet: A/B first-party facility coordinates have not been verified."
+  },
+  {
+   "node_type": "px_plant",
+   "code": "no_verified_ab_coordinates",
+   "detail": "No PX plant nodes yet: A/B first-party facility coordinates have not been verified."
+  },
+  {
+   "node_type": "pta_plant",
+   "code": "no_verified_ab_coordinates",
+   "detail": "No PTA plant nodes yet: A/B first-party facility coordinates have not been verified."
+  },
+  {
+   "node_type": "meg_plant",
+   "code": "no_verified_ab_coordinates",
+   "detail": "No MEG plant nodes yet: A/B first-party facility coordinates have not been verified."
+  }
+ ]
+}

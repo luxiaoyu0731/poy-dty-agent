@@ -1,0 +1,78 @@
+rules:
+  - id: project.python.subprocess-shell-true
+    message: Avoid shell=True; pass an argument list to subprocess APIs to prevent command injection.
+    severity: ERROR
+    languages: [python]
+    metadata:
+      category: security
+      confidence: HIGH
+      impact: HIGH
+      cwe: "CWE-78: Improper Neutralization of Special Elements used in an OS Command"
+    patterns:
+      - pattern-either:
+          - pattern: subprocess.run(..., shell=True, ...)
+          - pattern: subprocess.call(..., shell=True, ...)
+          - pattern: subprocess.check_call(..., shell=True, ...)
+          - pattern: subprocess.check_output(..., shell=True, ...)
+          - pattern: subprocess.Popen(..., shell=True, ...)
+    paths:
+      exclude:
+        - /dist/**
+        - /.visual-regression/**
+        - /.review-screenshots/**
+        - /artifacts/**
+        - /.codex-run/**
+
+  - id: project.python.requests-disable-tls-verification
+    message: TLS certificate verification must not be disabled in production HTTP requests.
+    severity: ERROR
+    languages: [python]
+    metadata:
+      category: security
+      confidence: HIGH
+      impact: HIGH
+      cwe: "CWE-295: Improper Certificate Validation"
+    pattern-either:
+      - pattern: requests.get(..., verify=False, ...)
+      - pattern: requests.post(..., verify=False, ...)
+      - pattern: requests.put(..., verify=False, ...)
+      - pattern: requests.patch(..., verify=False, ...)
+      - pattern: requests.delete(..., verify=False, ...)
+      - pattern: requests.request(..., verify=False, ...)
+      - pattern: $SESSION.get(..., verify=False, ...)
+      - pattern: $SESSION.post(..., verify=False, ...)
+      - pattern: $SESSION.put(..., verify=False, ...)
+      - pattern: $SESSION.patch(..., verify=False, ...)
+      - pattern: $SESSION.delete(..., verify=False, ...)
+      - pattern: $SESSION.request(..., verify=False, ...)
+      - pattern: httpx.Client(..., verify=False, ...)
+      - pattern: httpx.AsyncClient(..., verify=False, ...)
+      - pattern: aiohttp.TCPConnector(..., ssl=False, ...)
+      - pattern: urllib3.PoolManager(..., cert_reqs="CERT_NONE", ...)
+    paths:
+      exclude:
+        - /dist/**
+        - /.visual-regression/**
+        - /.review-screenshots/**
+        - /artifacts/**
+        - /.codex-run/**
+
+  - id: project.react.dangerously-set-inner-html
+    message: Avoid dangerouslySetInnerHTML unless the value is sanitized and the exception is security-reviewed.
+    severity: ERROR
+    languages: [typescript]
+    metadata:
+      category: security
+      confidence: MEDIUM
+      impact: HIGH
+      cwe: "CWE-79: Improper Neutralization of Input During Web Page Generation"
+    pattern: <$ELEMENT ... dangerouslySetInnerHTML=$VALUE ... />
+    paths:
+      include:
+        - /src/**
+      exclude:
+        - /dist/**
+        - /.visual-regression/**
+        - /.review-screenshots/**
+        - /artifacts/**
+        - /.codex-run/**

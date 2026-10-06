@@ -1,0 +1,40 @@
+version: 1
+name: production-review
+
+scope:
+  exclude:
+    - dist/**
+    - .visual-regression/**
+    - .review-screenshots/**
+    - artifacts/**
+    - .codex-run/**
+
+gates:
+  blocking:
+    secrets:
+      tools: [gitleaks, trivy]
+      threshold: any
+      baseline_allowed: false
+    vulnerabilities:
+      tools: [trivy, semgrep]
+      severities: [HIGH, CRITICAL, ERROR]
+      baseline_allowed: false
+
+  progressive:
+    enforcement: planned
+    severities: [UNKNOWN, LOW, MEDIUM, INFO, WARNING]
+    policy: no-new-findings
+    baseline:
+      allowed: true
+      requirement: fingerprinted-and-reviewed
+      expiry_required: true
+    activation_requirement: establish-and-review-a-full-scan-baseline
+
+exceptions:
+  approval:
+    required_roles: [security-owner, code-owner]
+    reason_required: true
+    expiry_required: true
+  prohibited:
+    - plaintext-secret
+    - disabled-tls-verification

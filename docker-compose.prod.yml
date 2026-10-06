@@ -1,0 +1,59 @@
+# 生产叠加层：docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# 在基础四服务（backend/scheduler/news-scheduler/event-summary-worker）之上增加：
+# - frontend：本地公网前端（密码门禁 + CSP + API 代理 + 静态 dist）
+# - cloudflared：Cloudflare Tunnel 连接器（复用既有隧道的 credentials）
+#
+# frontend/cloudflared 使用 host 网络：public-server 的后端源校验只放行
+# loopback，host 网络下 http://127.0.0.1:8000 即 backend 的端口发布，
+# 与 Mac launchd 拓扑一致；所有监听仍绑定 127.0.0.1，无外部接口暴露。
+#
+# 前置：
+#   cp .env.production.example .env   # 并填入真实值（与 Mac shared/.env.production 对齐）
+#   npm run build                     # 生成 dist/
+#   ./cloudflared/{config.yml,credentials.json}  # 从 Mac ~/.cloudflared/ 拷贝；ingress 指 http://127.0.0.1:4173
+services:
+  frontend:
+    image: node:22-alpine
+    working_dir: /app
+    network_mode: host
+    command:
+      - node
+      - scripts/local-public-server.mjs
+    env_file:
+      - .env
+    environment:
+      PUBLIC_FRONTEND_HOST: 127.0.0.1
+      PUBLIC_FRONTEND_PORT: ${PUBLIC_FRONTEND_PORT:-4173}
+      PUBLIC_BACKEND_ORIGIN: http://127.0.0.1:8000
+      NODE_ENV: production
+    volumes:
+      - ./dist:/app/dist:ro
+      - ./scripts:/app/scripts:ro
+      - ./public:/app/public:ro
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "3"
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    network_mode: host
+    command:
+      - tunnel
+      - --protocol
+      - http2
+      - --config
+      - /etc/cloudflared/config.yml
+      - run
+    volumes:
+      - ./cloudflared:/etc/cloudflared:ro
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "3"
+    # 仅出站连接：无需对外开放任何入站端口；防火墙可保持全关。

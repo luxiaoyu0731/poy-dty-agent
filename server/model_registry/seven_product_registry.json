@@ -1,0 +1,51 @@
+{
+  "schema_version": "seven-product-model-registry.v2",
+  "registry_revision": "seven-registry-initial",
+  "created_at": "2026-08-31T00:00:00+00:00",
+  "updated_at": "2026-08-31T00:00:00+00:00",
+  "candidate_models": {
+    "persistence.v1": {
+      "feature_version": "last-observation-level.v1",
+      "status": "immutable_baseline",
+      "parent_version": null,
+      "training_code_sha256": null,
+      "runtime_implemented": true,
+      "required_feature_series": ["target"]
+    },
+    "robust-drift-reference.v1": {
+      "feature_version": "univariate-log-return.v1",
+      "status": "candidate",
+      "parent_version": null,
+      "training_code_sha256": null,
+      "runtime_implemented": true,
+      "required_feature_series": ["target"]
+    }
+  },
+  "champions": {
+    "crude": {"1": null, "7": null, "30": null},
+    "naphtha": {"1": null, "7": null, "30": null},
+    "px": {"1": null, "7": null, "30": null},
+    "pta": {"1": null, "7": null, "30": null},
+    "meg": {"1": null, "7": null, "30": null},
+    "poy": {"1": null, "7": null, "30": null},
+    "dty": {"1": null, "7": null, "30": null}
+  },
+  "promotion_history": [],
+  "rollback_targets": {},
+  "reference_policy": {
+    "formal_status_ceiling": "reference",
+    "fallback_model_version": "persistence.v1",
+    "consecutive_loss_limit": 3
+  },
+  "reference_champions": {
+    "crude": {"1": null, "7": null, "30": null},
+    "naphtha": {"1": null, "7": null, "30": null},
+    "px": {"1": null, "7": null, "30": null},
+    "pta": {"1": null, "7": null, "30": null},
+    "meg": {"1": null, "7": null, "30": null},
+    "poy": {"1": null, "7": null, "30": null},
+    "dty": {"1": null, "7": null, "30": null}
+  },
+  "reference_promotion_history": [],
+  "reference_rollback_targets": {}
+}

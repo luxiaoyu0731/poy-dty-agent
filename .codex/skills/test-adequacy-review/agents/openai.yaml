@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Adequacy Review"
+  short_description: "Assess test coverage and behavioral confidence"
+  default_prompt: "Use $test-adequacy-review to evaluate whether changed behavior has sufficient tests."

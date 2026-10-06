@@ -1,0 +1,53 @@
+{
+  "contract_id": "phase-a",
+  "contract_version": "phase-a.v5",
+  "base_contract_version": "phase-a.v4",
+  "base_contract_path": "phase_a_contracts.v4.json",
+  "governance_version": "2026-08-06",
+  "formal_nodes": [
+    "brent",
+    "wti",
+    "coal",
+    "naphtha",
+    "mx",
+    "px",
+    "ethylene",
+    "eo",
+    "methanol",
+    "pta",
+    "meg",
+    "polyester_melt",
+    "polyester_chip",
+    "poy_dty_upstream_cost_pressure"
+  ],
+  "excluded_series_ids": [
+    "crude.sc.ine.main.settlement.cny_bbl"
+  ],
+  "formal_evidence_series_ids": [
+    "crude.brent.ice.front_month.settlement.usd_bbl",
+    "crude.wti.cme.front_month.settlement.usd_bbl",
+    "coal.benchmark.unresolved.assessment.cny_mt",
+    "naphtha.ccf.domestic.daily_assessment.cny_mt",
+    "mx.domestic.spot_assessment.cny_mt",
+    "px.czce.main.settlement.cny_mt",
+    "px.ccf.domestic.daily_assessment.cny_mt",
+    "ethylene.domestic.spot_assessment.cny_mt",
+    "eo.domestic.spot_assessment.cny_mt",
+    "methanol.czce.main.settlement.cny_mt",
+    "pta.czce.main.settlement.cny_mt",
+    "pta.ccf.domestic.daily_assessment.cny_mt",
+    "meg.dce.main.settlement.cny_mt",
+    "meg.ccf.domestic.daily_assessment.cny_mt",
+    "polyester_melt.domestic.assessment.cny_mt",
+    "polyester_chip.domestic.assessment.cny_mt",
+    "poy.upstream_cost_pressure.index",
+    "dty.upstream_cost_pressure.index",
+    "fx.usd_cny.cfets.central_parity.cny_per_usd"
+  ],
+  "continuous_contract_series_ids": [
+    "px.czce.main.settlement.cny_mt",
+    "methanol.czce.main.settlement.cny_mt",
+    "pta.czce.main.settlement.cny_mt",
+    "meg.dce.main.settlement.cny_mt"
+  ]
+}

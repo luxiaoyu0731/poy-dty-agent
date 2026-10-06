@@ -1,0 +1,44 @@
+.git
+.github
+.DS_Store
+
+# Local secrets and environment files. Keep examples in the build context.
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.production.example
+!.env.staging.example
+
+# Node and build outputs.
+node_modules
+dist
+coverage
+playwright-report
+test-results
+.visual-regression
+.review-screenshots
+
+# Local run artifacts and captured vendor exports.
+.codex-run
+.external
+backups
+*.sqlite
+*.db
+*.db-*
+
+# Python caches and virtualenvs.
+__pycache__
+*.py[cod]
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.venv
+venv
+
+# Editor/system files.
+.idea
+.vscode
+*.swp
+server/data
+server/.pytest_cache

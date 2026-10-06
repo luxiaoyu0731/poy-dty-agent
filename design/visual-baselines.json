@@ -1,0 +1,38 @@
+{
+  "version": 4,
+  "generatedFor": "POY/DTY 上游原料智能 Agent",
+  "purpose": "Use saved delivery-workbench references as the visual source of truth for the single customer-facing frontend.",
+  "defaultMaxDiffPercent": 3.5,
+  "comparison": {
+    "mode": "single-delivery-workbench-reference",
+    "analysisScale": 4,
+    "pixelThreshold": 0.4,
+    "rawPixelThreshold": 0.12,
+    "note": "Desktop and actual phone emulation; the phone uses the approved 1440px desktop replica and native pinch zoom."
+  },
+  "pages": [
+    {
+      "id": "delivery-desktop",
+      "slug": "delivery-workbench-desktop",
+      "title": "交付工作台 Desktop",
+      "reference": "public/visual-reference/delivery-workbench-desktop.png",
+      "viewport": {
+        "width": 1440,
+        "height": 820
+      },
+      "maxDiffPercent": 3.5
+    },
+    {
+      "id": "delivery-mobile",
+      "slug": "delivery-workbench-mobile",
+      "title": "桌面等比例复刻 · Phone",
+      "reference": "public/visual-reference/delivery-workbench-phone-desktop.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "maxDiffPercent": 3.5,
+      "device": "phone"
+    }
+  ]
+}

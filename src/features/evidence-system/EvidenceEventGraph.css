@@ -1,0 +1,32 @@
+.eeg-graph { margin: 12px 0 24px; color: #334155; }
+.eeg-graph > h4 { font-size: 16px; margin: 0 0 8px; color: #0f172a; }
+.eeg-boundary,.eeg-empty { font-size: 13px; line-height: 1.7; color: #64748b; }
+.eeg-chain { margin: 16px 0; border: 1px solid #dbe4f0; border-radius: 10px; background: #fff; overflow: hidden; }
+.eeg-chain-boundary { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 10px 14px; background: #f5f8fd; font-size: 12px; }
+.eeg-chain-boundary b { color: #475569; font-weight: 600; }
+.eeg-chain.is-context .eeg-chain-boundary { background: #fffbeb; }
+.eeg-chain-flow { display: grid; grid-template-columns: minmax(0,1.25fr) 24px minmax(0,1fr) 24px minmax(0,.85fr); gap: 8px; padding: 14px; align-items: stretch; }
+.eeg-node { min-width: 0; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; overflow-wrap: anywhere; }
+.eeg-node > small { display: block; font-size: 12px; color: #64748b; margin-bottom: 8px; }
+.eeg-node h4 { font-size: 14px; line-height: 1.5; margin: 0 0 10px; color: #0f172a; }
+.eeg-node p,.eeg-node ul { margin: 10px 0; font-size: 13px; line-height: 1.65; }
+.eeg-node ul { padding-left: 18px; }
+.eeg-state { display: inline-block; color: #475569; background: #f1f5f9; border-radius: 5px; padding: 3px 6px; font-size: 12px; }
+.eeg-arrow { align-self: center; text-align: center; color: #64748b; font-size: 20px; }
+.eeg-node ol { list-style: none; padding: 0; margin: 0; }
+.eeg-node ol li { display: flex; flex-direction: column; gap: 3px; padding: 8px 0; font-size: 13px; }
+.eeg-node ol li + li:before { content: "↓"; color: #94a3b8; }
+.eeg-node ol li span { color: #64748b; font-size: 12px; }
+.eeg-source-details { margin: 0 14px 14px; border-top: 1px solid #e2e8f0; padding-top: 10px; font-size: 12px; }
+.eeg-source-details summary,.eeg-market-background summary { cursor: pointer; color: #475569; }
+.eeg-source-details dl { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 6px; }
+.eeg-source-details dd { margin: 0; overflow-wrap: anywhere; }
+.eeg-source-details blockquote { margin: 10px 0; border-left: 2px solid #cbd5e1; padding-left: 10px; }
+.eeg-market-background { background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 13px; }
+.eeg-market-background article { border-top: 1px solid #e2e8f0; padding: 8px 0; }
+.eeg-market-background small { display: block; margin-top: 6px; color: #64748b; }
+.eeg-graph a { color: #2563eb; overflow-wrap: anywhere; }
+@media (max-width: 900px) {
+  .eeg-chain-flow { grid-template-columns: minmax(0,1fr); }
+  .eeg-arrow { transform: rotate(90deg); }
+}

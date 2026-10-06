@@ -1,0 +1,81 @@
+{
+  "schema_version": "seven-product-release-fault-matrix.v1",
+  "release_contract": "seven-product-forecast.v1",
+  "scenarios": [
+    {
+      "id": "process_restart",
+      "expected_behavior": "Loaded daemons are force-restarted while scheduled jobs are not spuriously executed.",
+      "test_nodeid": "server/tests/test_manage_public_stack.py::test_start_restarts_loaded_daemons_but_not_loaded_scheduled_jobs"
+    },
+    {
+      "id": "machine_service_restart_recovery",
+      "expected_behavior": "Core public daemons are configured RunAtLoad and KeepAlive for login/service recovery.",
+      "test_nodeid": "server/tests/test_manage_public_production.py::test_generate_launchd_is_review_only_and_uses_http2"
+    },
+    {
+      "id": "network_offline",
+      "expected_behavior": "Transient name-resolution/network failures retry within a bounded attempt budget.",
+      "test_nodeid": "server/tests/test_operations_hardening.py::test_fetch_public_source_with_retries_recovers_after_transient_failures"
+    },
+    {
+      "id": "http_403",
+      "expected_behavior": "Access denial fails closed and is not retried or bypassed.",
+      "test_nodeid": "server/tests/test_operations_hardening.py::test_public_source_http_403_fails_without_retry"
+    },
+    {
+      "id": "http_429",
+      "expected_behavior": "Rate limiting is treated as transient and retried with bounded backoff.",
+      "test_nodeid": "server/tests/test_operations_hardening.py::test_public_source_http_429_retries_then_recovers"
+    },
+    {
+      "id": "timeout",
+      "expected_behavior": "A slow source times out without blocking the following source.",
+      "test_nodeid": "server/tests/test_news_resilience.py::test_slow_source_times_out_and_fast_source_still_runs"
+    },
+    {
+      "id": "upstream_empty_data",
+      "expected_behavior": "A successful no-new-data response remains healthy and never fabricates observations.",
+      "test_nodeid": "server/tests/test_source_acquisition.py::test_no_new_data_does_not_degrade_public_fetch_component"
+    },
+    {
+      "id": "partial_month_failure",
+      "expected_behavior": "Successful periods checkpoint while a rate-limited month yields an explicit partial result.",
+      "test_nodeid": "server/tests/test_five_source_readiness.py::test_un_comtrade_reports_partial_when_any_period_is_rate_limited"
+    },
+    {
+      "id": "state_corruption",
+      "expected_behavior": "Corrupt source state blocks before any outbound request or database write.",
+      "test_nodeid": "server/tests/test_five_source_readiness.py::test_fetcher_does_not_contact_ofac_when_state_is_corrupt"
+    },
+    {
+      "id": "duplicate_schedule",
+      "expected_behavior": "A live run lock rejects duplicate scheduling with a stable locked result.",
+      "test_nodeid": "server/tests/test_source_acquisition.py::test_source_automation_refuses_concurrent_run_when_lock_is_fresh"
+    },
+    {
+      "id": "database_backup",
+      "expected_behavior": "A migration creates and verifies a pre-migration SQLite backup before changing schema.",
+      "test_nodeid": "server/tests/test_migration_prebackup.py::test_migration_creates_verified_pre_migration_backup"
+    },
+    {
+      "id": "backup_restore",
+      "expected_behavior": "The unified daily anchor opens in a restore drill and both integrity checks pass, with keep-7 rotation and same-day reuse (DISK-MODEL §3.2).",
+      "test_nodeid": "server/tests/test_run_local_daily.py::test_daily_anchor_is_created_integrity_checked_and_rotated_keep_seven"
+    },
+    {
+      "id": "disk_insufficient",
+      "expected_behavior": "Low free space blocks unattended writes in preflight.",
+      "test_nodeid": "server/tests/test_local_production_preflight.py::test_preflight_blocks_when_database_volume_has_insufficient_free_space"
+    },
+    {
+      "id": "llm_unavailable",
+      "expected_behavior": "Provider failure is audited and the next rule-only run succeeds with AI disabled.",
+      "test_nodeid": "server/tests/test_materialize_agent_foundation.py::test_ai_review_failure_then_emergency_disable_allows_next_day_rule_run"
+    },
+    {
+      "id": "numeric_model_unavailable",
+      "expected_behavior": "Missing labels produce model_unavailable cells without fabricated numeric forecasts.",
+      "test_nodeid": "server/tests/test_seven_product_forecast.py::test_missing_series_never_fabricates_a_numeric_result"
+    }
+  ]
+}

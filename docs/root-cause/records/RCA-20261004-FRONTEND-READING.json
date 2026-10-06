@@ -1,0 +1,140 @@
+{
+  "id": "RCA-20261004-FRONTEND-READING",
+  "owner": "维护者",
+  "status": "mitigated",
+  "incident": {
+    "symptom": "加载大片空白/提前空态；报告混合价格与方向；抽屉压缩节点；技术剖面缺组件与中文入口；雷达堆空栏目。",
+    "context": "操作员PDF两页，明确排除证据图谱；本地工作树修复。源文件 /path/to/user/Downloads/新建 DOCX 文档.pdf，SHA256 808109048d4dd556c329e041d70bb9031c6c40f7926c41352bd9d7f91c62d3c5",
+    "reproduction": "在本地查看各模块初载、报告旧表格、Agent四阶段详情和关键词入口；1920/1440打开抽屉；选择无推断的雷达事件。"
+  },
+  "root_cause": {
+    "earliest_layer": "报告组织/详情契约/共享加载状态与视口联动",
+    "explanation": "报告将历史价格与事件枚举拼进同一判断列；节点详情只有职责和运行块，没有当前配置；抽屉三层联动同时压缩坐标、卡宽及字号；报告列表未返回即展示空态；雷达按字段逐节绘制，空数组也占独立栏目。数据未提供传导不能归咎于样式，也不以虚构分析填空。",
+    "evidence": [
+      "server/app/information_reports.py::business_analysis",
+      "server/app/pipeline_graph.py::build_pipeline_node_detail",
+      "src/pages/AgentWorkbenchPage.tsx::AgentWorkflowModule / PipelineRefitView",
+      "src/fixed-viewport.css",
+      "src/components/InformationReports.tsx",
+      "src/features/industrial-intelligence/components/EventDetailPanel.tsx"
+    ]
+  },
+  "impact": {
+    "query": "追查五类症状各自的共享代码路径；验证四链阶段、无配置节点、无分析雷达事件、旧报告、初始加载与多分辨率。",
+    "declared_scope": "当前仓库上述渲染/报告生成路径，非全库材料质量或预测有效性。",
+    "coverage": "partial",
+    "counts": {
+      "scanned": 5,
+      "affected": 5,
+      "unit": "症状类别；不是数据记录数"
+    },
+    "exclusions": [
+      "证据图谱",
+      "生产数据/发布",
+      "预测方向、预算、候选、计票和冻结账本"
+    ],
+    "unassessed": [
+      "公网部署后的实际体验尚未验收",
+      "未补造缺失的事件传导数据",
+      "其余Agent没有公开配置块，仍明确未知",
+      "短屏全景仍受19节点同时取景的可读性限制"
+    ]
+  },
+  "mechanism_fix": {
+    "change": "统一结构化加载并避免报告列表提前报空；拆分价格与事件列及原文缺口；取消抽屉几何/字号压缩，保持zoom并平移选中节点；添加只读当前配置块并展示四阶段真实system prompt；中文技术入口；合并雷达空分析，显示已有传导路径与来源链接读取状态。",
+    "temporary_action": "报告旧稿只整理阅读视图；原文、下载和校验值不变。未声称补齐上游分析材料。",
+    "evidence": [
+      "server/app/agent_inspection.py",
+      "src/components/AgentImplementationProfile.tsx",
+      "src/components/ContentLoading.tsx",
+      "tests/frontend-reading-repair.spec.ts",
+      "tests/pipeline-routing.spec.ts",
+      "tests/workflow-card-design.spec.ts"
+    ]
+  },
+  "legacy_handling": {
+    "decision": "不回填/重跑生产；新生成报告用新结构，已保存报告仅作确定性阅读视图分栏。",
+    "issued_boundary": "冻结预测与报告原文不改写；原文下载与SHA保留。",
+    "rollback": "精确撤回本轮差异；外置baseline保留任务开始前已有未提交改动。未发布生产。"
+  },
+  "generalization": {
+    "positive_cases": [
+      "四阶段原文提示词与哈希逐字校验",
+      "旧报告确定性分栏",
+      "已有事实与传导路径显示",
+      "1920/1440抽屉前后zoom和宽度一致"
+    ],
+    "negative_cases": [
+      "非链节点不能获得编造提示词",
+      "无分析雷达不能产生空影响表或假推断",
+      "未返回列表不能冒充没有报告",
+      "价格变化不能写入事件判断列",
+      "密集卡片标题/预算/底栏不得横向溢出"
+    ],
+    "commands": [
+      "npm run check",
+      "uv run --project server python -m pytest server/tests -q",
+      "npx playwright test --reporter=line --retries=0",
+      "npm run root-cause:check"
+    ],
+    "results": [
+      "npm run check：assets与TypeScript/build通过；已有600kB分块警告。",
+      "后端全量3194 passed in384.68s；导入排序后相关54 passed in10.82s。",
+      "前端全量194 passed / 1 skipped (5.3m)，retries=0；相关16项通过。",
+      "最终本地抽屉与1920全景截图核对；公网验收仍未进行。",
+      "分离此前P2/证据图谱改动后的独立提交快照：npm check通过，相关e2e 16 passed (28.2s)，后端54 passed in7.81s；日志 commit-{check,e2e,backend}.log。"
+    ],
+    "limitations": [
+      "展示信息可追查不证明预测有效；短屏全景需缩放/详情阅读。"
+    ]
+  },
+  "recurrence": {
+    "command": "npx playwright test tests/frontend-reading-repair.spec.ts tests/pipeline-routing.spec.ts tests/workflow-card-design.spec.ts tests/agent-chain-frontend.spec.ts tests/events-ux.spec.ts --reporter=line",
+    "signals": [
+      "真实配置与未提供边界",
+      "陈旧报告原文保留",
+      "空数据不造推断",
+      "抽屉缩放及卡片溢出",
+      "异步读取与真空态区分"
+    ],
+    "owner": "维护者",
+    "review_on": "下一次相关修改与经批准发布后",
+    "deployment": "not_deployed"
+  },
+  "acceptance": {
+    "display": {
+      "state": "verified",
+      "evidence": [
+        "本地最终抽屉/1920全景视觉核对；194通过/1跳过，全量无重试；相关16项通过。"
+      ]
+    },
+    "mechanism": {
+      "state": "verified",
+      "evidence": [
+        "3194后端全量通过；代码配置与当次运行明确分开；保存原文未改。"
+      ]
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "未开展预测有效性或新材料覆盖实验；内容缺失边界保留。"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "public-validation",
+      "owner": "维护者与操作员",
+      "due": "经批准的下一次发布后",
+      "status": "open",
+      "check": "完成发布审查及公网各页面冷暖加载、实际数据验收。"
+    },
+    {
+      "id": "analysis-coverage",
+      "owner": "维护者",
+      "due": "操作员另行明确上游分析扩展时",
+      "status": "open",
+      "check": "调查无传导材料覆盖，不能以样式修复宣布分析充分。"
+    }
+  ]
+}

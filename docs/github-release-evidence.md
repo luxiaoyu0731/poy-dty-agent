@@ -1,0 +1,46 @@
+# 公开源码包验证 · 2026-10-06
+
+范围：新的 GitHub 源码仓库；原私有历史、生产部署、生产数据库与预测效果回放不在本次发布范围。
+
+## 观察结果
+
+| 检查 | 本次结果 |
+| --- | --- |
+| `npm run check` | exit 0；TypeScript、素材检查与生产构建通过；仍有大 chunk 提示 |
+| `npm run test:e2e -- --reporter=line` | 228 passed，1 skipped；本次关闭失败重试 |
+| `uv run --project server python -m pytest server/tests -q` | 3498 passed |
+| 后端完整覆盖率测试 | 3498 passed，4 warnings；84.93%，达到现有 70% 门槛 |
+| `npm run visual:check` | 桌面 2.68%、手机 0.00%，均低于 3.5%；独立于参考生成再次执行 |
+| 公共入口 Node 测试 | 27 passed，0 failed |
+| Ruff | All checks passed |
+| pre-commit 全文件检查 | 全部通过，含 Semgrep ERROR 与 staged Gitleaks |
+| 当前文件 Gitleaks | 未发现密钥；公开包不带旧提交对象 |
+| npm / Python dependency audit | 未发现已知漏洞 |
+| Trivy HIGH / CRITICAL | 未发现依赖漏洞、配置问题或密钥 |
+| 特定隐私模式检查 | 原服务器地址、旧 SSH 密钥名与个人本地目录标识均为 0 |
+| 视觉更新负向检查 | `--ci --update-mobile-baseline` 拒绝执行，exit 1 |
+
+## 发布审查
+
+**源码分发：GO。生产部署：本次未审查、未执行。**
+
+操作员批准新公开仓库、Apache-2.0、既有前端素材再分发与已确认手机方案的参考迁移。客户资料、Apple 字体、数据库和旧 Git 历史已排除；原私有仓库保留。GitHub CI 会继续运行包括 CodeQL 在内的远程检查，远程检查结果需单独观察，不能从本地结果推定。
+
+已知限制：工作台、样式与存储模块仍较大；构建大 chunk 警告保留。未进行加载速度对照实验或新增预测效果验收，不宣称性能提升百分比。Python 审计使用同一虚拟环境的真实路径，工具提示了 symlink 路径差异；不是一个独立新安装环境的验证。
+
+## 本地原始证据摘要
+
+日志保存在操作员本地任务目录，不公开其中的工作区路径。以下摘要便于核对；命令输出未伪造，也未用历史报告替代。
+
+| 文件 | 字节数 | SHA-256 |
+| --- | ---: | --- |
+| `check-complete.log` | 2817 | `0d373553d044b47df8c535568db17ac9613fa45cdef308cf39c6d939bda2924f` |
+| `e2e.log` | 982299 | `6dd36efaec96d30b7416eafe7f1d287f2bbacef4fea59ad01a9da0a33904b855` |
+| `backend.log` | 3953 | `5341de5a4fed8bcf26fb9048998f798d46ae79d6515bfe6f1d68f10966346704` |
+| `coverage.log` | 23291 | `dc365748c231da2bbf2243dfe079250d4100ab802799a636b7c60dd85b2e4446` |
+| `visual-final.log` | 346 | `3406c30b798fbccec88621bee6d9a36a62095957544dbc2f5c219f14356cf68e` |
+| `precommit-complete.log` | 800 | `99ff44e9d83b5bffc7ef81820c21534ca4681d3315ab09786de504f27dc75596` |
+| `node-tests.log` | 2194 | `cdc68a6fad65a6bbd03a70c1e412ea9af6fd5bc6758d579eea5eaaccf8b9d062` |
+| `ruff.log` | 19 | `82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18` |
+| `npm-audit.json` | 363 | `d9186a1ac1061183563ab6d60d2f7ef565982758b3969184c876b96dec0025e9` |
+| `pip-audit.json` | 5184 | `02b09becd22ea5c3a351be84ccc0b4aa113bebd92b8f4867c55c571481a21d2d` |

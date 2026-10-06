@@ -1,0 +1,26 @@
+{
+  "contract_id": "phase-a",
+  "contract_version": "phase-a.v6",
+  "base_contract_version": "phase-a.v5",
+  "base_contract_path": "phase_a_contracts.v5.json",
+  "governance_version": "2026-08-06",
+  "series_overrides": {
+    "coal.benchmark.unresolved.assessment.cny_mt": {
+      "market": "Bohai_rim_ports",
+      "instrument_or_grade": "CCTD_Bohai_rim_spot_reference_5500K",
+      "quote_type": "public_spot_assessment",
+      "candidate_source_ids": ["coalchina_cctd_bohai_rim_5500_daily_reference"],
+      "context_source_ids": ["cctd_qinhuangdao_thermal_coal"],
+      "raw_unit": "CNY/mt",
+      "standard_unit": "CNY/mt",
+      "conversion_formula": "identity",
+      "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai",
+      "calendar_id": "China_business_day",
+      "price_time_semantics": "CCTD_Bohai_rim_5500K_daily_reference_publication_date",
+      "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_evidence_capture_pending",
+      "blocked_reason": "daily CCTD Bohai-rim 5500K reference is registered; current capture, specification, visibility and calendar evidence are pending"
+    }
+  }
+}

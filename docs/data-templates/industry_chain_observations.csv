@@ -1,0 +1,1 @@
+observed_at,source_id,tier,product,market,region,quote_type,assessment_method,frequency,value,unit,currency,change_abs,change_pct,inventory_value,inventory_unit,operating_rate_pct,plant_status,shipment_status,spread_name,spread_value,raw_field_name,quality_flag,source_url,license_ref,ingested_by,notes

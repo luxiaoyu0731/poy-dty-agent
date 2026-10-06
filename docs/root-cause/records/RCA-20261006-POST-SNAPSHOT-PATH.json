@@ -1,0 +1,116 @@
+{
+  "id": "RCA-20261006-POST-SNAPSHOT-PATH",
+  "owner": "Codex / 操作员",
+  "status": "mechanism_verified",
+  "incident": {
+    "symptom": "反证扫描与日报解读 PermissionError: /local-production",
+    "context": "2026-10-06 14:12:04手动日链，15:00完成；运行提交470fd92；latest-status报告06:59:34Z，两个步骤均降级",
+    "reproduction": "默认sqlite_path=/data/agent.db且无单模块artifact覆盖，两模块_artifact_dir原实现返回/local-production/<stage>。"
+  },
+  "root_cause": {
+    "earliest_layer": "输出路径配置",
+    "explanation": "两个模块独立复制DB.parent.parent目录算法，未复用pipeline_state_paths；Docker数据库直接位于/data，导致上退至/。现有模块测试覆盖了显式路径而未覆盖默认路径。不是容器应授予根目录写权限。",
+    "evidence": [
+      "server/app/counter_scan.py:_artifact_dir",
+      "server/app/daily_interpretation.py:_artifact_dir",
+      "agent-context/path-before.log:4 failed,3 passed，默认与共享输出覆盖均失败"
+    ]
+  },
+  "impact": {
+    "query": "rg parent.parent及parents[1]与local-production组合，server/app与server/scripts；查两模块读写调用和现有显式覆盖测试",
+    "declared_scope": "当前提交生产默认输出路径的两模块及pipeline图消费者，不声明全历史数据库审计",
+    "coverage": "complete",
+    "counts": {
+      "scanned": 2,
+      "affected": 2
+    },
+    "exclusions": [
+      "历史已发行预测、预算账本、其他独立来源输出目录"
+    ],
+    "unassessed": []
+  },
+  "mechanism_fix": {
+    "change": "复用local_production_directory(shared_state_root(sqlite_path))；单模块env仍最高优先级并统一expanduser/resolve；读写artifact共用解析器",
+    "temporary_action": "无根目录chmod、无预算重置、无生产补跑",
+    "evidence": [
+      "server/tests/test_pipeline_state_paths.py：Docker/local/shared/stage override及原子写读/0600/缺失日反例"
+    ]
+  },
+  "legacy_handling": {
+    "decision": "保留今天降级报告，未重跑未回填；修复生效后的实际产出另验",
+    "issued_boundary": "已发行输入/账本保持冻结",
+    "rollback": "恢复 /opt/agent/releases/post-snapshot-20261006/ 保存制品：activate.sh rollback；保留账本，无数据库回写"
+  },
+  "generalization": {
+    "positive_cases": [
+      "两模块Docker /data/agent.db 默认/data/local-production",
+      "两模块传统state/data DB布局",
+      "共享输出目录与模块独立覆盖，completed/degraded读取一致"
+    ],
+    "negative_cases": [
+      "其他业务日不返回artifact",
+      "已完成artifact优先于降级artifact",
+      "单模块覆盖优先于共享覆盖，文件权限0600"
+    ],
+    "commands": [
+      "DG01隔离 pytest test_pipeline_state_paths.py test_counter_scan.py test_daily_interpretation.py test_pipeline_graph.py test_run_local_daily.py -q"
+    ],
+    "results": [
+      "109 passed in 12.02s",
+      "3457 passed in 263.85s (0:04:23)",
+      "214 passed (5.1m), 1 skipped",
+      "npm run check exit0，既有600kB块告警",
+      "全server Ruff通过",
+      "最终镜像UID10001、只读根目录、无网络无生产卷：两模块实际原子写读成功，0600；公网与live/ready版本一致、deep healthy、发行API哈希前后一致"
+    ],
+    "limitations": [
+      "已部署；今天降级报告保持原状，下一次实际日链产出待观察，不声称实际节点已恢复"
+    ]
+  },
+  "recurrence": {
+    "command": "ZCode 日度链运行与健康巡检 + check_local_production_alerts.py + 路径回归测试",
+    "signals": [
+      "counter_scan/daily_interpretation degraded及PermissionError",
+      "pipeline卡状态和最新artifact日期"
+    ],
+    "owner": "Codex / 操作员",
+    "review_on": "下一次实际日链运行后",
+    "deployment": "deployed; next actual daily observation pending"
+  },
+  "acceptance": {
+    "display": {
+      "state": "unknown",
+      "evidence": [
+        "已部署，图读取接口未改；今天旧降级状态保留，后续实际产出待观察"
+      ]
+    },
+    "mechanism": {
+      "state": "passed",
+      "evidence": [
+        "109项针对性回归通过；4项路径测试修复前失败"
+      ]
+    },
+    "business_effect": {
+      "state": "not_applicable",
+      "evidence": [
+        "输出路径修复，不修改预测方向算法，不主张命中率改善"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "verify-release",
+      "owner": "Codex",
+      "due": "发布前",
+      "status": "done",
+      "check": "操作员确认；GO WITH WARNINGS门、最终镜像安全与隔离写读验证通过，2026-10-06 15:25发布并完成线上只读验证"
+    },
+    {
+      "id": "observe-live",
+      "owner": "Codex / 操作员",
+      "due": "下次实际日链",
+      "status": "open",
+      "check": "两个节点实际产出路径和权限错误消失"
+    }
+  ]
+}

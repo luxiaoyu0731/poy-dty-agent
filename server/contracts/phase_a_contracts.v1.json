@@ -1,0 +1,329 @@
+{
+  "contract_id": "phase-a",
+  "contract_version": "phase-a.v1",
+  "governance_version": "2026-08-02",
+  "formal_nodes": [
+    "brent",
+    "wti",
+    "sc",
+    "coal",
+    "naphtha",
+    "mx",
+    "px",
+    "ethylene",
+    "eo",
+    "methanol",
+    "pta",
+    "meg",
+    "polyester_melt",
+    "polyester_chip",
+    "poy_dty_upstream_cost_pressure"
+  ],
+  "horizon_policy": {
+    "formal_write_days": [1, 7, 30],
+    "legacy_read_only_days": [14],
+    "legacy_response_fields": {
+      "legacy_horizon": true,
+      "write_allowed": false
+    }
+  },
+  "source_policy": {
+    "priority": ["official_exchange_or_government", "licensed_commercial_spot", "public_auxiliary"],
+    "prohibited_formal_sources": ["akshare_prototype", "yahoo_futures_daily_proxy"],
+    "prohibited_claims": [
+      "public_assessment_as_transaction_price",
+      "proxy_as_official_settlement",
+      "simulation_as_formal_observation"
+    ],
+    "fallback_must_match_quote_basis": true,
+    "fallback_quote_basis_evidence": {},
+    "source_registry": "server/source_registry.json"
+  },
+  "series_definition_required_fields": [
+    "contract_version",
+    "series_id",
+    "node_id",
+    "business_product",
+    "market",
+    "instrument_or_grade",
+    "quote_type",
+    "dataset_role",
+    "authoritative_source_id",
+    "fallback_source_ids",
+    "candidate_source_ids",
+    "raw_unit",
+    "raw_currency",
+    "standard_unit",
+    "standard_currency",
+    "conversion_formula",
+    "conversion_version",
+    "timezone",
+    "calendar_id",
+    "price_time_semantics",
+    "freshness_sla_minutes",
+    "eligibility_status",
+    "blocked_reason"
+  ],
+  "observation_required_fields": [
+    "observation_id",
+    "series_id",
+    "revision_id",
+    "supersedes_revision_id",
+    "raw_value",
+    "raw_unit",
+    "raw_currency",
+    "standard_value",
+    "standard_unit",
+    "standard_currency",
+    "conversion_version",
+    "conversion_evidence_ids",
+    "observed_at",
+    "exchange_trade_date",
+    "source_published_at",
+    "first_visible_at",
+    "fetched_at",
+    "source_id",
+    "source_url",
+    "raw_content_hash",
+    "http_status",
+    "timeout_result",
+    "retry_result",
+    "parser_version",
+    "authorization_status",
+    "license_status",
+    "quality_status"
+  ],
+  "quality_states": {
+    "eligible_path": ["received", "normalized", "schema_valid", "unit_valid", "time_valid", "eligible"],
+    "failure": [
+      "timeout",
+      "structure_invalid",
+      "unit_unknown",
+      "timestamp_invalid",
+      "duplicate",
+      "license_blocked",
+      "stale",
+      "quarantined"
+    ]
+  },
+  "series": [
+    {
+      "contract_version": "phase-a.v1", "series_id": "crude.brent.ice.front_month.settlement.usd_bbl",
+      "node_id": "brent", "business_product": "Brent", "market": "ICE", "instrument_or_grade": "Brent front-month continuous",
+      "quote_type": "futures_settlement", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": "USD/bbl", "raw_currency": "USD", "standard_unit": "USD/bbl",
+      "standard_currency": "USD", "conversion_formula": "identity", "conversion_version": "identity.v1",
+      "timezone": "exchange_defined", "calendar_id": "ICE_energy", "price_time_semantics": "exchange_trade_date_settlement",
+      "freshness_sla_minutes": null, "eligibility_status": "blocked_missing_source", "blocked_reason": "ICE authorized series is not registered"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "crude.wti.cme.front_month.settlement.usd_bbl",
+      "node_id": "wti", "business_product": "WTI", "market": "CME_NYMEX", "instrument_or_grade": "WTI front-month continuous",
+      "quote_type": "futures_settlement", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": "USD/bbl", "raw_currency": "USD", "standard_unit": "USD/bbl",
+      "standard_currency": "USD", "conversion_formula": "identity", "conversion_version": "identity.v1",
+      "timezone": "exchange_defined", "calendar_id": "CME_energy", "price_time_semantics": "exchange_trade_date_settlement",
+      "freshness_sla_minutes": null, "eligibility_status": "blocked_missing_source", "blocked_reason": "CME authorized series is not registered"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "crude.sc.ine.main.settlement.cny_bbl",
+      "node_id": "sc", "business_product": "SC", "market": "INE", "instrument_or_grade": "SC main continuous",
+      "quote_type": "futures_settlement", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["ine_sc_intraday"], "raw_unit": "CNY/bbl", "raw_currency": "CNY", "standard_unit": "CNY/bbl",
+      "standard_currency": "CNY", "conversion_formula": "identity; cross-node USD comparison requires CFETS evidence",
+      "conversion_version": "sc-cny.v1", "timezone": "Asia/Shanghai", "calendar_id": "INE_trade_day",
+      "price_time_semantics": "exchange_trade_date_settlement", "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_missing_roll_rule", "blocked_reason": "main-continuous selection and roll rule are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "coal.benchmark.unresolved.assessment.cny_mt",
+      "node_id": "coal", "business_product": "coal", "market": null, "instrument_or_grade": null,
+      "quote_type": "unresolved", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": null, "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": null, "conversion_version": null, "timezone": null,
+      "calendar_id": null, "price_time_semantics": null, "freshness_sla_minutes": null,
+      "eligibility_status": "blocked_unresolved_spec", "blocked_reason": "benchmark, grade, calorific value and market are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "naphtha.ccf.domestic.daily_assessment.cny_mt",
+      "node_id": "naphtha", "business_product": "naphtha", "market": "China_domestic", "instrument_or_grade": "CCF authorized daily basis",
+      "quote_type": "licensed_spot_assessment", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["ccf_dom_daily", "ccf_average_price", "ccf_manual_export"], "raw_unit": "CNY/mt", "raw_currency": "CNY",
+      "standard_unit": "CNY/mt", "standard_currency": "CNY", "conversion_formula": "identity",
+      "conversion_version": "identity.v1", "timezone": "Asia/Shanghai", "calendar_id": "CCF_business_day",
+      "price_time_semantics": "authorized_daily_assessment", "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_license_or_spec_unverified", "blocked_reason": "license evidence and exact assessment specification are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "mx.domestic.spot_assessment.cny_mt",
+      "node_id": "mx", "business_product": "MX", "market": null, "instrument_or_grade": null,
+      "quote_type": "licensed_spot_assessment", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": null, "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": null, "conversion_version": null, "timezone": null,
+      "calendar_id": null, "price_time_semantics": null, "freshness_sla_minutes": null,
+      "eligibility_status": "blocked_missing_source", "blocked_reason": "authorized source, grade and market are not registered"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "px.czce.main.settlement.cny_mt",
+      "node_id": "px", "business_product": "PX", "market": "ZCE", "instrument_or_grade": "PX main continuous",
+      "quote_type": "futures_settlement", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["czce_pta_px"], "raw_unit": "CNY/mt", "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": "identity", "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai", "calendar_id": "ZCE_trade_day", "price_time_semantics": "exchange_trade_date_settlement",
+      "freshness_sla_minutes": 1440, "eligibility_status": "blocked_missing_roll_rule", "blocked_reason": "main-continuous selection and roll rule are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "px.ccf.domestic.daily_assessment.cny_mt",
+      "node_id": "px", "business_product": "PX", "market": "China_domestic", "instrument_or_grade": "CCF authorized daily basis",
+      "quote_type": "licensed_spot_assessment", "dataset_role": "formal_companion_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["ccf_dom_daily", "ccf_average_price", "ccf_manual_export"], "raw_unit": "CNY/mt", "raw_currency": "CNY",
+      "standard_unit": "CNY/mt", "standard_currency": "CNY", "conversion_formula": "identity",
+      "conversion_version": "identity.v1", "timezone": "Asia/Shanghai", "calendar_id": "CCF_business_day",
+      "price_time_semantics": "authorized_daily_assessment", "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_license_or_spec_unverified", "blocked_reason": "license evidence and exact assessment specification are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "ethylene.domestic.spot_assessment.cny_mt",
+      "node_id": "ethylene", "business_product": "ethylene", "market": null, "instrument_or_grade": null,
+      "quote_type": "licensed_spot_assessment", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": null, "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": null, "conversion_version": null, "timezone": null,
+      "calendar_id": null, "price_time_semantics": null, "freshness_sla_minutes": null,
+      "eligibility_status": "blocked_missing_source", "blocked_reason": "authorized source, grade and delivery basis are not registered"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "eo.domestic.spot_assessment.cny_mt",
+      "node_id": "eo", "business_product": "EO", "market": null, "instrument_or_grade": null,
+      "quote_type": "licensed_spot_assessment", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": null, "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": null, "conversion_version": null, "timezone": null,
+      "calendar_id": null, "price_time_semantics": null, "freshness_sla_minutes": null,
+      "eligibility_status": "blocked_missing_source", "blocked_reason": "authorized source, grade and delivery basis are not registered"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "methanol.czce.main.settlement.cny_mt",
+      "node_id": "methanol", "business_product": "methanol", "market": "ZCE", "instrument_or_grade": "MA main continuous",
+      "quote_type": "futures_settlement", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["czce_pta_px"], "raw_unit": "CNY/mt", "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": "identity", "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai", "calendar_id": "ZCE_trade_day", "price_time_semantics": "exchange_trade_date_settlement",
+      "freshness_sla_minutes": 1440, "eligibility_status": "blocked_missing_roll_rule", "blocked_reason": "main-continuous selection and roll rule are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "pta.czce.main.settlement.cny_mt",
+      "node_id": "pta", "business_product": "PTA", "market": "ZCE", "instrument_or_grade": "TA main continuous",
+      "quote_type": "futures_settlement", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["czce_pta_px"], "raw_unit": "CNY/mt", "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": "identity", "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai", "calendar_id": "ZCE_trade_day", "price_time_semantics": "exchange_trade_date_settlement",
+      "freshness_sla_minutes": 1440, "eligibility_status": "blocked_missing_roll_rule", "blocked_reason": "main-continuous selection and roll rule are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "pta.ccf.domestic.daily_assessment.cny_mt",
+      "node_id": "pta", "business_product": "PTA", "market": "China_domestic", "instrument_or_grade": "CCF authorized daily basis",
+      "quote_type": "licensed_spot_assessment", "dataset_role": "formal_companion_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["ccf_dom_daily", "ccf_average_price", "ccf_manual_export"], "raw_unit": "CNY/mt", "raw_currency": "CNY",
+      "standard_unit": "CNY/mt", "standard_currency": "CNY", "conversion_formula": "identity",
+      "conversion_version": "identity.v1", "timezone": "Asia/Shanghai", "calendar_id": "CCF_business_day",
+      "price_time_semantics": "authorized_daily_assessment", "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_license_or_spec_unverified", "blocked_reason": "license evidence and exact assessment specification are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "meg.dce.main.settlement.cny_mt",
+      "node_id": "meg", "business_product": "MEG", "market": "DCE", "instrument_or_grade": "EG main continuous",
+      "quote_type": "futures_settlement", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["dce_meg"], "raw_unit": "CNY/mt", "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": "identity", "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai", "calendar_id": "DCE_trade_day", "price_time_semantics": "exchange_trade_date_settlement",
+      "freshness_sla_minutes": 1440, "eligibility_status": "blocked_missing_roll_rule", "blocked_reason": "main-continuous selection and roll rule are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "meg.ccf.domestic.daily_assessment.cny_mt",
+      "node_id": "meg", "business_product": "MEG", "market": "China_domestic", "instrument_or_grade": "CCF authorized daily basis",
+      "quote_type": "licensed_spot_assessment", "dataset_role": "formal_companion_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": ["ccf_dom_daily", "ccf_average_price", "ccf_manual_export"], "raw_unit": "CNY/mt", "raw_currency": "CNY",
+      "standard_unit": "CNY/mt", "standard_currency": "CNY", "conversion_formula": "identity",
+      "conversion_version": "identity.v1", "timezone": "Asia/Shanghai", "calendar_id": "CCF_business_day",
+      "price_time_semantics": "authorized_daily_assessment", "freshness_sla_minutes": 1440,
+      "eligibility_status": "blocked_license_or_spec_unverified", "blocked_reason": "license evidence and exact assessment specification are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "polyester_melt.domestic.assessment.cny_mt",
+      "node_id": "polyester_melt", "business_product": "polyester_melt", "market": null, "instrument_or_grade": null,
+      "quote_type": "licensed_spot_assessment", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": null, "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": null, "conversion_version": null, "timezone": null,
+      "calendar_id": null, "price_time_semantics": null, "freshness_sla_minutes": null,
+      "eligibility_status": "blocked_missing_source", "blocked_reason": "authorized product specification and source are not registered"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "polyester_chip.domestic.assessment.cny_mt",
+      "node_id": "polyester_chip", "business_product": "polyester_chip", "market": null, "instrument_or_grade": null,
+      "quote_type": "unresolved", "dataset_role": "formal_price", "authoritative_source_id": null,
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": null, "raw_currency": "CNY", "standard_unit": "CNY/mt",
+      "standard_currency": "CNY", "conversion_formula": null, "conversion_version": null, "timezone": null,
+      "calendar_id": null, "price_time_semantics": null, "freshness_sla_minutes": null,
+      "eligibility_status": "blocked_unresolved_spec", "blocked_reason": "fiber-grade, bottle-grade and other chip specifications are not interchangeable"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "poy.upstream_cost_pressure.index",
+      "node_id": "poy_dty_upstream_cost_pressure", "business_product": "POY upstream cost pressure", "market": "derived",
+      "instrument_or_grade": "POY", "quote_type": "derived_index", "dataset_role": "formal_target",
+      "authoritative_source_id": null, "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": "index", "raw_currency": null,
+      "standard_unit": "index", "standard_currency": null, "conversion_formula": null, "conversion_version": null,
+      "timezone": "Asia/Shanghai", "calendar_id": "effective_observation_day", "price_time_semantics": "daily_frozen_derived_target",
+      "freshness_sla_minutes": null, "eligibility_status": "blocked_missing_formula", "blocked_reason": "input weights and deterministic formula are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "dty.upstream_cost_pressure.index",
+      "node_id": "poy_dty_upstream_cost_pressure", "business_product": "DTY upstream cost pressure", "market": "derived",
+      "instrument_or_grade": "DTY", "quote_type": "derived_index", "dataset_role": "formal_target",
+      "authoritative_source_id": null, "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": "index", "raw_currency": null,
+      "standard_unit": "index", "standard_currency": null, "conversion_formula": null, "conversion_version": null,
+      "timezone": "Asia/Shanghai", "calendar_id": "effective_observation_day", "price_time_semantics": "daily_frozen_derived_target",
+      "freshness_sla_minutes": null, "eligibility_status": "blocked_missing_formula", "blocked_reason": "input weights and deterministic formula are not frozen"
+    },
+    {
+      "contract_version": "phase-a.v1", "series_id": "fx.usd_cny.cfets.central_parity.cny_per_usd",
+      "node_id": "__auxiliary_fx__", "business_product": "USD/CNY", "market": "CFETS", "instrument_or_grade": "central parity",
+      "quote_type": "official_benchmark", "dataset_role": "conversion_evidence", "authoritative_source_id": "cfets_cny_parity",
+      "fallback_source_ids": [], "candidate_source_ids": [], "raw_unit": "CNY/USD", "raw_currency": "CNY", "standard_unit": "CNY/USD",
+      "standard_currency": "CNY", "conversion_formula": "identity", "conversion_version": "identity.v1",
+      "timezone": "Asia/Shanghai", "calendar_id": "CFETS_business_day", "price_time_semantics": "official_publication_date",
+      "freshness_sla_minutes": 90, "eligibility_status": "contractible", "blocked_reason": null
+    }
+  ],
+  "schemas": {
+    "event": {
+      "schema_version": "phase-a.event.v1",
+      "required_fields": ["schema_version", "event_id", "cluster_id", "revision_id", "previous_revision_id", "as_of_time", "first_visible_at", "source_published_at", "evidence_snapshot_hash", "evidence_items", "title", "category", "lifecycle_status", "node_impacts", "requires_human_review", "human_review_reasons", "review_status", "data_completeness", "scoreability", "created_at"],
+      "nested_required_fields": {
+        "evidence_items": ["evidence_id", "source_id", "source_tier", "first_visible_at", "content_hash"],
+        "node_impacts": ["node_id", "state", "expected_onset_at", "expected_peak_at", "half_life", "effective_probability_by_horizon", "confirmation_conditions", "strengthening_conditions", "end_conditions", "reversal_conditions"]
+      },
+      "field_enums": {"lifecycle_status": ["latent", "active", "strengthening", "decaying", "ended", "reversed"], "review_status": ["not_required", "pending", "approved", "rejected"], "scoreability": ["scorable", "unscorable"]}
+    },
+    "fact_summary": {
+      "schema_version": "phase-a.fact-summary.v1",
+      "required_fields": ["schema_version", "fact_summary_id", "cluster_id", "revision_id", "previous_revision_id", "as_of_time", "input_evidence_ids", "input_snapshot_hash", "facts", "conflicts", "unknowns", "provider", "model", "prompt_version", "budget", "timeout_seconds", "retry_count", "degradation_status", "review_status", "created_at", "output_hash"],
+      "nested_required_fields": {"facts": ["fact_id", "occurred_at", "subject", "action", "object", "location", "numbers", "evidence_ids"]},
+      "forbidden_fields": ["direction", "direction_probability", "price_outlook", "trend", "recommendation"]
+    },
+    "prediction": {
+      "schema_version": "phase-a.prediction.v1",
+      "required_fields": ["schema_version", "prediction_batch_id", "revision_id", "previous_revision_id", "business_date", "data_frozen_at", "published_at", "as_of_time", "data_snapshot_id", "composition_rule_version", "cells", "created_at"],
+      "nested_required_fields": {"cells": ["node_id", "horizon_days", "direction", "direction_probability", "magnitude", "magnitude_unit", "confidence", "remaining_effective_probability", "driver_event_ids", "counter_event_ids", "data_completeness", "scoreability", "missing_series_ids", "subtarget_results"]},
+      "nested_field_enums": {"cells": {"scoreability": ["scorable", "unscorable"], "direction": ["up", "down", "neutral", "uncertain"]}},
+      "subtarget_required_fields": ["target", "direction", "direction_probability", "magnitude", "magnitude_unit", "confidence", "remaining_effective_probability", "data_completeness", "scoreability", "missing_series_ids"],
+      "subtarget_field_enums": {"scoreability": ["scorable", "unscorable"], "direction": ["up", "down", "neutral", "uncertain"]},
+      "complete_grid_required": true,
+      "field_enums": {}
+    },
+    "experience_card": {
+      "schema_version": "phase-a.experience-card.v1",
+      "required_fields": ["schema_version", "experience_card_id", "prediction_id", "node_id", "revision_id", "previous_revision_id", "as_of_time", "horizon_days", "maturity_stage", "posterior_window_start", "posterior_window_end", "start_price", "end_price", "raw_change_abs", "raw_change_pct", "benchmark_series_id", "relative_change", "mfe", "mae", "days_to_peak", "first_reversal_at", "data_completeness", "scoreability", "exclusion_reasons", "visibility_mode", "mechanism_support_status", "overlapping_event_ids", "success_reasons", "failure_reasons", "horizon_mismatch", "reusable_experience", "counterexamples", "candidate_factor_ids", "applicability_conditions", "eligible_for_retrieval_at", "created_at"],
+      "field_enums": {"maturity_stage": ["d1_preliminary", "d7_intermediate", "d30_mature"], "scoreability": ["scorable", "unscorable"], "visibility_mode": ["strict_as_of", "reconstructed"], "mechanism_support_status": ["supported", "partially_supported", "unsupported", "inconclusive"]},
+      "strict_backtest_visibility": "strict_as_of"
+    }
+  }
+}

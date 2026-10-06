@@ -1,0 +1,139 @@
+{
+  "id": "RCA-20261006-OTHER-PAGES",
+  "owner": "Codex",
+  "status": "open",
+  "incident": {
+    "symptom": "Non-overview cold reads delayed; radar read expensive; stale snapshots and repetitive reading UI",
+    "context": "Owned worktree c349406; native Chrome public audit 2026-10-06, private screenshots and timing JSON",
+    "reproduction": "Cold open each module; read radar list; open evidence/report/assistant before asking"
+  },
+  "root_cause": {
+    "earliest_layer": "Client aggregate dependency / ordered radar query",
+    "explanation": "Module effect unnecessarily waits for auxiliary aggregate. Radar title UDF evaluated across full candidates before ORDER/LIMIT. Missing body is a separate source-policy/coverage issue, not closed by display changes.",
+    "evidence": [
+      "src/pages/AgentWorkbenchPage.tsx module effect",
+      "server/app/industrial_intelligence/storage.py list_latest_events",
+      "/data/reports/body-acquisition-latest.json 2026-10-06T08:00:03Z; configuration_blocked source_not_enabled twice",
+      "/data/reports/news-summary-coverage-latest.json: articles4188/completed1062/rejected2316/no-job809",
+      "2026-10-06 original BigMint URL review: rendered body plus complimentary-insights/login notice; presence of page text does not establish permitted automated acquisition. No source access policy changed."
+    ]
+  },
+  "impact": {
+    "query": "All module readiness branches and all list_latest_events callers; two new ordered-page tests plus existing intelligence API suite",
+    "declared_scope": "Five non-overview dependent modules, independently loading intelligence; current vs issued dossier, report reader, assistant and radar detail",
+    "coverage": "partial",
+    "counts": {
+      "scanned": 6,
+      "affected": null
+    },
+    "exclusions": [
+      "overview untouched",
+      "grid uses original SQL title gate",
+      "frozen report downloads",
+      "issued ledgers"
+    ],
+    "unassessed": [
+      "Full historical body-source coverage",
+      "Production after-publication latency",
+      "Continuous recurrence checks"
+    ]
+  },
+  "mechanism_fix": {
+    "change": "Independent readiness after canonical snapshot; ordered bounded title scan with filtered cursor; bounded current-cache reads; reader dedup and exact field translations; deferred history fetch; per-revision number and Shanghai display time; quick-fill suggestions hidden while side recommendations are shown",
+    "temporary_action": "无",
+    "evidence": [
+      "other-pages-backend-tests.log:37passed",
+      "other-pages-e2e-final.log:28passed",
+      "agent-context/other-pages-e2e-verified.log:226passed,1skipped in8.5m",
+      "agent-context/other-pages-node-tests.log:30pass,0fail",
+      "agent-context/other-pages-check-final.log:buildpassed in5.93s"
+    ]
+  },
+  "legacy_handling": {
+    "decision": "Read-only reader transforms only; no reprocessing/no backfill/no source enablement",
+    "issued_boundary": "已发行输入/账本保持冻结，纠错单独标注",
+    "rollback": "Restore saved release/source changes; no persistence migration"
+  },
+  "generalization": {
+    "positive_cases": [
+      "500 candidates: only20 title classifications to return20",
+      "80 invalid titles followed by valid rows: pages complete",
+      "Frozen revision watermark and invalidation do not resurrect previous head"
+    ],
+    "negative_cases": [
+      "Map grid classification retained before grouping",
+      "Canonical snapshot held: module reads stay blocked",
+      "Overview uses original readiness",
+      "Conditional AI cards remain non-voting",
+      "Frozen issuance evidence never follows background cache updates: passed"
+    ],
+    "commands": [
+      "npm run check",
+      "npx playwright test affected files",
+      "uv run --project server python -m pytest server/tests -q"
+    ],
+    "results": [
+      "Backend full suite:3463passed in475.68s",
+      "Final backend affected suite:37passed in21.02s",
+      "Frontend final full Playwright suite:226passed,1skipped in8.5m; exit0. Node proxy tests isolated:30pass/0fail. Earlier duplicate controls and hidden-input locator failures corrected; old in-flight runner interrupted after test snapshots became stale.",
+      "Local10000-event query benchmark: previous123.697/226.8/291.585ms, updated27.971/34.976/24.610ms; not public latency"
+    ],
+    "limitations": [
+      "No production-after measurements",
+      "Root-cause scripts absent from owned worktree package.json",
+      "Node test files execute during Playwright collection in a shared process and emit conflicting-environment failures; proper isolated node --test run passed all30. Harness separation remains a separate governance action."
+    ]
+  },
+  "recurrence": {
+    "command": "Run affected module-loading and intelligence ordered-page regressions before relevant changes; production latency observation still pending.",
+    "signals": [
+      "逐字段完整性、报价/日期占比、直接与条件分开、持续零证据、读取未知"
+    ],
+    "owner": "维护者",
+    "review_on": "下一次相关改动前",
+    "deployment": "not_deployed"
+  },
+  "acceptance": {
+    "display": {
+      "state": "passed",
+      "evidence": [
+        "Native Chrome local public-data review: report age, Chinese evidence first, assistant invitation"
+      ]
+    },
+    "mechanism": {
+      "state": "passed",
+      "evidence": [
+        "Declared page-read and query behavior: final full frontend226passed/1skipped; backend3463passed; final affected backend37passed. Source body coverage and production timing excluded and remain open."
+      ]
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "Forecast correctness/effect not changed or tested by this UI work"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "release-validation",
+      "owner": "Codex",
+      "due": "Before release",
+      "status": "open",
+      "check": "Full checks and readiness review; no publication yet"
+    },
+    {
+      "id": "source-coverage",
+      "owner": "Operator/Codex",
+      "due": "Next data-processing decision",
+      "status": "open",
+      "check": "Audit disabled source decisions and permitted publisher正文 coverage; no automatic enabling"
+    },
+    {
+      "id": "recurrence-tool",
+      "owner": "Codex",
+      "due": "Before root-cause closure",
+      "status": "open",
+      "check": "root-cause:check absent in owned worktree; governance integration required"
+    }
+  ]
+}

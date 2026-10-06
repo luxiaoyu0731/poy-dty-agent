@@ -1,0 +1,451 @@
+[
+ {
+  "source_id": "tnc_polyester_history",
+  "source_name": "Global Textile Network POY/DTY Public Average History",
+  "tier": "B",
+  "category": "polyester_public_assessment",
+  "url": "https://www.tnc.com.cn/market/average-price.html",
+  "crawl_type": "static_html",
+  "auth_type": "public_personal_reuse",
+  "frequency": "business_day",
+  "products": [
+   "poy",
+   "dty"
+  ],
+  "product_roles": {
+   "poy": "current_public_assessment_label",
+   "dty": "current_public_assessment_label"
+  },
+  "freshness_sla_minutes": 2880,
+  "license_note": "Public dated average-price pages for personal non-commercial research; preserve attribution and exact page URL.",
+  "reliability_score": 0.82
+ },
+ {
+  "source_id": "eia_petroleum_api",
+  "source_name": "EIA Open Data",
+  "tier": "A",
+  "category": "energy_official",
+  "url": "https://api.eia.gov/v2/petroleum/pri/spt/data/",
+  "crawl_type": "api_json",
+  "auth_type": "api_key",
+  "frequency": "daily_weekly",
+  "products": [
+   "crude_oil",
+   "inventory",
+   "production",
+   "refinery_run"
+  ],
+  "freshness_sla_minutes": 180,
+  "license_note": "Official API; comply with EIA terms.",
+  "reliability_score": 0.96
+ },
+ {
+  "source_id": "opec_press",
+  "data_role": "event_evidence",
+  "source_name": "OPEC Press Releases",
+  "tier": "A",
+  "category": "energy_policy",
+  "url": "https://www.opec.org/press-releases.html",
+  "crawl_type": "static_html",
+  "auth_type": "public",
+  "frequency": "15min",
+  "products": [
+   "crude_oil",
+   "opec_policy"
+  ],
+  "freshness_sla_minutes": 30,
+  "license_note": "Public page; preserve source attribution.",
+  "reliability_score": 0.94
+ },
+ {
+  "source_id": "ine_sc_intraday",
+  "source_name": "INE Shanghai Crude Oil SC Public Data",
+  "tier": "A",
+  "category": "china_futures",
+  "url": "https://www.ine.cn/eng/market/futures/energy/sc/index.html",
+  "crawl_type": "api_json",
+  "auth_type": "api_key",
+  "frequency": "daily_public",
+  "products": [
+   "sc",
+   "crude_oil",
+   "china_import_cost"
+  ],
+  "freshness_sla_minutes": 1440,
+  "license_note": "Official public daily/delayed data is approved for personal reuse with attribution; no licensed minute feed.",
+  "reliability_score": 0.95
+ },
+ {
+  "source_id": "czce_pta_px",
+  "source_name": "ZCE PTA/PX/Methanol Daily Data",
+  "tier": "A",
+  "category": "china_futures",
+  "url": "https://www.czce.com.cn/",
+  "crawl_type": "html_download",
+  "auth_type": "public_personal_reuse",
+  "frequency": "daily_public",
+  "products": [
+   "pta",
+   "px",
+   "methanol"
+  ],
+  "product_roles": {
+   "pta": "exchange_official_daily_settlement",
+   "px": "exchange_official_daily_settlement"
+  },
+  "freshness_sla_minutes": 1440,
+  "license_note": "Official public daily data is approved for personal reuse with attribution; no licensed minute feed.",
+  "reliability_score": 0.95
+ },
+ {
+  "source_id": "ice_brent_settlement_public",
+  "source_name": "ICE Brent Public Settlement Data",
+  "tier": "A",
+  "category": "international_futures",
+  "url": "https://www.ice.com/fixed-income-data-services/data-and-analytics/proprietary-data",
+  "crawl_type": "manual_form",
+  "auth_type": "public_personal_reuse",
+  "frequency": "business_day",
+  "products": [
+   "crude_oil",
+   "brent"
+  ],
+  "freshness_sla_minutes": 1440,
+  "license_note": "Project policy permits personal reuse of first-party public data with attribution; preserve the exact published source URL and do not redistribute raw data.",
+  "reliability_score": 0.95
+ },
+ {
+  "source_id": "cme_wti_settlement_public",
+  "source_name": "CME WTI Public Settlement Data",
+  "tier": "A",
+  "category": "international_futures",
+  "url": "https://www.cmegroup.com/market-data/license-data.html",
+  "crawl_type": "manual_form",
+  "auth_type": "public_personal_reuse",
+  "frequency": "business_day",
+  "products": [
+   "crude_oil",
+   "wti"
+  ],
+  "freshness_sla_minutes": 1440,
+  "license_note": "Project policy permits personal reuse of first-party public data with attribution; preserve the exact published source URL and do not redistribute raw data.",
+  "reliability_score": 0.95
+ },
+ {
+  "source_id": "cctd_qinhuangdao_thermal_coal",
+  "source_name": "CCTD Qinhuangdao Thermal Coal Benchmark",
+  "tier": "B",
+  "category": "china_coal_public_weekly_assessment",
+  "url": "https://www.cctd.com.cn/",
+  "crawl_type": "static_html",
+  "auth_type": "public_personal_reuse",
+  "frequency": "weekly",
+  "products": [
+   "coal",
+   "thermal_coal"
+  ],
+  "freshness_sla_minutes": 10080,
+  "license_note": "Weekly contextual assessment under the project's personal-reuse policy; preserve grade, calorific-value basis, page URL and attribution. It is not a daily formal-price candidate.",
+  "reliability_score": 0.85
+ },
+ {
+  "source_id": "coalchina_cctd_bohai_rim_5500_daily_reference",
+  "source_name": "China Coal Industry Association CCTD Bohai-rim 5500K Daily Reference",
+  "tier": "B",
+  "category": "china_coal_public_daily_assessment",
+  "url": "https://www.coalchina.org.cn/list-25-1.html",
+  "crawl_type": "static_html",
+  "auth_type": "public_personal_reuse",
+  "frequency": "business_day",
+  "products": [
+   "coal",
+   "thermal_coal"
+  ],
+  "freshness_sla_minutes": 1440,
+  "license_note": "Public China Coal Industry Association page publishing the CCTD Bohai-rim 5500K daily-reference candidate under the project's personal-reuse policy; preserve exact page URL, publication/visible time, grade, price basis and attribution. Do not redistribute raw quotations.",
+  "reliability_score": 0.85
+ },
+ {
+  "source_id": "sunsirs_public_commodity_assessment",
+  "operational_status": "active",
+  "data_role": "current_label",
+  "current_formal_eligible": true,
+  "source_name": "SunSirs Public Commodity Assessment",
+  "tier": "B",
+  "category": "china_public_spot_assessment",
+  "url": "https://www.sunsirs.com/",
+  "crawl_type": "static_html",
+  "auth_type": "public_personal_reuse",
+  "frequency": "business_day",
+  "products": [
+   "mx",
+   "ethylene",
+   "eo",
+   "meg",
+   "ethylene_glycol",
+   "polyester_melt",
+   "polyester_chip"
+  ],
+  "product_roles": {
+   "meg": "current_public_spot_assessment_label"
+  },
+  "freshness_sla_minutes": 1440,
+  "license_note": "Accepted on 2026-09-01 as the current MEG label source for this personal workbench. Preserve exact product page, market, specification, first-capture visibility and attribution; the published methodology is dated 2013-11-01 and current applicability remains unverified. Never label this assessment as a transaction price, and never treat source acceptance as proof that the forecast OOS gate passed.",
+  "reliability_score": 0.8
+ },
+ {
+  "source_id": "sunsirs_mx_east_china_daily_assessment",
+  "source_name": "SunSirs East China Mixed Xylene Daily Assessment",
+  "tier": "B",
+  "category": "china_public_spot_assessment",
+  "url": "https://www.100ppi.com/monitor/detail-50.html",
+  "crawl_type": "manual_form",
+  "auth_type": "public_personal_reuse",
+  "frequency": "business_day",
+  "products": [
+   "mx"
+  ],
+  "freshness_sla_minutes": 1440,
+  "license_note": "Public SunSirs East-China mixed-xylene daily-assessment candidate under the project's personal-reuse policy; preserve the exact monitor and dated detail URLs, publication time, assessed range, midpoint rule, unit and attribution. It is an assessment, not a transaction quote. Do not redistribute raw quotations.",
+  "reliability_score": 0.8
+ },
+ {
+  "source_id": "akshare_prototype",
+  "source_name": "AkShare Futures Daily Prototype",
+  "tier": "D",
+  "category": "china_futures_prototype",
+  "url": "https://akshare.akfamily.xyz/data/futures/futures.html",
+  "crawl_type": "manual_form",
+  "auth_type": "public_or_license",
+  "frequency": "business_day",
+  "products": [
+   "sc",
+   "pta",
+   "px",
+   "meg",
+   "china_futures"
+  ],
+  "freshness_sla_minutes": 1440,
+  "license_note": "Internal prototype and cross-checking only. Do not use as licensed exchange settlement, production display, external report default source, redistribution feed, or direct action-grade trading signal. Replace with authorized exchange/vendor source before production.",
+  "reliability_score": 0.55
+ },
+ {
+  "source_id": "cfets_cny_parity",
+  "source_name": "CFETS CNY Central Parity",
+  "tier": "A",
+  "category": "fx",
+  "url": "https://www.chinamoney.com.cn/r/cms/www/chinamoney/data/fx/ccpr.json",
+  "crawl_type": "api_json",
+  "auth_type": "public",
+  "frequency": "business_day",
+  "products": [
+   "usd_cny",
+   "fx"
+  ],
+  "freshness_sla_minutes": 90,
+  "license_note": "Official benchmark page; preserve source attribution.",
+  "reliability_score": 0.95
+ },
+ {
+  "source_id": "fred_macro_api",
+  "source_name": "FRED Macro and Rates API",
+  "tier": "A",
+  "category": "macro_financial",
+  "url": "https://api.stlouisfed.org/fred/series/observations",
+  "crawl_type": "api_json",
+  "auth_type": "api_key",
+  "frequency": "daily_weekly_monthly",
+  "products": [
+   "dxy_proxy",
+   "rates",
+   "macro",
+   "usd"
+  ],
+  "freshness_sla_minutes": 1440,
+  "license_note": "Official FRED API; register and use API key according to St. Louis Fed terms.",
+  "reliability_score": 0.94
+ },
+ {
+  "source_id": "cftc_cot_petroleum",
+  "source_name": "CFTC COT Petroleum Reports",
+  "tier": "A",
+  "category": "market_positioning",
+  "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+  "crawl_type": "html_download",
+  "auth_type": "public",
+  "frequency": "weekly",
+  "products": [
+   "crude_oil",
+   "petroleum_products",
+   "positioning"
+  ],
+  "freshness_sla_minutes": 10080,
+  "license_note": "Official public COT reports; preserve report date and contract market code.",
+  "reliability_score": 0.92
+ },
+ {
+  "source_id": "yahoo_futures_daily_proxy",
+  "source_name": "Yahoo Futures Daily Public Proxy",
+  "tier": "B",
+  "category": "trade_futures_proxy",
+  "url": "https://query1.finance.yahoo.com/v8/finance/chart/",
+  "crawl_type": "api_json",
+  "auth_type": "public",
+  "frequency": "business_day",
+  "products": [
+   "crude_oil",
+   "gasoline",
+   "distillate",
+   "petroleum_products",
+   "crack_spread",
+   "term_structure_proxy"
+  ],
+  "freshness_sla_minutes": 1440,
+  "license_note": "Public chart endpoint for research proxies only. Preserve attribution; do not present as licensed exchange settlement, official volume/open interest, or exchange-certified intraday feed.",
+  "reliability_score": 0.78
+ },
+ {
+  "source_id": "ofac_sanctions",
+  "data_role": "event_evidence",
+  "source_name": "OFAC Sanctions List and Releases",
+  "tier": "A",
+  "category": "sanctions_policy",
+  "url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV",
+  "crawl_type": "html_download",
+  "auth_type": "public",
+  "frequency": "15min",
+  "products": [
+   "sanctions",
+   "shipping",
+   "energy_policy",
+   "geopolitics"
+  ],
+  "freshness_sla_minutes": 30,
+  "license_note": "Official sanctions data; do not infer market impact without cross-checking affected entities and trade routes.",
+  "reliability_score": 0.94
+ },
+ {
+  "source_id": "gacc_trade_statistics",
+  "source_name": "GACC China Customs Statistics",
+  "tier": "A",
+  "category": "trade_flow",
+  "url": "http://english.customs.gov.cn/statics/report/monthly.html",
+  "crawl_type": "html_download",
+  "auth_type": "public",
+  "frequency": "monthly",
+  "products": [
+   "crude_oil",
+   "naphtha",
+   "xylenes_broad",
+   "meg",
+   "coal",
+   "trade_flow"
+  ],
+  "product_roles": {
+   "crude_oil": "current_candidate",
+   "naphtha": "current_candidate",
+   "meg": "current_candidate",
+   "coal": "current_candidate",
+   "xylenes_broad": "context_proxy_not_px"
+  },
+  "freshness_sla_minutes": 43200,
+  "license_note": "Official monthly customs statistics; preserve HS code and revision date.",
+  "reliability_score": 0.9
+ },
+ {
+  "source_id": "un_comtrade_api",
+  "data_role": "historical_context",
+  "current_formal_eligible": false,
+  "source_name": "UN Comtrade API",
+  "tier": "A",
+  "category": "trade_flow",
+  "url": "https://comtradeapi.un.org/data/v1/get",
+  "crawl_type": "api_json",
+  "auth_type": "api_key",
+  "frequency": "monthly",
+  "products": [
+   "crude_oil",
+   "naphtha",
+   "px",
+   "pta",
+   "meg",
+   "trade_flow"
+  ],
+  "freshness_sla_minutes": 43200,
+  "license_note": "Use the official free API key when configured and the official preview endpoint as a bounded fallback; preserve HS revisions and broad naphtha scope.",
+  "reliability_score": 0.9
+ },
+ {
+  "source_id": "us_centcom_press",
+  "source_name": "U.S. Central Command Public Affairs RSS",
+  "tier": "A",
+  "category": "shipping_security",
+  "url": "https://www.dvidshub.net/rss/unit/72",
+  "crawl_type": "static_html",
+  "auth_type": "public",
+  "frequency": "30min",
+  "products": [
+   "crude_oil",
+   "shipping_security"
+  ],
+  "freshness_sla_minutes": 60,
+  "license_note": "Official public-affairs feed hosted by DVIDS; fetch only public article pages and preserve attribution.",
+  "reliability_score": 0.9
+ },
+ {
+  "source_id": "mpa_press_releases",
+  "source_name": "Maritime and Port Authority of Singapore",
+  "tier": "A",
+  "category": "shipping_security",
+  "url": "https://www.mpa.gov.sg/feeds/media-releases",
+  "crawl_type": "static_html",
+  "auth_type": "public",
+  "frequency": "30min",
+  "products": [
+   "crude_oil",
+   "shipping_security"
+  ],
+  "freshness_sla_minutes": 60,
+  "license_note": "Official public feed; public HTML may link a PDF, but no attachment is extracted unless separately supported and authorized.",
+  "reliability_score": 0.92
+ },
+ {
+  "source_id": "internal_market_notes",
+  "source_name": "业务员市场笔记",
+  "tier": "D",
+  "category": "internal_weak_signal",
+  "url": "internal://obsidian/market-notes",
+  "crawl_type": "manual_form",
+  "auth_type": "internal",
+  "frequency": "realtime",
+  "products": [
+   "quote",
+   "sentiment",
+   "customer_feedback"
+  ],
+  "freshness_sla_minutes": 15,
+  "license_note": "Internal notes; require human review before prediction.",
+  "reliability_score": 0.45
+ },
+ {
+  "source_id": "texnet_price_articles",
+  "source_name": "Texnet Daily POY/DTY Public Price Articles",
+  "tier": "B",
+  "category": "polyester_public_assessment",
+  "url": "https://info.texnet.com.cn/list--20-.html",
+  "crawl_type": "static_html",
+  "auth_type": "public_personal_reuse",
+  "frequency": "published_day",
+  "products": [
+   "poy",
+   "dty"
+  ],
+  "product_roles": {
+   "poy": "current_public_assessment_label",
+   "dty": "current_public_assessment_label"
+  },
+  "freshness_sla_minutes": 2880,
+  "license_note": "Public daily price articles for personal non-commercial research; preserve attribution and exact article URL.",
+  "reliability_score": 0.8
+ }
+]

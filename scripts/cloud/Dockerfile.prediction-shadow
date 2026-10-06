@@ -1,0 +1,14 @@
+# Build from the exact reviewed production image ID/tag; no pulls or dependency install.
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+ENV OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+COPY server/app/prediction_shadow.py server/app/prediction_shadow_store.py server/app/prediction_features.py server/app/prediction_benchmark.py server/app/prediction_replay.py /app/server/app/
+COPY server/app/seven_product_forecast.py server/app/seven_product_experiment.py server/app/seven_product_multivariate_experiment.py server/app/seven_product_contract.py server/app/seven_product_evaluation.py /app/server/app/
+COPY server/scripts/run_prediction_shadow.py server/scripts/export_prediction_vintages.py /app/server/scripts/
+COPY server/app/prediction_inputs.py /app/server/app/
+# Existing image's dependency lock/runtime is preserved and fingerprinted at init.
+HEALTHCHECK NONE
+USER 10001:10001
+ENTRYPOINT ["python", "server/scripts/run_prediction_shadow.py"]
+CMD ["status", "--ledger-dir", "/shadow"]

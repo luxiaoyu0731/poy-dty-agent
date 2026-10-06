@@ -1,0 +1,30 @@
+crude_oil:
+  aliases: ["crude oil", "petroleum oils", "原油"]
+  candidate_hs_codes: ["2709"]
+naphtha:
+  aliases: ["naphtha", "石脑油"]
+  candidate_hs_codes: ["2710"]
+px:
+  aliases: ["para-xylene", "p-xylene", "PX", "对二甲苯"]
+  candidate_hs_codes: ["290243"]
+pta:
+  aliases: ["purified terephthalic acid", "PTA", "精对苯二甲酸"]
+  candidate_hs_codes: ["291736"]
+meg:
+  aliases: ["mono ethylene glycol", "ethylene glycol", "MEG", "乙二醇"]
+  candidate_hs_codes: ["290531"]
+ethylene:
+  aliases: ["ethylene", "乙烯"]
+  candidate_hs_codes: ["290121"]
+methanol:
+  aliases: ["methanol", "methyl alcohol", "甲醇"]
+  candidate_hs_codes: ["290511"]
+ethylene_oxide:
+  aliases: ["ethylene oxide", "EO", "环氧乙烷"]
+  candidate_hs_codes: ["291010"]
+pet_chips:
+  aliases: ["PET resin", "polyester chips", "聚酯切片"]
+  candidate_hs_codes: ["390761", "390769"]
+coal:
+  aliases: ["coal", "steam coal", "thermal coal", "动力煤"]
+  candidate_hs_codes: ["2701"]

@@ -1,0 +1,15 @@
+title = "POY/DTY production secret scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Generated outputs are not source inputs to the production review gate"
+paths = [
+  '''(^|/)dist/''',
+  '''(^|/)\.visual-regression/''',
+  '''(^|/)\.review-screenshots/''',
+  '''(^|/)artifacts/''',
+  '''(^|/)\.codex-run/''',
+  '''(^|/)\.external/''',
+]

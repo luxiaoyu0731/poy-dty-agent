@@ -1,0 +1,25 @@
+# Generated and packaged assets must retain exact bytes and are not source text.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.doc binary
+*.docx binary
+*.xlsx binary
+*.xls binary
+*.zip binary
+*.gz binary
+*.db binary
+
+# These are frozen customer-facing deliverables and evidence assets. Preserve
+# their exact bytes rather than applying source-text whitespace normalization.
+/customer-manual/** binary
+/deliverables/** binary
+/artifacts/** binary

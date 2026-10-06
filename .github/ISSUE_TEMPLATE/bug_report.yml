@@ -1,0 +1,23 @@
+name: Bug report
+description: Report a reproducible behavior problem
+labels: [bug]
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed behavior
+      description: Describe the earliest visible symptom; omit credentials and private data.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include module, input conditions, browser or runtime version and steps.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Add relevant errors or screenshots without API keys, tokens or customer content.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Production Review"
+  short_description: "Run the complete evidence-based production review"
+  default_prompt: "Use $production-review to orchestrate a complete read-only production readiness review."

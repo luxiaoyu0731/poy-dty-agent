@@ -1,0 +1,66 @@
+{
+  "name": "poy-dty-upstream-intelligence-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@10.9.2",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "lint": "tsc --noEmit",
+    "check": "npm run lint && npm run assets:check && npm run build",
+    "test:e2e": "playwright test",
+    "eval:ai": "cd server && uv run python ../scripts/run-ai-evals.py",
+    "eval:rag": "cd server && uv run python ../scripts/run-rag-evals.py",
+    "eval:forecast": "server/.venv/bin/python server/scripts/run_seven_product_evaluation.py",
+    "ops:sqlite-permissions": "python3 server/scripts/harden_production_sqlite_permissions.py",
+    "assets:check": "node scripts/check-assets.mjs",
+    "visual:diff": "node scripts/visual-regression.mjs",
+    "visual:check": "node scripts/visual-regression.mjs --ci",
+    "review:quick": "python3 server/scripts/run_isolated_quick_review.py",
+    "review:security": "sh -c 'command -v semgrep >/dev/null 2>&1 || { echo \"Missing semgrep. Install with: pipx install semgrep\" >&2; exit 127; }; command -v gitleaks >/dev/null 2>&1 || { echo \"Missing gitleaks. Install with: brew install gitleaks\" >&2; exit 127; }; command -v trivy >/dev/null 2>&1 || { echo \"Missing trivy. Install with: brew install trivy\" >&2; exit 127; }; semgrep scan --config .semgrep/semgrep.yml --severity ERROR --error . && gitleaks git --redact --no-banner --config .gitleaks.toml && trivy fs --config trivy.yaml .'",
+    "review:full": "npm run review:quick && npm run review:security && npm run check && cd server && uv run ruff check . && cd .. && sh scripts/run-backend-review.sh",
+    "local:public": "node scripts/local-public-server.mjs",
+    "source:automation": "server/.venv/bin/python server/scripts/run_source_automation.py --fetch-news --run-quality --output-dir .codex-run/source-automation",
+    "local:preflight": "server/.venv/bin/python server/scripts/run_local_production_preflight.py",
+    "local:daily": "server/.venv/bin/python server/scripts/run_local_daily.py",
+    "local:alerts": "server/.venv/bin/python server/scripts/check_local_production_alerts.py",
+    "production:scheduler": "server/.venv/bin/python server/scripts/run_production_scheduler.py",
+    "production:scheduler:once": "server/.venv/bin/python server/scripts/run_production_scheduler.py --once",
+    "local:prod:dry-run": "npm run local:preflight && npm run local:daily && npm run local:alerts",
+    "local:prod:apply": "npm run local:preflight -- --require-services && npm run local:daily -- --apply && npm run local:alerts"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.6.1",
+    "@ant-design/pro-components": "^2.8.10",
+    "@vitejs/plugin-react": "^6.0.2",
+    "@xyflow/react": "^12.11.0",
+    "antd": "^5.29.3",
+    "lucide-react": "^0.468.0",
+    "maplibre-gl": "6.10.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-map-gl": "8.1.3",
+    "react-resizable-panels": "^4.11.2",
+    "recharts": "^2.13.3",
+    "typescript": "^5.6.3",
+    "vite": "^8.0.14"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/react": "^18.3.29",
+    "@types/react-dom": "^18.3.7",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.60.0",
+    "pngjs": "^7.0.0"
+  },
+  "overrides": {
+    "nanoid": "3.3.18",
+    "path-to-regexp": "8.4.2",
+    "postcss": "8.5.26"
+  }
+}

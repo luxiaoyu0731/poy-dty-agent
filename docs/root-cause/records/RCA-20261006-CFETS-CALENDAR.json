@@ -1,0 +1,130 @@
+{
+  "id": "RCA-20261006-CFETS-CALENDAR",
+  "owner": "Codex/操作员",
+  "status": "mechanism_verified",
+  "incident": {
+    "symptom": "国庆正常停更被质量门误判陈旧，基础材料与日报跳过；历史经验模板回退未显示",
+    "context": "/path/to/project-context/desktop-review-20261006/daily-20261005-artifacts.json; sha256=a0b70bdfba180266355bea067d14240c8a99c95e6438fd5595ae364c1629f315; bytes=790150; 2026-10-05 08:08北京时间",
+    "reproduction": "保存九条 samples，在原 evaluated_at 调用 evaluate_observation；旧代码8/9，修复9/9"
+  },
+  "root_cause": {
+    "earliest_layer": "公开基准及来源就绪度新鲜度判断",
+    "explanation": "固定自然日TTL忽略来源发布日历；采集未报关键失败。跳过基础材料为下游结果。另模板工件未记录fallback且整体状态漏查历史/质证。",
+    "evidence": [
+      "/path/to/project-context/desktop-review-20261006/daily-20261005-artifacts.json",
+      "/path/to/project-context/desktop-review-20261006/daily-20261005-review.md"
+    ]
+  },
+  "impact": {
+    "query": "枚举全部9个 PUBLIC_BENCHMARK_INPUTS；rg observation_sla_seconds/outside_declared_source_cadence，核对两处消费者；链全部工件对比回退计数",
+    "declared_scope": "保存的10月5日九条基准输入、CFETS两个新鲜度消费者、五阶段模板工件计数",
+    "coverage": "complete",
+    "counts": {
+      "scanned": 9,
+      "affected": 1
+    },
+    "exclusions": [
+      "其他来源发布日历未获出处，不应用CFETS日历",
+      "旧发行与结算不改"
+    ],
+    "unassessed": [
+      "其他历史运行日期未全量扫描",
+      "发布后真实日链恢复未验证"
+    ]
+  },
+  "mechanism_fix": {
+    "change": "版本化来源发布日历，假期只承接最近应发布记录，未来记录拒绝；年度覆盖质量告警；模板计数与整体降级补齐",
+    "temporary_action": "无数据特例和人工改值",
+    "evidence": [
+      "/path/to/project-context/desktop-review-20261006/calendar-snapshot-recheck.json",
+      "/path/to/project-context/desktop-review-20261006/calendar-focused-tests.log",
+      "/path/to/project-context/desktop-review-20261006/calendar-backend-final.log",
+      "/path/to/project-context/desktop-review-20261006/calendar-e2e.log",
+      "/path/to/project-context/desktop-review-20261006/budget-backend-final.log",
+      "/path/to/project-context/desktop-review-20261006/budget-e2e-final.log",
+      "/path/to/project-context/daily-fix-public-20261006/post-runtime.json"
+    ]
+  },
+  "legacy_handling": {
+    "decision": "保存现场；不重跑旧发行",
+    "issued_boundary": "已发行输入/账本保持冻结，纠错单独标注",
+    "rollback": "撤回本批源文件；无需DB迁移"
+  },
+  "generalization": {
+    "positive_cases": [
+      "国庆/春节/劳动节、恢复日09:15前、调休"
+    ],
+    "negative_cases": [
+      "节前漏采、恢复到点未更新、未知年份、错单位、其他来源、未来日期、失败采集"
+    ],
+    "commands": [
+      "uv run --project server python -m pytest server/tests -q",
+      "npm run check",
+      "npm run test:e2e -- --reporter=line",
+      "npm run root-cause:check -- --directory <本批记录>"
+    ],
+    "results": [
+      "59 passed in 4.03s",
+      "3432 passed in 266.60s (0:04:26)",
+      "214 passed (5.1m), 1 skipped, retries=0",
+      "npm run check exit=0; existing >600kB chunk warning",
+      "九输入重评仅CFETS由stale变ready",
+      "预算ADR-11后最终后端3436 passed in 256.33s，前端214 passed (5.0m)/1 skipped，重试0",
+      "budget-frontend-check.log: npm run check exit=0",
+      "生产uid10001只读验证：8640运行指纹匹配，保存的九输入9/9，定案降级告警可识别；真实新日链尚未发生"
+    ],
+    "limitations": [
+      "生产未部署，真实日链恢复待观察",
+      "历史全库未重跑，旧发行未改"
+    ]
+  },
+  "recurrence": {
+    "command": "run_delivery_data_quality_gate.py；source_publication_calendar 年度覆盖告警；tests/test_agent_chain.py 工件与计数对照",
+    "signals": [
+      "年度日历缺失",
+      "真实陈旧输入",
+      "模板回退计数与交付工件不一致"
+    ],
+    "owner": "Codex/操作员",
+    "review_on": "2026-10-07 08:00真实日链；下次相关改动前",
+    "deployment": "deployed"
+  },
+  "acceptance": {
+    "display": {
+      "state": "verified",
+      "evidence": [
+        "/path/to/project-context/desktop-review-20261006/calendar-focused-tests.log",
+        "/path/to/project-context/desktop-review-20261006/calendar-snapshot-recheck.json"
+      ]
+    },
+    "mechanism": {
+      "state": "verified",
+      "evidence": [
+        "/path/to/project-context/desktop-review-20261006/calendar-focused-tests.log",
+        "/path/to/project-context/desktop-review-20261006/calendar-snapshot-recheck.json"
+      ]
+    },
+    "business_effect": {
+      "state": "unknown",
+      "evidence": [
+        "未发布，未重跑历史日链；预测效果不在本批范围"
+      ]
+    }
+  },
+  "actions": [
+    {
+      "id": "publish-observe",
+      "owner": "Codex/操作员",
+      "due": "获发布指令后",
+      "status": "open",
+      "check": "新制品日链与年度告警运行证据"
+    },
+    {
+      "id": "deployed-readonly-check",
+      "owner": "Codex",
+      "due": "2026-10-06发布后",
+      "status": "done",
+      "check": "版本/接口/源码/告警只读验证通过；新日链观察仍开放"
+    }
+  ]
+}
