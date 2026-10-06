@@ -22,7 +22,7 @@
 
 ## 发布审查
 
-**源码分发：GO。生产部署：本次未审查、未执行。**
+**原本地检查通过；远端完整验收：NO-GO，待修复下述 CI 问题。生产部署：本次未执行。**
 
 操作员批准新公开仓库、Apache-2.0、既有前端素材再分发与已确认手机方案的参考迁移。客户资料、Apple 字体、数据库和旧 Git 历史已排除；原私有仓库保留。GitHub CI 会继续运行包括 CodeQL 在内的远程检查，远程检查结果需单独观察，不能从本地结果推定。
 
@@ -44,3 +44,14 @@
 | `ruff.log` | 19 | `82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18` |
 | `npm-audit.json` | 363 | `d9186a1ac1061183563ab6d60d2f7ef565982758b3969184c876b96dec0025e9` |
 | `pip-audit.json` | 5184 | `02b09becd22ea5c3a351be84ccc0b4aa113bebd92b8f4867c55c571481a21d2d` |
+
+## 远端 CI 复核（2026-10-06）
+
+[首次 main CI](https://github.com/luxiaoyu0731/poy-dty-agent/actions/runs/37459774017) 已完成，结论为 failure。这是新增的跨环境证据，不能继续仅引用本地全绿。
+
+- Security review：success。
+- 后端：3497 passed、1 failed；测试运行生产环境加载脚本时 Linux runner 没有 `/bin/zsh`。
+- 前端：225 passed、2 failed、1 flaky、1 skipped。石脑油单元断言未隔离真实价格历史，手机原生 pinch 模拟在 Linux 环境未达到预期比例；会话取消用例发生重试通过。
+- CodeQL：报告 22 项未豁免发现，需逐项审阅，不能把它们直接认定为误报或修改门禁放行。
+
+本次同步审查文档，保留原始 CI 证据；未更改生产业务或掩盖失败。后续需隔离测试数据、修复跨平台 shell 与手势验收，并处理 CodeQL 发现后重跑。

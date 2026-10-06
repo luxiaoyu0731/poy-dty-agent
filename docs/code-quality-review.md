@@ -39,3 +39,7 @@
 ## 验收
 
 本次完成后以 `docs/github-release-evidence.md` 为新鲜命令结果入口；历史文档不替代本次测试。任何尚未通过的检查会保留原始失败，不在 README 中用“全绿”徽章掩盖。
+
+## GitHub CI 后续结果
+
+2026-10-06 首次公开 main CI 未全绿；具体跨平台测试失败与 CodeQL 22 项发现见 [公开验证记录](github-release-evidence.md)。本地通过不覆盖远端失败，本次不据此宣称安全与发布验收完成。
