@@ -81,7 +81,7 @@ jobs:
 
       - name: Preserve security reports for PR feedback
         if: always() && (hashFiles('semgrep.sarif') != '' || hashFiles('trivy.sarif') != '')
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: security-sarif
           path: |
@@ -173,7 +173,7 @@ jobs:
         run: node --test scripts/tests/demo-setup.test.mjs tests/public-login-browser.test.mjs tests/public-password-auth.test.mjs tests/public-password-auth-integration.test.mjs tests/public-proxy-response.test.mjs tests/local-public-server-entrypoint.test.mjs tests/public-bare-apex-redirect.test.mjs
       - run: npm run test:e2e
       - run: npm run visual:check
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: frontend-test-artifacts
@@ -209,7 +209,7 @@ jobs:
         working-directory: server
       - run: uv run python ../scripts/run-ai-evals.py
         working-directory: server
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
           name: backend-test-artifacts
@@ -264,7 +264,7 @@ jobs:
           test "$(jq '.invalid_metadata' <<<"$waiver_audit")" -eq 0
       - name: Preserve CodeQL reports
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: codeql-sarif
           path: results/
