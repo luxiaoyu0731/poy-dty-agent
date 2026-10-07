@@ -36,10 +36,10 @@ jobs:
       - name: Prepare archive and manifest
         env:
           VERSION: ${{ inputs.version }}
-        run: python scripts/prepare-release.py --version "$VERSION" --output ../source-release
+        run: python scripts/prepare-release.py --version "$VERSION" --output "$RUNNER_TEMP/source-release"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: source-release-${{ inputs.version }}
-          path: ../source-release/
+          path: ${{ runner.temp }}/source-release/
           if-no-files-found: error
           retention-days: 14
