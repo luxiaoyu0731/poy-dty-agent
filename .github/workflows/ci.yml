@@ -170,7 +170,7 @@ jobs:
       - run: npm audit --registry=https://registry.npmjs.org --omit=dev
       - run: npx playwright install --with-deps chromium
       - name: Public login browser and authentication regression
-        run: node --test tests/public-login-browser.test.mjs tests/public-password-auth.test.mjs tests/public-password-auth-integration.test.mjs tests/public-proxy-response.test.mjs tests/local-public-server-entrypoint.test.mjs tests/public-bare-apex-redirect.test.mjs
+        run: node --test scripts/tests/demo-setup.test.mjs tests/public-login-browser.test.mjs tests/public-password-auth.test.mjs tests/public-password-auth-integration.test.mjs tests/public-proxy-response.test.mjs tests/local-public-server-entrypoint.test.mjs tests/public-bare-apex-redirect.test.mjs
       - run: npm run test:e2e
       - run: npm run visual:check
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

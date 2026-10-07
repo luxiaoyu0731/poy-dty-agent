@@ -2,7 +2,7 @@
 
 # POY/DTY · 产业链情报与多 Agent 研判
 
-把公开新闻、价格与历史案例组织成可追溯的研判流程，覆盖 7 品种 × 1/7/30 天，共 21 格方向预测。
+面向原料采购与产业研究，把公开新闻、价格和历史案例整理成可追溯的判断，覆盖 7 品种 × 1/7/30 天，并提供图谱、报告与到期复盘。
 
 [在线演示](https://app.kaipingrc.com/) · [本地运行](docs/getting-started.md) · [English](README.en.md)
 
@@ -41,7 +41,7 @@ flowchart LR
 
 ## 无密钥样例
 
-安装依赖后运行 `npm run demo`。样例使用独立临时数据库，明确标注合成数据，不启动调度器或付费模型；退出后自动清理。
+在克隆后的仓库运行 `npm run demo:setup`，自动安装锁定依赖并启动样例（需要 Node.js 22.12+ 和 uv）。以后可用 `npm run demo` 直接启动。样例使用独立临时数据库，明确标注合成数据，不启动调度器或付费模型；退出后自动清理。
 
 ## 本地运行
 
@@ -76,3 +76,5 @@ npm run test:e2e
 </details>
 
 [Apache-2.0](LICENSE)。外部新闻、价格与第三方素材保留各自许可；预测用于研究辅助，不构成收益保证。
+
+[遇到问题](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=bug_report.yml) · [告诉我们哪一步不清楚](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=first_use.yml) · [从小任务参与](CONTRIBUTING.md)

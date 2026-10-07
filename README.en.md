@@ -39,3 +39,7 @@ Follow the [setup guide](docs/getting-started.md) to start isolated services. Pr
 [Code review](docs/code-quality-review.md) and [validation status](docs/github-release-evidence.md) record remaining engineering issues. Screenshots show a captured live state; [asset credits](docs/media/README.md) distinguish generated illustrations.
 
 [Apache-2.0](LICENSE). External data and dependencies retain their own licenses. Forecasts are research outputs, not financial guarantees.
+
+[Report a bug](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=bug_report.yml) · [First-use feedback](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=first_use.yml) · [Starter tasks](CONTRIBUTING.md)
+
+One-command first run after cloning: `npm run demo:setup` installs locked dependencies and starts the synthetic sample. Requires Node.js 22.12+ and uv. Use `npm run demo` on subsequent runs.

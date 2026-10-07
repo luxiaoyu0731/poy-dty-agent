@@ -1,0 +1,46 @@
+{
+  "name": "体验反馈 / First-use feedback",
+  "description": "告诉我们什么有用、哪一步不清楚",
+  "title": "[Feedback] ",
+  "body": [
+    {
+      "type": "textarea",
+      "id": "goal",
+      "attributes": {
+        "label": "你想完成什么 / Goal"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "dropdown",
+      "id": "stage",
+      "attributes": {
+        "label": "停在哪一步 / Stage",
+        "options": [
+          "看懂项目 / Understanding",
+          "安装启动 / Setup",
+          "跑样例 / Sample",
+          "配置模型 / Model setup",
+          "理解结果 / Result",
+          "已经成功 / Completed"
+        ]
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "change",
+      "attributes": {
+        "label": "希望改善什么 / Suggested improvement",
+        "description": "请用自制例子，不上传隐私资料"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  ]
+}

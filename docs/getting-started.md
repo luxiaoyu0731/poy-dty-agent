@@ -63,3 +63,7 @@ npm run demo
 ```
 
 只在新建临时目录写样例数据库；不加载 `.env`，不启动定时器、不使用模型密钥。可指定 `-- --api-port 18001 --web-port 15175`。关闭终端任务会停止服务并移除临时目录；这不是线上数据或预测质量演示。
+
+## One-command synthetic trial
+
+After cloning, run `npm run demo:setup`. The command installs the repository lockfiles, then starts the isolated synthetic sample. Use `npm run demo` afterwards. Initial setup needs internet for packages; it does not call a paid model. Stop with Ctrl+C. On macOS/Linux, child processes and the sample database are cleaned up. Windows process lifecycle is not validated.

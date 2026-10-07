@@ -1,23 +1,53 @@
-name: Bug report
-description: Report a reproducible behavior problem
-labels: [bug]
-body:
-  - type: textarea
-    id: behavior
-    attributes:
-      label: Expected and observed behavior
-      description: Describe the earliest visible symptom; omit credentials and private data.
-    validations:
-      required: true
-  - type: textarea
-    id: reproduction
-    attributes:
-      label: Reproduction
-      description: Include module, input conditions, browser or runtime version and steps.
-    validations:
-      required: true
-  - type: textarea
-    id: evidence
-    attributes:
-      label: Sanitized evidence
-      description: Add relevant errors or screenshots without API keys, tokens or customer content.
+{
+  "name": "使用问题 / Bug report",
+  "description": "报告可复现的问题，帮助定位首次使用阻碍",
+  "title": "[Bug] ",
+  "body": [
+    {
+      "type": "markdown",
+      "attributes": {
+        "value": "请勿上传密钥、个人路径、客户文件或私人论文。Please redact private data. 安全漏洞请使用 SECURITY.md 的入口。"
+      }
+    },
+    {
+      "type": "input",
+      "id": "environment",
+      "attributes": {
+        "label": "运行环境 / Environment",
+        "description": "系统、版本号或提交、使用的启动命令"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "steps",
+      "attributes": {
+        "label": "复现步骤 / Steps",
+        "description": "尽量使用仓库自带合成样例"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "result",
+      "attributes": {
+        "label": "预期与实际 / Expected and actual",
+        "description": "在哪里停住、报错或结果不清楚？"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "evidence",
+      "attributes": {
+        "label": "脱敏日志或截图 / Redacted evidence"
+      }
+    }
+  ]
+}
