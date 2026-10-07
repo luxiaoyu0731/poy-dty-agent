@@ -4,7 +4,7 @@
 
 ## 安装
 
-Node.js 20+、npm、Python 3.11+、uv。
+Node.js 22.12+、npm、Python 3.11+、uv。
 
 ```bash
 npm ci
@@ -55,3 +55,11 @@ uv run --project server python -m pytest server/tests -q
 ```
 
 不要对生产库运行测试。实际抓取、付费模型调用和生产调度都需要单独配置；简单启动页面不会代替这些操作。
+
+## 先体验合成样例
+
+```sh
+npm run demo
+```
+
+只在新建临时目录写样例数据库；不加载 `.env`，不启动定时器、不使用模型密钥。可指定 `-- --api-port 18001 --web-port 15175`。关闭终端任务会停止服务并移除临时目录；这不是线上数据或预测质量演示。

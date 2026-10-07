@@ -12,3 +12,7 @@
 `workflow-live.png`、`evidence-live.png`、`intelligence-live.png` 来自 2026-10-06 对在线演示的浏览器截图，1600 × 1000。图中是捕获时刻的状态，不是生成式 UI 或性能证明。
 
 前端原有图标、插画与视觉参考图来自项目既有素材，操作员于本次公开整理中确认可公开再分发。客户手册附带的 Apple 字体不在公开包内。
+
+## Recorded walkthrough
+
+`walkthrough.gif`：真实本地工作台录屏，输入为独立临时库中的合成样例；不是在线实时行情或效果回测。 录制于 2026-10-07。非 ImageGen 图片，无第三方私有材料。

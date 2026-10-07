@@ -30,3 +30,12 @@ test("current quote publisher is independent of the historical-series publisher"
   expect(priceSourceLabel("public_spot_page_refresh", "https://zh.tradingeconomics.com/commodity/naphtha"))
     .toBe("Trading Economics");
 });
+
+
+test("lookalike hosts cannot impersonate price publishers", async () => {
+  const { priceSourceLabel } = await import("../src/utils/priceSourceLabel");
+  for (const url of ["https://eviltradingeconomics.com/a", "https://not100ppi.com/a", "not a URL"]) {
+    expect(priceSourceLabel("public_spot_page_refresh", url)).toBe("公开页面评估");
+  }
+  expect(priceSourceLabel("public_spot_page_refresh", "https://www.100ppi.com/a")).toBe("生意社");
+});

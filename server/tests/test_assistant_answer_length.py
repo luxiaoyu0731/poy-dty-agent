@@ -69,3 +69,8 @@ def test_unverified_price_date_pair_is_not_presented_as_inference() -> None:
 def test_numeric_source_identifier_does_not_remove_mechanism_explanation() -> None:
     text = "原油通过石脑油向PTA传导（业务数据=doc_123）。"
     assert _remove_unverified_numbers(text, []) == (text, 0)
+
+
+def test_sentence_limit_does_not_parse_suffix_of_long_number() -> None:
+    assert _question_sentence_limit("0" * 100000 + "句话") is None
+    assert _question_sentence_limit("21句话") is None

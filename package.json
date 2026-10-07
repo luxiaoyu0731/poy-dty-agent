@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "npm@10.9.2",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -32,7 +32,8 @@
     "production:scheduler": "server/.venv/bin/python server/scripts/run_production_scheduler.py",
     "production:scheduler:once": "server/.venv/bin/python server/scripts/run_production_scheduler.py --once",
     "local:prod:dry-run": "npm run local:preflight && npm run local:daily && npm run local:alerts",
-    "local:prod:apply": "npm run local:preflight -- --require-services && npm run local:daily -- --apply && npm run local:alerts"
+    "local:prod:apply": "npm run local:preflight -- --require-services && npm run local:daily -- --apply && npm run local:alerts",
+    "demo": "python3 scripts/start-sample.py"
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.1",

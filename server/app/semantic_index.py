@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import math
 import os
 import sqlite3
@@ -137,8 +138,9 @@ class SemanticIndexBuilder:
                 "warnings": warnings,
                 "retention": _apply_generation_retention(index_id),
             }
-        except Exception as exc:
-            error = f"{type(exc).__name__}:{exc}"
+        except Exception:
+            logging.getLogger(__name__).exception("semantic index build failed")
+            error = "semantic_index_build_failed"
             with closing(connect()) as connection, connection:
                 connection.execute(
                     "UPDATE semantic_indices SET status='failed', completed_at=?, last_error=? WHERE index_id=?",
@@ -453,12 +455,13 @@ def _apply_generation_retention(active_index_id: str) -> dict[str, Any]:
 
     try:
         return prune_non_active_indices(trigger=f"activation:{active_index_id}")
-    except Exception as exc:  # noqa: BLE001 -- activation always wins over retention
+    except Exception:  # noqa: BLE001 -- activation always wins over retention
+        logging.getLogger(__name__).exception("semantic index retention failed")
         return {
             "status": "failed",
             "trigger": f"activation:{active_index_id}",
             "active_index_id": active_index_id,
-            "error": f"{type(exc).__name__}:{exc}",
+            "error": "semantic_index_retention_failed",
         }
 
 

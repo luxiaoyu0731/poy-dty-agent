@@ -6,6 +6,10 @@ Collect public news and prices, retrieve traceable evidence, coordinate speciali
 
 <img src="docs/media/workflow-live.png" alt="Actual Agent workflow interface" width="100%" />
 
+![Recorded walkthrough](docs/media/walkthrough.gif)
+
+Recorded local workbench with a synthetic temporary database; not live market data or an effect evaluation.
+
 ## Features
 
 - Source collection, original-text retrieval, bounded PDF parsing and provenance tracking.
@@ -13,9 +17,13 @@ Collect public news and prices, retrieve traceable evidence, coordinate speciali
 - Specialist reasoning, historical analogies and skeptical review via structured artifacts.
 - Rule-based decisions, frozen ledgers, settlement and retrospective memory.
 
+## No-key sample
+
+After installing dependencies, run `npm run demo`. It launches the actual workbench with synthetic fixtures, a new temporary database and disabled schedulers; no provider credentials are used. A persistent sample notice distinguishes it from real market data.
+
 ## Run locally
 
-Node.js 20+, Python 3.11+ and uv are required.
+Node.js 22.12+, Python 3.11+ and uv are required.
 
 ```sh
 git clone https://github.com/luxiaoyu0731/poy-dty-agent.git

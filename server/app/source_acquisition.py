@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 import sqlite3
 from collections import Counter
@@ -247,8 +248,9 @@ def inspect_source_inventory(db_path: Path, errors: list[str] | None = None) -> 
                     """
                 ).fetchall()
                 inventory["event_observations"] = {row["source_id"]: dict(row) for row in event_rows}
-    except sqlite3.Error as exc:
-        issues.append(f"source inventory: {exc}")
+    except sqlite3.Error:
+        logging.getLogger(__name__).exception("source inventory read failed")
+        issues.append("source inventory: read_failed")
     return inventory
 
 

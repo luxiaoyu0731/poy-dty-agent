@@ -88,8 +88,8 @@ def parse_futures_daily_csv(csv_text: str) -> tuple[list[dict[str, Any]], list[s
     for line_number, raw_row in enumerate(reader, start=2):
         try:
             row = _normalize_row(raw_row, header_map, now)
-        except ValueError as exc:
-            errors.append(f"line {line_number}: {exc}")
+        except ValueError:
+            errors.append(f"line {line_number}: invalid_row")
             continue
         if row["exchange"] == "DCE" or row["source_id"] == "dce_meg":
             errors.append(f"line {line_number}: dce_source_soft_removed")

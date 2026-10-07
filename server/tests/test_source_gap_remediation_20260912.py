@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 from contextlib import contextmanager
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import httpx
 
@@ -342,9 +343,9 @@ def test_sina_hf_to_row_maps_documented_global_fields() -> None:
 
 def test_brent_falls_back_to_sina_global_when_yahoo_fails(monkeypatch) -> None:
     async def fake_get_allowed(_client: object, url: str, **_kwargs: object):
-        if "query1.finance.yahoo.com" in url:
+        if urlsplit(str(url)).hostname == "query1.finance.yahoo.com":
             raise httpx.ConnectError("yahoo unreachable")
-        assert "hq.sinajs.cn" in url
+        assert urlsplit(str(url)).hostname == "hq.sinajs.cn"
         body = (
             'var hq_str_hf_OIL="104.246,,104.320,104.470,109.970,103.500,05:59:55,'
             '107.630,109.940,0,1,1,2026-09-12,布伦特原油,449953";'

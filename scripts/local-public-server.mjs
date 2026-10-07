@@ -205,8 +205,8 @@ async function proxyToBackend(req, res, requestUrl) {
   }
   const headers = backendRequestHeaders(req.headers, target.host);
   const upstream = http.request(
-    target,
-    { method: req.method, headers },
+    { hostname: backendOriginUrl.hostname, port: backendOriginUrl.port,
+      path: target.pathname + target.search, method: req.method, headers },
     (upstreamRes) => {
       const responseHeaders = { ...upstreamRes.headers };
       delete responseHeaders["set-cookie"];

@@ -216,8 +216,8 @@ test("PX uses a unified yuan unit without merging the futures proxy into the spo
   await expect(profitCard).toContainText("不代表 PX 自身利润");
 
   await page.locator(".review-material-price").filter({ hasText: /^石脑油/ }).click();
-  await expect(page.locator(".trend-panel")).toContainText("石脑油 价格趋势（元/吨）", { timeout: 15_000 });
-  // 本用例 mock 未提供石脑油价格：链路节点如实显示"未返回"（元/吨已在趋势标题断言）。
+  await expect(page.locator(".trend-panel")).toContainText("石脑油 价格趋势（美元/吨）", { timeout: 15_000 });
+  // 种子石脑油曲线保持美元原始口径，不能被 PX 的人民币代理报价改变。
   await expect(page.locator(".review-material-price").filter({ hasText: /^石脑油/ })).toContainText(/元\/吨|未返回/);
 });
 

@@ -3611,6 +3611,7 @@ def test_import_row_error_contract_is_bounded() -> None:
         "row 2: observed_at is required"
     )
     assert main_module._row_import_error(3, RuntimeError("injected storage internals")) == "row 3: RuntimeError"
+    assert main_module._row_import_error(3, ValueError("private /secret/db connection detail")) == "row 3: invalid row"
 
     class Strict(PydanticBaseModel):
         value: float

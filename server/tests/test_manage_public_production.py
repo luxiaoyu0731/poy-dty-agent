@@ -12,6 +12,15 @@ import pytest
 from scripts import manage_public_production as manager
 
 
+def _configured_hosts(rendered: str) -> set[str]:
+    return {
+        host.strip()
+        for line in rendered.splitlines()
+        if line.startswith("OUTBOUND_FETCH_HOSTS=")
+        for host in line.split("=", 1)[1].split(",")
+    }
+
+
 def make_repository(path: Path) -> None:
     (path / "dist").mkdir(parents=True)
     (path / "dist" / "index.html").write_text("<html>release</html>", encoding="utf-8")
@@ -928,11 +937,11 @@ def test_configure_intelligence_syncs_managed_hosts_into_explicit_allowlist(tmp_
     )
 
     rendered = env_file.read_text(encoding="utf-8")
-    assert "api.eia.gov" in rendered
-    assert "custom.example.org" in rendered
-    assert "www.cctd.com.cn" in rendered
-    assert "www.chinamoney.com.cn" in rendered
-    assert "earthquake.usgs.gov" in rendered
+    assert "api.eia.gov" in _configured_hosts(rendered)
+    assert "custom.example.org" in _configured_hosts(rendered)
+    assert "www.cctd.com.cn" in _configured_hosts(rendered)
+    assert "www.chinamoney.com.cn" in _configured_hosts(rendered)
+    assert "earthquake.usgs.gov" in _configured_hosts(rendered)
 
 
 def test_configure_intelligence_expands_shell_self_reference_to_explicit_hosts(tmp_path: Path, monkeypatch) -> None:
@@ -958,10 +967,10 @@ def test_configure_intelligence_expands_shell_self_reference_to_explicit_hosts(t
     rendered = env_file.read_text(encoding="utf-8")
     assert "$" not in rendered
     assert '"' not in rendered
-    assert "api.eia.gov" in rendered
-    assert "www.tnc.com.cn" in rendered
-    assert "custom.example.org" in rendered
-    assert "earthquake.usgs.gov" in rendered
+    assert "api.eia.gov" in _configured_hosts(rendered)
+    assert "www.tnc.com.cn" in _configured_hosts(rendered)
+    assert "custom.example.org" in _configured_hosts(rendered)
+    assert "earthquake.usgs.gov" in _configured_hosts(rendered)
     assert result["allowlist_expanded"] is True
 
 

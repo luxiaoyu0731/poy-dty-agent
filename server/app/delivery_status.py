@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import sqlite3
 from collections import Counter
@@ -169,8 +170,9 @@ def _operational_status(
 def _source_automation_summary(errors: list[str]) -> dict[str, Any]:
     try:
         status = build_source_automation_status()
-    except Exception as exc:  # noqa: BLE001
-        errors.append(f"source_automation: {exc}")
+    except Exception:  # noqa: BLE001
+        logging.getLogger(__name__).exception("source automation status failed")
+        errors.append("source_automation: status_unavailable")
         return {}
     tasks = status.get("tasks") if isinstance(status.get("tasks"), list) else []
     visible_tasks = [
@@ -305,8 +307,9 @@ def _database_status(errors: list[str]) -> dict[str, Any]:
         status["forecast_price_points_total"] = int(total)
         status["ccf_dom_daily_rows"] = int(ccf_total)
         status["ccf_products"] = [dict(row) for row in rows]
-    except sqlite3.Error as exc:
-        errors.append(f"database: {exc}")
+    except sqlite3.Error:
+        logging.getLogger(__name__).exception("delivery database read failed")
+        errors.append("database: read_failed")
     return status
 
 
@@ -331,8 +334,9 @@ def _read_json(path: Path | None, errors: list[str]) -> dict[str, Any]:
         return {}
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        errors.append(f"{path}: {exc}")
+    except (OSError, json.JSONDecodeError):
+        logging.getLogger(__name__).exception("delivery report read failed")
+        errors.append("report: invalid_or_unreadable")
         return {}
     return payload if isinstance(payload, dict) else {}
 

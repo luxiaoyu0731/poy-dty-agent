@@ -733,7 +733,9 @@ def _render_sections(sections: AssistantAnswerSections) -> str:
     )
 
 
-_QUESTION_SENTENCE_LIMIT_PATTERN = re.compile(r"([0-9]+|[一二两三四五六七八九十]+)\s*句话?")
+_QUESTION_SENTENCE_LIMIT_PATTERN = re.compile(
+    r"(?<![0-9一二两三四五六七八九十])([0-9]{1,2}|[一二两三四五六七八九十]{1,3})\s{0,8}句话?"
+)
 _QUESTION_SENTENCE_NUMERALS = {
     "一": 1, "二": 2, "两": 2, "三": 3, "四": 4, "五": 5,
     "六": 6, "七": 7, "八": 8, "九": 9, "十": 10,

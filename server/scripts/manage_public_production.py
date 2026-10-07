@@ -1518,7 +1518,7 @@ def rebuild_shared_semantic_index(args: argparse.Namespace) -> dict[str, Any]:
         raise RuntimeError("production environment file is missing; refusing a default-config index build")
     # Match the running launchd services without printing any environment values.
     command = [
-        "/bin/zsh", "-c",
+        "/bin/bash", "-c",
         'set -a; source "$1" || exit $?; set +a; shift; exec "$@"',
         "production-index", str(env_file), *command,
     ]

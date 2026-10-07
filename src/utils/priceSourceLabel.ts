@@ -4,8 +4,8 @@ export function priceSourceLabel(sourceId?: string, sourceUrl?: string): string 
     try {
       const host = new URL(sourceUrl).hostname;
       if (host === "texnet.com.cn" || host.endsWith(".texnet.com.cn")) return "纺织网（生意社参考价）";
-      if (host.endsWith("tradingeconomics.com")) return "Trading Economics";
-      if (host.endsWith("100ppi.com")) return "生意社";
+      if ((host === "tradingeconomics.com" || host.endsWith(".tradingeconomics.com"))) return "Trading Economics";
+      if ((host === "100ppi.com" || host.endsWith(".100ppi.com"))) return "生意社";
     } catch { /* Invalid URLs must not determine a publisher. */ }
   }
   return ({

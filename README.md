@@ -8,6 +8,10 @@
 
 React / TypeScript · FastAPI · SQLite · FTS5 / FastEmbed · Apache-2.0
 
+![Recorded walkthrough](docs/media/walkthrough.gif)
+
+演示说明：真实本地工作台录屏，输入为独立临时库中的合成样例；不是在线实时行情或效果回测。
+
 ## 核心能力
 
 - **信源治理**：采集新闻与价格，获取原文、解析官方 PDF，保留来源与时间。
@@ -35,9 +39,13 @@ flowchart LR
   E --> I
 ```
 
+## 无密钥样例
+
+安装依赖后运行 `npm run demo`。样例使用独立临时数据库，明确标注合成数据，不启动调度器或付费模型；退出后自动清理。
+
 ## 本地运行
 
-需要 Node.js 20+、Python 3.11+ 和 uv：
+需要 Node.js 22.12+、Python 3.11+ 和 uv：
 
 ```sh
 git clone https://github.com/luxiaoyu0731/poy-dty-agent.git

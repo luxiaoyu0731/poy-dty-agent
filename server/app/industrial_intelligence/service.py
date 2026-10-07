@@ -64,7 +64,7 @@ def single_flight(key: str):
     root = run_root()
     root.mkdir(parents=True, exist_ok=True)
     os.chmod(root, 0o700)
-    lock_path = root / f"{key}.lock"
+    lock_path = root / f"{hashlib.sha256(key.encode()).hexdigest()}.lock"
     handle = open(lock_path, "a+")  # noqa: SIM115 - flock handle lives for the context duration
     try:
         os.chmod(lock_path, 0o600)
@@ -816,9 +816,7 @@ def _cursor_secret() -> bytes:
         material = settings.internal_api_token
     else:
         material = uuid.uuid4().hex  # process-local fallback for dev/test
-    _CURSOR_SECRET_CACHE = hashlib.sha256(
-        ("intelligence-cursor-v1:" + material).encode("utf-8")
-    ).digest()
+    _CURSOR_SECRET_CACHE = material.encode("utf-8")  # HMAC signing key, not a password verifier.
     return _CURSOR_SECRET_CACHE
 
 

@@ -3553,7 +3553,12 @@ def _row_import_error(index: int, exc: Exception) -> str:
             return f"row {index}: invalid fields: {', '.join(fields)}"
         return f"row {index}: invalid payload"
     if isinstance(exc, ValueError):
-        return f"row {index}: {exc}"
+        # Only code-owned validation messages may cross the API boundary.
+        safe_messages = {f"{key} is required": f"{key} is required" for key in (
+            "observed_at", "source_id", "product", "metric", "value", "occurred_at",
+            "event_type", "title", "url", "published_at", "raw_text"
+        )}
+        return f"row {index}: {safe_messages.get(str(exc), 'invalid row')}"
     return f"row {index}: {exc.__class__.__name__}"
 
 
