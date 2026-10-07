@@ -43,3 +43,5 @@ Follow the [setup guide](docs/getting-started.md) to start isolated services. Pr
 [Report a bug](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=bug_report.yml) · [First-use feedback](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=first_use.yml) · [Starter tasks](CONTRIBUTING.md)
 
 One-command first run after cloning: `npm run demo:setup` installs locked dependencies and starts the synthetic sample. Requires Node.js 22.12+ and uv. Use `npm run demo` on subsequent runs.
+
+[Versioned releases and artifact verification](docs/releasing.md)

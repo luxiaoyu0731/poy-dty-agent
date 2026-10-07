@@ -78,3 +78,5 @@ npm run test:e2e
 [Apache-2.0](LICENSE)。外部新闻、价格与第三方素材保留各自许可；预测用于研究辅助，不构成收益保证。
 
 [遇到问题](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=bug_report.yml) · [告诉我们哪一步不清楚](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=first_use.yml) · [从小任务参与](CONTRIBUTING.md)
+
+[Versioned releases and artifact verification](docs/releasing.md)

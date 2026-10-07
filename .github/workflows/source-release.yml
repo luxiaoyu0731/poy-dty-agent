@@ -1,0 +1,44 @@
+name: Prepare source release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'vMAJOR.MINOR.PATCH or vMAJOR.MINOR.PATCH-preview.N'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Require passing CI for this exact commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          CHECK_WORKFLOW: 'CI'
+        run: |
+          gh run list --repo "$REPO" --commit "$SHA" --workflow "$CHECK_WORKFLOW" --limit 20 --json conclusion,status,event > /tmp/ci.json
+          python - <<'PYCODE'
+          import json
+          rows=json.load(open('/tmp/ci.json'))
+          rows=[r for r in rows if r['event']=='push']
+          if not rows or rows[0]['status']!='completed' or rows[0]['conclusion']!='success':
+              raise SystemExit('Exact-commit push CI must pass first; no artifacts prepared')
+          PYCODE
+      - name: Prepare archive and manifest
+        env:
+          VERSION: ${{ inputs.version }}
+        run: python scripts/prepare-release.py --version "$VERSION" --output ../source-release
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-release-${{ inputs.version }}
+          path: ../source-release/
+          if-no-files-found: error
+          retention-days: 14
