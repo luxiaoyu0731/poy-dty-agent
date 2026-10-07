@@ -937,11 +937,10 @@ def test_configure_intelligence_syncs_managed_hosts_into_explicit_allowlist(tmp_
     )
 
     rendered = env_file.read_text(encoding="utf-8")
-    assert "api.eia.gov" in _configured_hosts(rendered)
-    assert "custom.example.org" in _configured_hosts(rendered)
-    assert "www.cctd.com.cn" in _configured_hosts(rendered)
-    assert "www.chinamoney.com.cn" in _configured_hosts(rendered)
-    assert "earthquake.usgs.gov" in _configured_hosts(rendered)
+    assert _configured_hosts(rendered) == {
+        "api.eia.gov", "custom.example.org", "www.cctd.com.cn",
+        "www.chinamoney.com.cn", "earthquake.usgs.gov",
+    }
 
 
 def test_configure_intelligence_expands_shell_self_reference_to_explicit_hosts(tmp_path: Path, monkeypatch) -> None:
@@ -967,10 +966,9 @@ def test_configure_intelligence_expands_shell_self_reference_to_explicit_hosts(t
     rendered = env_file.read_text(encoding="utf-8")
     assert "$" not in rendered
     assert '"' not in rendered
-    assert "api.eia.gov" in _configured_hosts(rendered)
-    assert "www.tnc.com.cn" in _configured_hosts(rendered)
-    assert "custom.example.org" in _configured_hosts(rendered)
-    assert "earthquake.usgs.gov" in _configured_hosts(rendered)
+    assert _configured_hosts(rendered) == {
+        "api.eia.gov", "www.tnc.com.cn", "www.czce.com.cn", "custom.example.org", "earthquake.usgs.gov",
+    }
     assert result["allowlist_expanded"] is True
 
 
