@@ -289,7 +289,7 @@ there is no `unsafe-eval`, wildcard script origin, inline script allowance or
 blob-worker allowance. MapLibre's CSP worker is packaged as a same-origin asset.
 # 当前访问方式（2026-09-07）
 
-用户已确认全部功能免密码公开，依据 [公开访问决定](public-access-2026-09-07.md)。公网前端与健康探针从 `shared/public-access-mode` 读取非敏感模式覆盖值 `public`；原 `.env.production` 中的密钥与密码校验器不读取、不复制、不改写。下文密码部署流程仅适用于显式恢复 `single_user_password` 的环境。
+用户已确认全部功能免密码公开，依据 [公开访问决定](https://github.com/luxiaoyu0731/poy-dty-agent/blob/64ce86b10dc9acb487959bba970a790298e389dd/docs/public-access-2026-09-07.md)。公网前端与健康探针从 `shared/public-access-mode` 读取非敏感模式覆盖值 `public`；原 `.env.production` 中的密钥与密码校验器不读取、不复制、不改写。下文密码部署流程仅适用于显式恢复 `single_user_password` 的环境。
 
 公开模式下首页、深链接、业务 API 和 live/ready 应匿名返回 200，`/login` 应跳转首页。发布烟测使用 `smoke --access-mode public --base-url https://app.kaipingrc.com`，不提供密码文件或钥匙串参数。五分钟健康探针读取相同模式，检查 release/live/ready，不再把登录重定向当成公开模式成功。
 

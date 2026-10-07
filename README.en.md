@@ -1,44 +1,33 @@
-<p align="center"><img src="docs/media/project-hero.png" alt="POY/DTY — Evidence-led Multi-Agent Research" width="100%" /></p>
+# POY/DTY · Multi-Agent Supply Chain Research
 
-# POY/DTY · Evidence-led Multi-Agent Research
+Collect public news and prices, retrieve traceable evidence, coordinate specialist agents, and review issued forecasts. Seven products, three horizons: 21 directional forecast cells per business day.
 
-A personal research workbench for the polyester supply chain: collect public information, retrieve relevant evidence, coordinate specialist agents, issue directional forecasts, and review outcomes.
+[Live demo](https://app.kaipingrc.com/) · [中文](README.md) · [Local setup](docs/getting-started.md)
 
-[Live demo](https://app.kaipingrc.com/) · [中文](README.md) · [Local setup](docs/getting-started.md) · [Code review](docs/code-quality-review.md)
+<img src="docs/media/workflow-live.png" alt="Actual Agent workflow interface" width="100%" />
 
-## What it connects
+## Features
 
-The system covers crude oil, naphtha, PX, PTA, MEG, POY and DTY across 1-, 7- and 30-day horizons: 21 forecast cells per business day.
+- Source collection, original-text retrieval, bounded PDF parsing and provenance tracking.
+- Hybrid FTS5 / FastEmbed retrieval with product and availability-time filters.
+- Specialist reasoning, historical analogies and skeptical review via structured artifacts.
+- Rule-based decisions, frozen ledgers, settlement and retrospective memory.
 
-- Source collection with deduplication, allowlisted publishers, original-text retrieval and bounded PDF parsing.
-- Hybrid retrieval using SQLite FTS5 and FastEmbed multilingual vectors, with availability-time and product filters.
-- Specialist agents for political analysis, historical analogies, product reasoning and skeptical review; structured artifacts, citation checks and request quotas.
-- Frozen input context, traceable case memory and retrospective lessons.
-- Rule-based decisions, an append-only forecast ledger, settlement and review.
-- Evidence browsing, reports, industrial intelligence and read-only research assistance.
+## Run locally
 
-<img src="docs/media/workflow-live.png" alt="Actual workflow interface" width="100%" />
+Node.js 20+, Python 3.11+ and uv are required.
 
-## Context, evidence and memory
-
-<img src="docs/media/context-memory.png" alt="Context / Evidence / Memory conceptual illustration" width="100%" />
-
-Keep current inputs separate from retrievable source material and long-term lessons. Semantic similarity alone does not establish directional support. Module integration, evidence coverage and predictive improvement require different forms of validation; this repository does not claim a universal backtest uplift.
-
-## Stack and setup
-
-React / TypeScript / Ant Design / React Flow / MapLibre on the frontend; FastAPI / SQLite / FTS5 / FastEmbed on the backend. Requires Node.js 20+, npm, Python 3.11+ and uv.
-
-```bash
+```sh
+git clone https://github.com/luxiaoyu0731/poy-dty-agent.git
+cd poy-dty-agent
 npm ci
-npm run check
 uv sync --project server
 ```
 
-Follow the [local setup guide](docs/getting-started.md) before starting services or tests. Production databases, credentials, customer documents and historical Git objects are excluded. Real model requests require your own provider key and incur provider costs.
+Follow the [setup guide](docs/getting-started.md) to start isolated services. Production data is not distributed; provider keys and fees are your responsibility. Integration is distinct from measured predictive improvement.
 
-## Engineering and contribution
+[Architecture](docs/architecture.md) · [OpenAPI](docs/openapi.yaml) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
 
-See [maintainability findings](docs/code-quality-review.md), [contribution guidance](CONTRIBUTING.md), [security reporting](SECURITY.md) and [distribution scope](docs/public-distribution.md). Screenshots are captured from the live interface; editorial illustrations are generated and identified separately.
+[Code review](docs/code-quality-review.md) and [validation status](docs/github-release-evidence.md) record remaining engineering issues. Screenshots show a captured live state; [asset credits](docs/media/README.md) distinguish generated illustrations.
 
-Code is licensed under [Apache-2.0](LICENSE). Third-party dependencies and external data retain their original licensing conditions. Forecasts are research outputs, not a guarantee of financial returns.
+[Apache-2.0](LICENSE). External data and dependencies retain their own licenses. Forecasts are research outputs, not financial guarantees.

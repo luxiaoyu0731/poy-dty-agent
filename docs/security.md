@@ -149,4 +149,4 @@ The `/api/v1/intelligence/*` surface inherits every global rule above and adds:
   enforced by CHECK constraints that the application cannot relax.
 # 当前公网产品边界（2026-09-07）
 
-用户已明确授权所有既有功能匿名公开，包括 AI、生成与抓取。具体合同见 [公开访问决定](public-access-2026-09-07.md)。本环境不再以密码门槛为发布条件；保留服务端内部 token、loopback 绑定、浏览器凭据头隔离及同源写入检查。匿名访客具备原有业务操作权限是接受的产品行为，不能按未授权绕过登录计为漏洞。
+用户已明确授权所有既有功能匿名公开，包括 AI、生成与抓取。具体合同见 [公开访问决定](https://github.com/luxiaoyu0731/poy-dty-agent/blob/64ce86b10dc9acb487959bba970a790298e389dd/docs/public-access-2026-09-07.md)。本环境不再以密码门槛为发布条件；保留服务端内部 token、loopback 绑定、浏览器凭据头隔离及同源写入检查。匿名访客具备原有业务操作权限是接受的产品行为，不能按未授权绕过登录计为漏洞。
