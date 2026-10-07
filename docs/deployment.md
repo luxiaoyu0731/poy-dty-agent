@@ -33,7 +33,7 @@ the container refuses to start unless `APP_ENV` is `staging` or `production`, `E
 `INTERNAL_API_TOKEN` is non-empty.
 
 ```bash
-cp .env.production.example .env
+cp deploy/examples/.env.production.example .env
 # Edit .env and set INTERNAL_API_TOKEN plus any provider/source credentials.
 docker compose up --build
 ```

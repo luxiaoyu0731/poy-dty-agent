@@ -9,7 +9,7 @@
 # 与 Mac launchd 拓扑一致；所有监听仍绑定 127.0.0.1，无外部接口暴露。
 #
 # 前置：
-#   cp .env.production.example .env   # 并填入真实值（与 Mac shared/.env.production 对齐）
+#   cp deploy/examples/.env.production.example .env   # 并填入真实值（与 Mac shared/.env.production 对齐）
 #   npm run build                     # 生成 dist/
 #   ./cloudflared/{config.yml,credentials.json}  # 从 Mac ~/.cloudflared/ 拷贝；ingress 指 http://127.0.0.1:4173
 services:

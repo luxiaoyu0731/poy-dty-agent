@@ -7,8 +7,8 @@
 .env.local
 .env.*.local
 !.env.example
-!.env.production.example
-!.env.staging.example
+!deploy/examples/.env.production.example
+!deploy/examples/.env.staging.example
 
 # Node and build outputs.
 node_modules

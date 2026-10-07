@@ -17,7 +17,7 @@ This file is a compact navigation index for coding agents. It does not replace u
 
 | Need | Read first |
 | --- | --- |
-| Product scope and setup | `README.md`, `POY_DTY_上游原料智能Agent项目文档.md` |
+| Product scope and setup | `README.md`, `docs/product-scope.md` |
 | Architecture | `docs/architecture.md` |
 | API and OpenAPI | `docs/api.md`, `docs/openapi.yaml` |
 | Security | `docs/security.md` |

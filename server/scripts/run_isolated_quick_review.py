@@ -31,7 +31,7 @@ def main() -> int:
         if result.returncode != 0:
             return result.returncode
         result = subprocess.run(
-            ["gitleaks", "dir", "--redact", "--no-banner", "--config", ".gitleaks.toml", "."],
+            ["gitleaks", "dir", "--redact", "--no-banner", "--config", "config/security/gitleaks.toml", "."],
             cwd=snapshot,
             check=False,
         )

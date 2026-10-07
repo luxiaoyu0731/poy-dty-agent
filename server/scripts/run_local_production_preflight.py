@@ -136,7 +136,7 @@ def check_required_files() -> list[dict[str, Any]]:
         "docs/runbook.md",
         "docs/deployment.md",
         "docs/release-checklist.md",
-        ".env.production.example",
+        "deploy/examples/.env.production.example",
     ]
     checks = []
     for item in paths:
@@ -322,15 +322,15 @@ def check_http_services(backend_url: str, frontend_url: str, *, require_services
 def check_env_templates() -> list[dict[str, Any]]:
     checks = []
     templates = {
-        ".env.production.example": (
+        "deploy/examples/.env.production.example": (
             "APP_ENV=production",
             "ENFORCE_INTERNAL_TOKEN=1",
             "INTERNAL_API_TOKEN=",
             "CORS_ALLOW_ORIGINS=",
             "EIA_API_KEY=",
         ),
-        ".env.local-production.example": ("EIA_API_KEY=",),
-        ".env.public-production.example": ("EIA_API_KEY=",),
+        "deploy/examples/.env.local-production.example": ("EIA_API_KEY=",),
+        "deploy/examples/.env.public-production.example": ("EIA_API_KEY=",),
     }
     for filename, required_terms in templates.items():
         path = REPO_ROOT / filename

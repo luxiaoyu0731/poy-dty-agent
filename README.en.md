@@ -34,13 +34,13 @@ uv sync --project server
 
 Follow the [setup guide](docs/getting-started.md) to start isolated services. Production data is not distributed; provider keys and fees are your responsibility. Integration is distinct from measured predictive improvement.
 
-[Architecture](docs/architecture.md) · [OpenAPI](docs/openapi.yaml) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
+[Architecture](docs/architecture.md) · [OpenAPI](docs/openapi.yaml) · [Contributing](.github/CONTRIBUTING.md) · [Security](.github/SECURITY.md)
 
 [Code review](docs/code-quality-review.md) and [validation status](docs/github-release-evidence.md) record remaining engineering issues. Screenshots show a captured live state; [asset credits](docs/media/README.md) distinguish generated illustrations.
 
 [Apache-2.0](LICENSE). External data and dependencies retain their own licenses. Forecasts are research outputs, not financial guarantees.
 
-[Report a bug](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=bug_report.yml) · [First-use feedback](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=first_use.yml) · [Starter tasks](CONTRIBUTING.md)
+[Report a bug](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=bug_report.yml) · [First-use feedback](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=first_use.yml) · [Starter tasks](.github/CONTRIBUTING.md)
 
 One-command first run after cloning: `npm run demo:setup` installs locked dependencies and starts the synthetic sample. Requires Node.js 22.12+ and uv. Use `npm run demo` on subsequent runs.
 

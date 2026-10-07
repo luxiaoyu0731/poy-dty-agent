@@ -71,12 +71,12 @@ npm run test:e2e
 
 模块接入不代表预测效果已经得到实验验证。当前工程问题和验收状态见 [代码审查](docs/code-quality-review.md) 与 [验证记录](docs/github-release-evidence.md)。
 
-[贡献指南](CONTRIBUTING.md) · [安全反馈](SECURITY.md) · [公开范围](docs/public-distribution.md) · [素材说明](docs/media/README.md)
+[贡献指南](.github/CONTRIBUTING.md) · [安全反馈](.github/SECURITY.md) · [公开范围](docs/public-distribution.md) · [素材说明](docs/media/README.md)
 
 </details>
 
 [Apache-2.0](LICENSE)。外部新闻、价格与第三方素材保留各自许可；预测用于研究辅助，不构成收益保证。
 
-[遇到问题](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=bug_report.yml) · [告诉我们哪一步不清楚](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=first_use.yml) · [从小任务参与](CONTRIBUTING.md)
+[遇到问题](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=bug_report.yml) · [告诉我们哪一步不清楚](https://github.com/luxiaoyu0731/poy-dty-agent/issues/new?template=first_use.yml) · [从小任务参与](.github/CONTRIBUTING.md)
 
 [Versioned releases and artifact verification](docs/releasing.md)

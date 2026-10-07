@@ -6,7 +6,7 @@ runner:
     level: error
 
   trivy:
-    cmd: trivy fs --config trivy.yaml --format sarif --exit-code 0 .
+    cmd: trivy fs --config config/security/trivy.yaml --format sarif --exit-code 0 .
     format: sarif
     name: Trivy
     level: error

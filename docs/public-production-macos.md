@@ -68,7 +68,7 @@ diagnostics and produces a deliberately partial candidate.
 Copy the environment template and set secrets outside the repository:
 
 ```bash
-cp .env.public-production.example \
+cp deploy/examples/.env.public-production.example \
   "$HOME/Library/Application Support/POY-DTY-Agent/shared/.env.production"
 chmod 600 "$HOME/Library/Application Support/POY-DTY-Agent/shared/.env.production"
 ```

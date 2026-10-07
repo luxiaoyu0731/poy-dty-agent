@@ -6,7 +6,7 @@
     {
       "type": "markdown",
       "attributes": {
-        "value": "请勿上传密钥、个人路径、客户文件或私人论文。Please redact private data. 安全漏洞请使用 SECURITY.md 的入口。"
+        "value": "请勿上传密钥、个人路径、客户文件或私人论文。Please redact private data. 安全漏洞请使用 .github/SECURITY.md 的入口。"
       }
     },
     {

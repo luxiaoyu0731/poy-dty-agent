@@ -22,7 +22,7 @@
     "visual:diff": "node scripts/visual-regression.mjs",
     "visual:check": "node scripts/visual-regression.mjs --ci",
     "review:quick": "python3 server/scripts/run_isolated_quick_review.py",
-    "review:security": "sh -c 'command -v semgrep >/dev/null 2>&1 || { echo \"Missing semgrep. Install with: pipx install semgrep\" >&2; exit 127; }; command -v gitleaks >/dev/null 2>&1 || { echo \"Missing gitleaks. Install with: brew install gitleaks\" >&2; exit 127; }; command -v trivy >/dev/null 2>&1 || { echo \"Missing trivy. Install with: brew install trivy\" >&2; exit 127; }; semgrep scan --config .semgrep/semgrep.yml --severity ERROR --error . && gitleaks git --redact --no-banner --config .gitleaks.toml && trivy fs --config trivy.yaml .'",
+    "review:security": "sh -c 'command -v semgrep >/dev/null 2>&1 || { echo \"Missing semgrep. Install with: pipx install semgrep\" >&2; exit 127; }; command -v gitleaks >/dev/null 2>&1 || { echo \"Missing gitleaks. Install with: brew install gitleaks\" >&2; exit 127; }; command -v trivy >/dev/null 2>&1 || { echo \"Missing trivy. Install with: brew install trivy\" >&2; exit 127; }; semgrep scan --config .semgrep/semgrep.yml --severity ERROR --error . && gitleaks git --redact --no-banner --config config/security/gitleaks.toml && trivy fs --config config/security/trivy.yaml .'",
     "review:full": "npm run review:quick && npm run review:security && npm run check && cd server && uv run ruff check . && cd .. && sh scripts/run-backend-review.sh",
     "local:public": "node scripts/local-public-server.mjs",
     "source:automation": "server/.venv/bin/python server/scripts/run_source_automation.py --fetch-news --run-quality --output-dir .codex-run/source-automation",

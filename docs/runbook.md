@@ -339,7 +339,7 @@ Local production helper reports and launchd templates are generated under `.code
 Review the launchd templates before loading them. The checked-in helper scripts install and optionally load them:
 
 ```bash
-cp .env.local-production.example .env.local-production
+cp deploy/examples/.env.local-production.example .env.local-production
 # Fill INTERNAL_API_TOKEN and alert provider keys.
 scripts/install_launchd_local_production.sh
 scripts/install_launchd_local_production.sh --load
@@ -507,7 +507,7 @@ Do not deploy staging or production with an empty `INTERNAL_API_TOKEN`. The Dock
 ## Docker Startup
 
 ```bash
-cp .env.production.example .env
+cp deploy/examples/.env.production.example .env
 # Edit .env and set INTERNAL_API_TOKEN before starting.
 docker compose up --build
 ```

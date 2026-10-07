@@ -65,7 +65,7 @@ jobs:
       - name: Run Gitleaks history scan
         id: gitleaks
         continue-on-error: true
-        run: gitleaks git --redact --no-banner --config .gitleaks.toml
+        run: gitleaks git --redact --no-banner --config config/security/gitleaks.toml
 
       - name: Run Trivy HIGH/CRITICAL dependency and IaC gate
         id: trivy
@@ -74,7 +74,7 @@ jobs:
         with:
           scan-type: fs
           scan-ref: .
-          trivy-config: trivy.yaml
+          trivy-config: config/security/trivy.yaml
           format: sarif
           output: trivy.sarif
           exit-code: "1"

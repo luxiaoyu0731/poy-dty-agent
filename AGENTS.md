@@ -18,7 +18,7 @@
 ## External References
 | Need | File |
 | --- | --- |
-| Product scope | `POY_DTY_上游原料智能Agent项目文档.md` |
+| Product scope | `docs/product-scope.md` |
 | Setup | `README.md` |
 | Visual regression | `docs/visual-regression.md` |
 | Figma rebuild | `docs/figma-rebuild-guide.md` |

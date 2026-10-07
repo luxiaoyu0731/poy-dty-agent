@@ -328,7 +328,7 @@ FIRMS、OSM 网络能力和 AIS 均不是首版完成条件。任何付费能力
 
 ## 9. God’s Eye View 的复用边界
 
-参考上游：[`bilawalsidhu/gods-eye-view`](https://github.com/bilawalsidhu/gods-eye-view)。代码采用 MIT License，但其调用的第三方数据和资产各自保留独立条款，参见上游 [`LICENSE`](https://github.com/bilawalsidhu/gods-eye-view/blob/main/LICENSE)、[`DATA_SOURCES.md`](https://github.com/bilawalsidhu/gods-eye-view/blob/main/DATA_SOURCES.md) 与 [`SECURITY.md`](https://github.com/bilawalsidhu/gods-eye-view/blob/main/SECURITY.md)。
+参考上游：[`bilawalsidhu/gods-eye-view`](https://github.com/bilawalsidhu/gods-eye-view)。代码采用 MIT License，但其调用的第三方数据和资产各自保留独立条款，参见上游 [`LICENSE`](https://github.com/bilawalsidhu/gods-eye-view/blob/main/LICENSE)、[`DATA_SOURCES.md`](https://github.com/bilawalsidhu/gods-eye-view/blob/main/DATA_SOURCES.md) 与 [`.github/SECURITY.md`](https://github.com/bilawalsidhu/gods-eye-view/blob/main/.github/SECURITY.md)。
 
 接受的方案是**选择性复用，不整仓接入**：
 

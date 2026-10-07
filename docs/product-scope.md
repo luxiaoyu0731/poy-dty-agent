@@ -5,11 +5,11 @@
 状态：工业情报中心产品方向已确认；实施待完成，20 日价值验证未开始
 视觉参考目录：`视觉参考图/`
 
-详细实施规格：[`docs/industrial-intelligence-center.md`](docs/industrial-intelligence-center.md)
+详细实施规格：[`docs/industrial-intelligence-center.md`](industrial-intelligence-center.md)
 
-架构决策：[`docs/adr/0005-industrial-intelligence-center.md`](docs/adr/0005-industrial-intelligence-center.md)
+架构决策：[`docs/adr/0005-industrial-intelligence-center.md`](adr/0005-industrial-intelligence-center.md)
 
-双轨完成定义：[`docs/history/project-correction-100.md`](docs/history/project-correction-100.md)
+双轨完成定义：[`docs/history/project-correction-100.md`](history/project-correction-100.md)
 
 ## 1. 项目定位
 

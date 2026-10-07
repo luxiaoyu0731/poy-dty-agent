@@ -21,7 +21,7 @@ if [[ ! -x "$ROOT_DIR/$PYTHON_BIN" ]]; then
 fi
 
 if [[ ! -f "$ROOT_DIR/.env.local-production" ]]; then
-  echo "Missing $ROOT_DIR/.env.local-production. Copy .env.local-production.example and fill secrets first." >&2
+  echo "Missing $ROOT_DIR/.env.local-production. Copy deploy/examples/.env.local-production.example and fill secrets first." >&2
   exit 2
 fi
 

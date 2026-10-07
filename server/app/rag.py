@@ -107,7 +107,7 @@ PROJECT_DOCUMENTS: tuple[dict[str, str], ...] = (
     },
     {"path": "docs/api.md", "doc_kind": "ApiContract", "tier": "A", "title": "API 合同与调用边界"},
     {
-        "path": "POY_DTY_上游原料智能Agent项目文档.md",
+        "path": "docs/product-scope.md",
         "doc_kind": "ProductRequirement",
         "tier": "A",
         "title": "POY/DTY 上游原料智能 Agent 产品文档",

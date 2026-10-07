@@ -19,7 +19,7 @@
 - 下一阶段：在 2026-09-07 首个工作日窗口核验以 08:20 为 cutoff、在 09:30 前释放的非 `blocked` 日报，然后启动独立 20 业务日价值实验。预测轨继续自然积累真实 OOS，并只在逐格证据通过时走治理晋级。
 - 明确非目标：不实现“下一结果何时成熟、为何未结算、预计何时可评估”；不重开同一历史快照上的盲目调参；不恢复 CCF/DCE 当前采集；不降低预测门槛或把模拟结果计为 formal；不发送工业情报即时业务提醒；不让情报输出成为采购、销售、套保或交易执行指令。
 
-工业情报轨的产品范围、实施合同和架构决策分别以 [`POY_DTY_上游原料智能Agent项目文档.md`](../../POY_DTY_上游原料智能Agent项目文档.md)、[`docs/industrial-intelligence-center.md`](../industrial-intelligence-center.md) 和 [ADR-0005](../adr/0005-industrial-intelligence-center.md) 为准；本文件继续冻结预测轨评分与全项目完成关系。
+工业情报轨的产品范围、实施合同和架构决策分别以 [`POY_DTY_上游原料智能Agent项目文档.md`](../product-scope.md)、[`docs/industrial-intelligence-center.md`](../industrial-intelligence-center.md) 和 [ADR-0005](../adr/0005-industrial-intelligence-center.md) 为准；本文件继续冻结预测轨评分与全项目完成关系。
 
 ## 1. 文档权威与修正原则
 
@@ -268,7 +268,7 @@
 - 视觉：desktop 0.02% perceptual、mobile 0.25% perceptual，均 PASS。
 - 安全/供应链：最终 `npm run review:security` 串行通过：项目自定义 ERROR 级 Semgrep 扫描 259 个 Git 跟踪目标，0 finding；Gitleaks 扫描 43 commits/约 8.85 MB，0 leak；Trivy 对 npm/uv 漏洞、Docker 误配和许可证均为 0。随后以同一自定义规则和 `--no-git-ignore` 覆盖 `server/app`、`server/scripts`、`server/tests`、`src`、`tests` 的当前未提交工作树，237 个适用目标、0 finding、0 error。通用 `--config auto --no-git-ignore` 的历史扫描噪声不能作为 0 finding 证据；本机 `.env` 被忽略且不得提交或复制到发布物。
 - 静态：Ruff、TypeScript、资产检查、生产构建和 `git diff --check` 通过。
-- 正式源运行时预检新增只读、零值泄露合同：不 source 或执行 env 内容，只接受当前用户所有、非 symlink、无 group/world 权限、UTF-8 且不超过 1 MiB 的文件；只报告 configured/missing 变量名。`.env.production.example`、`.env.local-production.example`、`.env.public-production.example` 已统一覆盖 EIA/FRED/UN/DCE。定向回归 70/70 通过。
+- 正式源运行时预检新增只读、零值泄露合同：不 source 或执行 env 内容，只接受当前用户所有、非 symlink、无 group/world 权限、UTF-8 且不超过 1 MiB 的文件；只报告 configured/missing 变量名。`deploy/examples/.env.production.example`、`deploy/examples/.env.local-production.example`、`deploy/examples/.env.public-production.example` 已统一覆盖 EIA/FRED/UN/DCE。定向回归 70/70 通过。
 
 以上通过项只关闭相应代码、测试和故障 E2 门禁。它们不能替代 21/21 真实 OOS、当前 release 首次生产成功和发布后公网 E1 smoke。
 

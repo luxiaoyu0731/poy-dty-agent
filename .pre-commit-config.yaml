@@ -32,13 +32,13 @@ repos:
 
       - id: gitleaks-staged
         name: Gitleaks staged secret scan
-        entry: gitleaks git --pre-commit --redact --staged --verbose --config .gitleaks.toml
+        entry: gitleaks git --pre-commit --redact --staged --verbose --config config/security/gitleaks.toml
         language: system
         pass_filenames: false
 
       - id: trivy-production-gate
         name: Trivy High/Critical production gate
-        entry: trivy fs --config trivy.yaml .
+        entry: trivy fs --config config/security/trivy.yaml .
         language: system
         pass_filenames: false
         stages: [pre-push]

@@ -972,7 +972,7 @@ def test_configure_intelligence_expands_shell_self_reference_to_explicit_hosts(t
     assert result["allowlist_expanded"] is True
 
 
-@pytest.mark.parametrize("env_name", [".env.example", ".env.production.example"])
+@pytest.mark.parametrize("env_name", [".env.example", "deploy/examples/.env.production.example"])
 def test_production_env_templates_include_registered_fetch_hosts(env_name: str) -> None:
     rendered = (manager.REPO_ROOT / env_name).read_text(encoding="utf-8")
     hosts = {
